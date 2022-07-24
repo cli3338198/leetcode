@@ -12,9 +12,9 @@ var search = function(nums, target) {
         if (num === target) {
             return m
         } else if (num > target) {
-            b--
+            b = m - 1
         } else {
-            a++
+            a = m + 1
         }
     }
     return -1
