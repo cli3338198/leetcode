@@ -4,13 +4,18 @@
  * @return {number[]}
  */
 var twoSum = function(nums, target) {
-    const map = {}
-    for (let i=0; i < nums.length; i++) {
-        const num = nums[i]
-        const complement = target - num
-        if (complement in map) {
-            return [i, map[complement]]
+    nums = nums.map((num, i) => ({num, i}))
+    nums.sort((a, b) => a.num - b.num)
+    let a = 0
+    let b = nums.length-1
+    while (a < b) {
+        const sum = nums[a].num + nums[b].num
+        if (sum === target) {
+            return [nums[a].i, nums[b].i]
+        } else if (sum > target) {
+            b--
+        } else {
+            a++
         }
-        map[num] = i
     }
 };
