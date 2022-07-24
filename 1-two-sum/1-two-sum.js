@@ -5,7 +5,7 @@
  */
 var twoSum = function(nums, target) {
     nums = nums.map((num, i) => ({num, i}))
-    nums.sort((a, b) => a.num - b.num)
+    nums.sort(({num: a}, {num: b}) => a - b)
     let a = 0
     let b = nums.length-1
     while (a < b) {
