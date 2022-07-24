@@ -4,7 +4,16 @@
  * @return {boolean}
  */
 var isAnagram = function(s, t) {
-    s = s.split("").sort()
-    t = t.split("").sort()
-    return JSON.stringify(s) === JSON.stringify(t)
+    const map = {}
+    for (let char of s) {
+        map[char] = map[char] + 1 || 1
+    }
+    for (let char of t) {
+        if (!(char in map)) return false
+        map[char]--
+    }
+    for (let key in map) {
+        if (map[key] !== 0) return false
+    }
+    return true
 };
