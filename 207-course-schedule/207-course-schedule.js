@@ -14,7 +14,6 @@ var canFinish = function(numCourses, prerequisites) {
         graph[req].push(course)
         indegree[course]++
     }
-    const set = new Set()
     const q = []
     for (let i=0; i < numCourses; i++) {
         if (indegree[i] === 0) {
@@ -23,7 +22,6 @@ var canFinish = function(numCourses, prerequisites) {
     }
     while (q.length) {
         const course = q.shift()
-        set.add(course)
         for (let next of graph[course] || []) {
             indegree[next]--
             if (indegree[next] === 0) {
