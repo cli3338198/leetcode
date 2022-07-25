@@ -12,18 +12,16 @@
  * @return {number}
  */
 var kthSmallest = function(root, k) {
-    let res
-    helper(root)
-    return res
-    
-    function helper(root) {
-        if (!root) return
-        helper(root.left)
-        k--
-        if (!k) {
-            res = root.val
-            return
+    let cur = root
+    const stack = []
+    while (cur || stack) {
+        while (cur) {
+            stack.push(cur)
+            cur = cur.left
         }
-        helper(root.right)
+        cur = stack.pop()
+        k--
+        if (k === 0) return cur.val
+        cur = cur.right
     }
 };
