@@ -8,12 +8,12 @@ var generateParenthesis = function(n) {
     return res
 
     function helper(open, close, list) {
-        if (open > n || close > n) return
         if (open === close && close === n) {
-            res.push(list)
-            return
+            return res.push(list)
         }
-        helper(open+1, close, list+"(")
+        if (open < n) {
+            helper(open+1, close, list+"(")
+        }
         if (close < open) {
             helper(open, close+1, list+")")
         }
