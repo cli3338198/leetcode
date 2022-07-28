@@ -3,20 +3,14 @@
  * @return {boolean}
  */
 var isValid = function(s) {
-    const map = {
-        ")": "(", "}": "{", "]": "["
-    }
     const stack = []
-    for (let bracket of s) {
-        if (!stack.length) {
-            stack.push(bracket)
-            continue
-        }
-        if (stack.length && stack[stack.length-1] === map[bracket]) {
+    const map = { ")": "(", "}": "{", "]": "[" }
+    for (let c of s) {
+        if (stack.length && stack[stack.length-1] === map[c]) {
             stack.pop()
         } else {
-            stack.push(bracket)
+            stack.push(c)
         }
     }
-    return stack.length ? false : true
+    return !stack.length
 };
