@@ -7,16 +7,16 @@ var fourSum = function(nums, target) {
     nums.sort((a, b) => a - b)
     return kSum(0, 4, target)    
     
-    function kSum(start, k, target) {
-        if (k === 2) return twoSum(start, target)
-        const kList = []
-        for (let i=start; i < nums.length; i++) {
-            if (i > start && nums[i] === nums[i-1]) continue
+    function kSum(idx, k, target) {
+        if (k === 2) return twoSum(idx, target)
+        const res = []
+        for (let i=idx; i < nums.length; i++) {
+            if (i > idx && nums[i] === nums[i-1]) continue
             for (let kMinusOneList of kSum(i+1, k-1, target-nums[i])) {
-                kList.push([nums[i], ...kMinusOneList])
+                res.push([nums[i], ...kMinusOneList])
             }
         }
-        return kList
+        return res
     }
     
     function twoSum(idx, target) {
