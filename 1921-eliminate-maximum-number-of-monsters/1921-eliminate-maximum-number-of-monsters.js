@@ -9,13 +9,10 @@ var eliminateMaximum = function(dist, speed) {
         reachTime[i] = dist[i] / speed[i]
     }
     reachTime.sort((a, b) => a - b)
-    let time = 0
     let killed = 0
-    while (reachTime.length) {
-        const curMonster = reachTime.shift()
-        if (time >= curMonster) return killed
+    for (let time=0; time < reachTime.length; time++) {
+        if (time >= reachTime[time]) return killed
         killed++
-        time++
     }
     return dist.length
 };
