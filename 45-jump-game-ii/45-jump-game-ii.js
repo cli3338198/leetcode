@@ -3,13 +3,15 @@
  * @return {number}
  */
 var jump = function(nums) {
-    const n = nums.length
-    const dp = Array(n).fill(Infinity)
-    dp[0] = 0
-    for (let i=0; i < n; i++) {
-        for (let j=i; j <= i + nums[i]; j++) {
-            dp[j] = Math.min(dp[j], 1 + dp[i])
+    let farthest = 0
+    let currentJumpMax = 0
+    let jumps = 0
+    for (let i=0; i < nums.length-1; i++) {
+        farthest = Math.max(farthest, i + nums[i])
+        if (i === currentJumpMax) {
+            jumps++
+            currentJumpMax = farthest
         }
     }
-    return dp[n-1]
+    return jumps
 };
