@@ -12,7 +12,14 @@
  */
 var minDepth = function(root) {
     if (!root) return 0
-    const left = minDepth(root.left)
-    const right = minDepth(root.right)
-    return 1 + ((!left || !right) ? left + right : Math.min(left, right))
+    if (root.left && root.right) {
+        return 1 + Math.min(minDepth(root.left), minDepth(root.right))
+    }
+    if (root.left) {
+        return 1 + minDepth(root.left)
+    }
+    if (root.right) {
+        return 1 + minDepth(root.right)
+    }
+    return 1
 };
