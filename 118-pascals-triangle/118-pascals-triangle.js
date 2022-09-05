@@ -15,7 +15,7 @@ var generate = function(numRows) {
                     row.push(lastRow[j-1] + lastRow[j])
                 }
             } else {
-                row.push(j + 1)
+                row.push(1)
             }
         }
         res.push(row)
