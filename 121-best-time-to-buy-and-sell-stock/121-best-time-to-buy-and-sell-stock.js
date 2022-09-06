@@ -4,10 +4,10 @@
  */
 var maxProfit = function(prices) {
     let min = Infinity
-    let maxProfit = 0
+    let profit = 0
     for (let price of prices) {
-        maxProfit = Math.max(maxProfit, price - min)
+        profit = Math.max(profit, price - min)
         min = Math.min(min, price)
     }
-    return maxProfit
+    return profit
 };
