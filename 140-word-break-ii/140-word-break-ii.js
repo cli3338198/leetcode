@@ -3,21 +3,45 @@
  * @param {string[]} wordDict
  * @return {string[]}
  */
+
+class Trie {
+    constructor() {
+        this.children = {}
+        this.end = false
+        this.word = ''
+    }
+    insert(word) {
+        let cur = this
+        for (let char of word) {
+            if (!(char in cur.children)) {
+                cur.children[char] = new Trie()
+                cur.children[char].word += cur.word + char
+            }
+            cur = cur.children[char]
+        }
+        cur.end = true
+    }
+}
+
 var wordBreak = function(s, wordDict) {
-    const dp = {}
+    const trie = new Trie()
+    for (const word of wordDict) {
+        trie.insert(word)
+    }
     const res = []
-    wordDict = new Set(wordDict)
-    helper(0, [])
+    helper(0, trie, [])
     return res.map(arr => arr.join(" "))
     
-    function helper(idx, list) {
-        if (idx >= s.length) {
-            return res.push(list)
+    function helper(idx, curTrie, list) {
+        if (idx >= s.length && curTrie.end) {
+            return res.push([...list, curTrie.word])
         }
-        for (let i=idx; i <= s.length; i++) {
-            if (wordDict.has(s.substring(idx, i))) {
-                helper(i, [...list, s.substring(idx, i)])
-            }
+        if (curTrie.end) {
+            helper(idx, trie, [...list, curTrie.word])
+        }
+        const char = s[idx]
+        if (char in curTrie.children) {
+            helper(idx+1, curTrie.children[char], list)
         }
     }
 };
