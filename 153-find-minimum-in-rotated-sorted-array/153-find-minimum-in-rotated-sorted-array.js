@@ -3,15 +3,15 @@
  * @return {number}
  */
 var findMin = function(nums) {
-    let l = 0
-    let r = nums.length-1
-    while (l < r) {
-        const m = Math.floor((l+r)/2)
-        if (nums[m] > nums[r]) {
-            l = m + 1
+    let left = 0
+    let right = nums.length-1
+    while (left < right) {
+        const mid = Math.floor((left + right)/2)
+        if (nums[mid] > nums[right]) {
+            left = mid + 1
         } else {
-            r = m
+            right = mid
         }
     }
-    return nums[l]
+    return nums[left]
 };
