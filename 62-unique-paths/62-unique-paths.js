@@ -4,15 +4,19 @@
  * @return {number}
  */
 var uniquePaths = function(m, n) {
-    const grid = Array(m).fill(0).map(() => Array(n).fill(0))
-    for (let r=m-1; r >= 0; r--) {
-        for (let c=n-1; c >= 0; c--) {
-            if (r === m-1 || c === n-1) {
-                grid[r][c] = 1
+    const dp = Array(m).fill(0).map(() => Array(n).fill(0))
+    dp[m-1][n-1] = 1
+    for (let i=m-1; i >= 0; i--) {
+        for (let j=n-1; j >=0; j--) {
+            if (i === m-1 && j === n-1) continue
+            if (i === m-1) {
+                dp[i][j] = dp[i][j+1]
+            } else if (j === n-1) {
+                dp[i][j] = dp[i+1][j]
             } else {
-                grid[r][c] = grid[r+1][c] + grid[r][c+1]
+                dp[i][j] = dp[i+1][j] + dp[i][j+1]
             }
         }
     }
-    return grid[0][0]
+    return dp[0][0]
 };
