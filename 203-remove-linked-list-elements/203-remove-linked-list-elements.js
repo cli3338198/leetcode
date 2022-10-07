@@ -11,10 +11,9 @@
  * @return {ListNode}
  */
 var removeElements = function(head, val) {
-    const dummy = new ListNode()
-    dummy.next = head
-    let prev = dummy
+    const dummy = new ListNode(null, head)
     let cur = head
+    let prev = dummy
     while (cur) {
         if (cur.val === val) {
             prev.next = cur.next
@@ -23,6 +22,5 @@ var removeElements = function(head, val) {
         }
         cur = cur.next
     }
-    
     return dummy.next
 };
