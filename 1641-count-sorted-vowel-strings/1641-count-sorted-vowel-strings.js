@@ -16,6 +16,5 @@ var countVowelStrings = function(n) {
             }
         }
     }
-    dp.forEach(r => console.log(JSON.stringify(r)))
     return dp[n][0]
 };
