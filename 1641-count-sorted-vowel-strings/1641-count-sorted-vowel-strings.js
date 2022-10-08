@@ -3,29 +3,19 @@
  * @return {number}
  */
 var countVowelStrings = function(n) {
-    const map = {
-        a: 'aeiou',
-        e: 'eiou',
-        i: 'iou',
-        o: 'ou',
-        u: 'u'
+    const m = 'aeiou'.length
+    const dp = Array(n+1).fill(0).map(() => Array(m).fill(0))
+    for (const row of dp) {
+        row[row.length-1] = 1
     }
-    const res = []
-    helper(0, '')
-    return res.length
-    
-    function helper(idx, str) {
-        if (idx === n) {
-            return res.push(str)
-        }
-        if (!str.length) {
-            for (const char of 'aeiou') {
-                helper(idx + 1, str + char)
-            }
-        } else {
-            for (const nextChar of map[str[str.length-1]]) {
-                helper(idx+1, str + nextChar)
+    dp[0].fill(1)
+    for (let r=1; r <= n; r++) {
+        for (let c=m-2; c >= 0; c--) {
+            for (let i=m-1; i >= c; i--) {
+                dp[r][c] += dp[r-1][i]
             }
         }
     }
+    dp.forEach(r => console.log(JSON.stringify(r)))
+    return dp[n][0]
 };
