@@ -11,7 +11,9 @@ var checkValid = function(matrix) {
             const col = `c${c}`
             map[row] = map[row] || new Set()
             map[col] = map[col] || new Set()
+            if (map[row].has(matrix[r][c])) return false
             map[row].add(matrix[r][c])
+            if (map[col].has(matrix[r][c])) return false
             map[col].add(matrix[r][c])
         }
     }
