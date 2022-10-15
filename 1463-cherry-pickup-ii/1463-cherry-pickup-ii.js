@@ -9,8 +9,9 @@ var cherryPickup = function(grid) {
     return helper(0, 0, cols-1)
     
     function helper(r, c1, c2) {
-        if ([r, c1, c2] in dp) {
-            return dp[[r, c1, c2]]
+        const key = JSON.stringify([r, c1, c2])
+        if (key in dp) {
+            return dp[key]
         }
         if (r >= rows) {
             return 0
@@ -30,6 +31,6 @@ var cherryPickup = function(grid) {
                 nextCherries = Math.max(nextCherries, helper(r+1, c1+cc, c2+ccc))
             }
         }
-        return dp[[r, c1, c2]] = nextCherries + cherries
+        return dp[key] = nextCherries + cherries
     }
 };
