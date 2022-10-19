@@ -4,14 +4,10 @@
  */
 var canJump = function(nums) {
     const n = nums.length
-    const dp = Array(n).fill(false)
-    dp[0] = true
+    let max = 0
     for (let i=0; i < n; i++) {
-        if (dp[i] === true) {
-            for (let j=i; j <= i + nums[i] && j < n; j++) {
-                dp[j] = true
-            }
-        }
+        if (i > max) return false
+        max = Math.max(max, i + nums[i])
     }
-    return dp[n-1]
+    return true
 };
