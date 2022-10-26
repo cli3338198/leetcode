@@ -4,25 +4,27 @@
  */
 var minFlipsMonoIncr = function(s) {
     const n = s.length
-    const left = Array(n).fill(0)
-    let cur = 0
-    for (let i=0; i < n; i++) {
-        left[i] = cur
-        if (s[i] === '1') {
-            cur++
+    let zero = count(s)
+    let one = 0
+    let res = zero
+    for (const char of s) {
+        if (char === '0') {
+            zero -= 1
         }
-    }
-    const right = Array(n).fill(0)
-    cur = 0
-    for (let i=n-1; i >= 0; i--) {
-        right[i] = cur
-        if (s[i] === '0') {
-            cur++
+        if (char === '1') {
+            one += 1
         }
-    }
-    let res = Infinity
-    for (let i=0; i < n; i++) {
-        res = Math.min(res, left[i] + right[i])
+        res = Math.min(res, zero + one)
     }
     return res
 };
+
+function count(s) {
+    let res = 0
+    for (const char of s) {
+        if (char === '0') {
+            res++
+        }
+    }
+    return res
+}
