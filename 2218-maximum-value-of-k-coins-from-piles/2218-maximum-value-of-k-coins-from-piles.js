@@ -9,9 +9,9 @@ var maxValueOfCoins = function(piles, coins) {
     for (let i=0; i < piles.length; i++) {
         for (let j=coins; j > 0; j--) {
             let sum = 0
-            for (let k=1; k <= Math.min(j, piles[i].length); k++) {
-                sum += piles[i][k-1]
-                dp[j] = Math.max(dp[j], dp[j-k] + sum)
+            for (let k=0; k < Math.min(j, piles[i].length); k++) {
+                sum += piles[i][k]
+                dp[j] = Math.max(dp[j], dp[j-k-1] + sum)
             }
         }
     }
