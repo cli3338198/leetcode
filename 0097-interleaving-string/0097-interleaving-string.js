@@ -5,25 +5,20 @@
  * @return {boolean}
  */
 var isInterleave = function(s1, s2, s3) {
-    const dp = {}
-    return helper(0, 0)
-    
-    function helper(i, j) {
-        const key = `${i} ${j}`
-        if (key in dp) {
-            return dp[key]
+    const m = s1.length
+    const n = s2.length
+    if (m + n !== s3.length) return false
+    const dp = Array(m+1).fill(0).map(() => Array(n+1).fill(false))
+    dp[m][n] = true
+    for (let i=m; i >= 0; i--) {
+        for (let j=n; j >= 0; j--) {
+            if (i < s1.length && s1[i] === s3[i+j] && dp[i+1][j] === true) {
+                dp[i][j] = true
+            }
+            if (j < s2.length && s2[j] === s3[i+j] && dp[i][j+1] === true) {
+                dp[i][j] = true
+            }
         }
-        if (i === s1.length && j === s2.length) {
-            return i + j === s3.length
-        }
-        let res = false
-        const k = i + j
-        if (i < s1.length && s1[i] === s3[k]) {
-            res = res || helper(i+1, j)
-        }
-        if (j < s2.length && s2[j] === s3[k]) {
-            res = res || helper(i, j+1)
-        }
-        return dp[key] = res
     }
+    return dp[0][0]
 };
