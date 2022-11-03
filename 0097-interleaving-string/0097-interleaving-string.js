@@ -10,14 +10,12 @@ var isInterleave = function(s1, s2, s3) {
     
     function helper(i, j) {
         const key = `${i} ${j}`
-        console.log(key)
         if (key in dp) {
             return dp[key]
         }
         if (i === s1.length && j === s2.length) {
             return i + j === s3.length
         }
-        console.log(1, key)
         let res = false
         const k = i + j
         if (i < s1.length && s1[i] === s3[k]) {
