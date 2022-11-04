@@ -5,34 +5,28 @@
 var longestIncreasingPath = function(matrix) {
     const rows = matrix.length
     const cols = matrix[0].length
-    const graph = {}
+    const dp = Array(rows).fill(0).map(() => Array(cols).fill(0))
+    let res = 1
     for (let r=0; r < rows; r++) {
         for (let c=0; c < cols; c++) {
-            const key = `${r},${c}`
-            graph[key] = []
-            for (let [rr, cc] of [[0, 1], [1, 0], [0, -1], [-1, 0]]) {
-                const rrr = rr + r
-                const ccc = cc + c
-                if (rrr in matrix && ccc in matrix[rrr] && matrix[r][c] < matrix[rrr][ccc]) {
-                    graph[key].push([rrr, ccc])
-                }
-            }
+            dp[r][c] = Math.max(dp[r][c], helper(r, c))
+            res = Math.max(res, dp[r][c])
         }
-    }
-    let res = 1
-    const dp = {}
-    for (const key in graph) {
-        res = Math.max(res, helper(key))
     }
     return res
     
-    function helper(node) {
-        if (node in dp) return dp[node]
-        if (!(node in graph)) return 0
-        let res = 1
-        for (const next of graph[node] || []) {
-            res = Math.max(res, 1 + helper(next))
+    function helper(r, c) {
+        if (dp[r][c] !== 0) {
+            return dp[r][c]
         }
-        return dp[node] = res
+        dp[r][c] = 1
+        for (let [rr, cc] of [[0, 1], [1, 0], [0, -1], [-1, 0]]) {
+            const rrr = r + rr
+            const ccc = c + cc
+            if (rrr in matrix && ccc in matrix[rrr] && matrix[r][c] < matrix[rrr][ccc]) {
+                dp[r][c] = Math.max(dp[r][c], 1 + helper(rrr, ccc))
+            }
+        }
+        return dp[r][c]
     }
 };
