@@ -4,31 +4,30 @@
  * @return {number}
  */
 var splitArray = function(nums, k) {
-    const dp = {}
-    return helper(0, k)
+    let lo = Math.max(...nums)
+    let hi = nums.reduce((acc, val) => acc + val, 0)
+    let res = hi
+    while (lo <= hi) {
+        const mid = Math.floor((lo+hi)/2)
+        if (helper(mid)) {
+            hi = mid - 1
+            res = mid
+        } else {
+            lo = mid + 1
+        }
+    }
+    return res
     
-    function helper(i, k) {
-        const key = `${i} ${k}`
-        if (k === 1) {
-            return sum(i)
-        }
-        if (key in dp) {
-            return dp[key]
-        }
-        let res = Infinity
+    function helper(target) {
+        let subArrays = 1
         let curSum = 0
-        for (let j=i; j < nums.length-1; j++) {
-            curSum += nums[j]
-            const maxSum = Math.max(curSum, helper(j+1, k-1))
-            res = Math.min(res, maxSum)
-            if (curSum > res) {
-                break
+        for (const num of nums) {
+            curSum += num
+            if (curSum > target) {
+                curSum = num
+                subArrays++
             }
         }
-        return dp[key] = res
-    }
-    
-    function sum(idx) {
-        return nums.slice(idx).reduce((acc, val) => acc + val, 0)
+        return subArrays <= k
     }
 };
