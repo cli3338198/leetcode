@@ -14,17 +14,14 @@ var maxNumberOfBalloons = function(text) {
     for (const char of text) {
         map[char] = map[char] + 1 || 1
     }
-    let flag = false
     let res = 0
     while (true) {
         for (const char in balloon) {
             if (!(char in map) || map[char] < balloon[char]) {
-                flag = true
-                break
+                return res
             }
             map[char] -= balloon[char]
         }
-        if (flag === true) break
         res++
     }
     return res
