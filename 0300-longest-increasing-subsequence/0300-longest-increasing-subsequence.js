@@ -4,16 +4,28 @@
  */
 var lengthOfLIS = function(nums) {
     const n = nums.length
-    let res = 0
-    const dp = Array(n).fill(1)
-    for (let i=0; i < n; i++) {
-        for (let j=0; j < i; j++) {
-            if (nums[j] < nums[i]) {
-                dp[i] = Math.max(dp[i], 1 + dp[j])
+    const dp = []
+    for (const n of nums) {
+        if (!dp.length || dp[dp.length-1] < n) {
+            dp.push(n)
+        } else {
+            const idx = binarySearch(dp, n)
+            dp[idx] = n
+        }
+    }
+    return dp.length
+    
+    function binarySearch(dp, val) {
+        let l = 0
+        let r = dp.length-1
+        while (l < r) {
+            const m = Math.floor((l+r)/2)
+            if (dp[m] < val) {
+                l = m + 1
+            } else {
+                r = m
             }
         }
-        res = Math.max(res, dp[i])
+        return l
     }
-    
-    return res
 };
