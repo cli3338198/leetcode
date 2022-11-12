@@ -9,9 +9,9 @@ var maxSumAfterPartitioning = function(arr, k) {
     for (let i=1; i <= n; i++) {
         let max = 0
         let curBest = 0
-        for (let j=1; j <= k && i - j >= 0; j++) {
-            max = Math.max(max, arr[i - j])
-            curBest = Math.max(curBest, dp[i - j] + (max * j))
+        for (let subarraySize=1; subarraySize <= k && i - subarraySize >= 0; subarraySize++) {
+            max = Math.max(max, arr[i - subarraySize])
+            curBest = Math.max(curBest, dp[i - subarraySize] + (max * subarraySize))
         }
         dp[i] = curBest
     }
