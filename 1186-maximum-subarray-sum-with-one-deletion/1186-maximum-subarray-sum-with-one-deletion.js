@@ -4,6 +4,7 @@
  */
 var maximumSum = function(arr) {
     const n = arr.length
+    if (n === 0) return 0
     if (n === 1) return arr[0]
     let res = -Infinity
     for (const n of arr) {
