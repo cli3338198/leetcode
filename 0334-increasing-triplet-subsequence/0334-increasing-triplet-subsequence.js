@@ -3,7 +3,7 @@
  * @return {boolean}
  */
 var increasingTriplet = function(nums) {
-    return nums.reduce((acc, val, k, arr) => {
+    return nums.reduce((acc, val) => {
         if (val <= acc[0]) {
             acc[0] = val
         } else if (val <= acc[1]) {
