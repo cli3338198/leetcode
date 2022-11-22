@@ -12,9 +12,7 @@ var nthUglyNumber = function(n) {
         const t2 = dp[i2] * 2
         const t3 = dp[i3] * 3
         const t5 = dp[i5] * 5
-        dp[i] = t2
-        if (t3 < dp[i]) dp[i] = t3
-        if (t5 < dp[i]) dp[i] = t5
+        dp[i] = Math.min(t2, t3, t5)
         if (dp[i] === t2) i2++
         if (dp[i] === t3) i3++
         if (dp[i] === t5) i5++
