@@ -18,7 +18,7 @@ var jobScheduling = function(startTime, endTime, profit) {
     for (let i=0; i < n; i++) {
         jobs.push(new Job(startTime[i], endTime[i], profit[i]))
     }
-    jobs.sort((a, b) => a.endTime - b.endTime)
+    jobs.sort((a, b) => a.endTime - b.endTime || b.profit - a.profit)
     const dp = Array(n).fill(0)
     dp[0] = jobs[0].profit
     for (let i=1; i < n; i++) {
