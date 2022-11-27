@@ -16,9 +16,10 @@ var guessNumber = function(n) {
     let r = n
     while (l <= r) {
         const m = Math.floor((l+r)/2)
-        if (guess(m) === -1) {
+        const pick = guess(m)
+        if (pick === -1) {
             r = m - 1
-        } else if (guess(m) === 1) {
+        } else if (pick === 1) {
             l = m + 1
         } else {
             return m
