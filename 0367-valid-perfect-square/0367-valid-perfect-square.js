@@ -3,10 +3,9 @@
  * @return {boolean}
  */
 var isPerfectSquare = function(num) {
-    if (num === 1) return true
     let l = 0
-    let r = Math.floor(num / 2)
-    while (l < r) {
+    let r = num
+    while (l <= r) {
         const m = Math.floor((l+r)/2)
         if (m * m === num) {
             return true
@@ -16,5 +15,5 @@ var isPerfectSquare = function(num) {
             l = m + 1
         }
     }
-    return l * l === num
+    return false
 };
