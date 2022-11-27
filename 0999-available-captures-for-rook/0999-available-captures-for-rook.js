@@ -12,6 +12,7 @@ var numRookCaptures = function(board) {
             if (board[r][c] === 'R') {
                 r0 = r
                 c0 = c
+                break
             }
         }
     }
@@ -22,7 +23,7 @@ var numRookCaptures = function(board) {
                 res++
                 break
             }
-            if (board[rr][cc] !== '.') {
+            if (board[rr][cc] === 'B') {
                 break
             }
         }
