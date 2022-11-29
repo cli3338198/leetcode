@@ -4,12 +4,19 @@
  * @return {number}
  */
 var findTargetSumWays = function(nums, target) {
-    const dp = {}
-    return helper(0, 0)
-    
-    function helper(i, total) {
-        if (i === nums.length) return total === target ? 1 : 0
-        if ([i, total] in dp) return dp[[i, total]]
-        return dp[[i, total]] = helper(i+1, total-nums[i]) + helper(i+1, total+nums[i])
+    const sum = nums.reduce((acc, val) => acc + val, 0)
+    if (Math.abs(target) > sum || (sum + target) % 2 !== 0) return 0
+    const s1 = (sum + target) / 2
+    const dp = Array(nums.length+1).fill(0).map(() => Array(s1+1).fill(0))
+    dp[0][0] = 1
+    for (let i=1; i <= nums.length; i++) {
+        for (let j=0; j <= s1; j++) {
+            if (nums[i-1] <= j) {
+                dp[i][j] = dp[i-1][j] + dp[i-1][j-nums[i-1]]
+            } else {
+                dp[i][j] = dp[i-1][j]
+            }
+        }
     }
+    return dp[nums.length][s1]
 };
