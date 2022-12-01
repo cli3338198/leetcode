@@ -8,17 +8,16 @@ var peopleAwareOfSecret = function(n, delay, forget) {
     const mod = Math.pow(10, 9) + 7
     const dp = Array(n+1).fill(0)
     dp[1] = 1
+    let sharing = 0
     for (let i=2; i <= n; i++) {
-        for (let j=1; j < i; j++) {
-            if (i-j < forget && i-j >= delay) {
-                dp[i] += dp[j]
-                dp[i] %= mod
-            }
-        }
+        const nowSharing = dp[Math.max(i-delay, 0)]
+        const nowForgetting = dp[Math.max(i-forget, 0)]
+        sharing = (sharing + nowSharing - nowForgetting) % mod
+        dp[i] = sharing
     }
     let res = 0
-    for (let i=0; i <= n; i++) {
-        if (n - i < forget) res = (res + dp[i]) % mod
+    for (let i=n-forget+1; i <= n; i++) {
+        res = (res + dp[i]) % mod
     }
-    return res
+    return (res % mod + mod) % mod
 };
