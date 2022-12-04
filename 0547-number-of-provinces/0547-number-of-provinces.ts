@@ -9,7 +9,7 @@ function findCircleNum(cities: number[][]): number {
     }
     return res
     
-    function dfs(i) {
+    function dfs(i): void {
         if (cities[i][i] === 0) return
         for (let j=0; j < n; j++) {
             if (cities[i][j] === 1) {
