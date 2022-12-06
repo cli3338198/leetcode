@@ -3,7 +3,7 @@
  * @return {number}
  */
 var countTexts = function(pressedKeys) {
-    const mod = 10 ** 9 + 7
+    const mod = Math.pow(10, 9) + 7
     const n = pressedKeys.length
     const dp = Array(n+1).fill(0)
     dp[0] = 1
