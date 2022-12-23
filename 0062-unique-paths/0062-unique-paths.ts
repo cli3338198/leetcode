@@ -7,9 +7,6 @@ function uniquePaths(rows: number, cols: number): number {
         if (r >= rows || c >= cols) return 0
         if (r === rows-1 && c === cols-1) return 1
         if (key in dp) return dp[key]
-        let res = 0
-        res += helper(r+1, c)
-        res += helper(r, c+1)
-        return dp[key] = res
+        return dp[key] = helper(r+1, c) + helper(r, c+1)
     }
 };
