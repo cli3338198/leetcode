@@ -1,5 +1,5 @@
 /**
- * @param {number[][]} obstacleGrid
+ * @param {number[][]} grid
  * @return {number}
  */
 var uniquePathsWithObstacles = function(grid) {
