@@ -11,7 +11,7 @@ function partition(s: string): string[][] {
                 }
             }
         }
-    }    
+    }
     return dp[0]
 };
 
