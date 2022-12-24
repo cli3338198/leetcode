@@ -1,35 +1,17 @@
 class Solution:
     def partition(self, s: str) -> List[List[str]]:
         
-        res = []
+        dp = [[] * (len(s) + 1) for _ in range(len(s) + 1)]
         
-        def is_palindrome(s: str) -> bool:
-            
-            a = 0
-            b = len(s) - 1
-            
-            while a < b:
-                if s[a] != s[b]: return False
-                a += 1
-                b -= 1
+        dp[-1].append([])
+        
+        for i in range(len(s)-1, -1, -1):
+            for j in range(i+1, len(s) + 1):
+                sub = s[i:j:]
                 
-            return True
-        
-        def helper(s: str, list: List[str]) -> None:
-            
-            if not s:
-                res.append(list.copy())
-                return 
-            
-            for i in range(1, len(s) + 1):
-                left = s[:i:]
-                right = s[i::]
-                
-                if is_palindrome(left):
-                    list.append(left)
-                    helper(right, list)
-                    list.pop()
-                    
-        helper(s, [])
-        
-        return res
+                if sub == sub[::-1]:
+
+                    for r in dp[j]:
+                        dp[i].append([sub, *r])
+                        
+        return dp[0]
