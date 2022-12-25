@@ -3,43 +3,35 @@
  * @param {string[]} wordDict
  * @return {string[]}
  */
-class Trie {
-    constructor() {
-        this.children = {}
-        this.word = ''
-        this.end = false
-    }
-    insert(word) {
-        let cur = this
-        for (const c of word) {
-            if (!(c in cur.children)) {
-                cur.children[c] = new Trie()
-                cur.children[c].word = cur.word + c
-            }
-            cur = cur.children[c]
-        }
-        cur.end = true
-    }
-}
-
 var wordBreak = function(s, wordDict) {
-    const trie = new Trie()
-    for (const word of wordDict) {
-        trie.insert(word)
-    }
-    const res = []
-    helper(0, trie, [])
-    return res.map(arr => arr.join(" "))
-    
-    function helper(idx, cur, list) {
-        if (idx === s.length && cur.end) {
-            return res.push([...list, cur.word])
-        }
-        if (cur.end) {
-            helper(idx, trie, [...list, cur.word])
-        }
-        if (s[idx] in cur.children) {
-            helper(idx+1, cur.children[s[idx]], list)
+    const n = s.length
+    const set = new Set(wordDict)
+    if (!canSplit(s, set)) return []
+    const dp = Array(n).fill(0).map(() => ([]))
+    for (let i=0; i < n; i++) {
+        for (let j=i; j >= 0; j--) {
+            const sub = s.substring(j, i+1)
+            if (set.has(sub)) {
+                for (const k of dp[j-1] || [""]) {
+                    dp[i].push(`${k} ${sub}`.trim())
+                }
+            }
         }
     }
+    return dp[n-1]
 };
+
+function canSplit(s, set) {
+    const n = s.length
+    const dp = Array(n+1).fill(false)
+    dp[0] = true
+    for (let i=1; i <= n; i++) {
+        for (let j=0; j < i; j++) {
+            const sub = s.substring(j, i)
+            if (set.has(sub) && dp[j]) {
+                dp[i] = true
+            }
+        }
+    }
+    return dp[n]
+}
