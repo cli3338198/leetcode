@@ -1,40 +1,33 @@
-/**
- * @param {string} expression
- * @return {number[]}
- */
-var diffWaysToCompute = function(expression) {
-    const dp = {}
-    return helper(expression)
-    
-    function helper(expression) {
-        if (expression in dp) {
-            return dp[expression]
-        }
-        if (expression.length === 1) {
-            return dp[expression] = [Number(expression)]
-        }
-        const res = []
-        let flag = false
-        for (let i=0; i < expression.length; i++) {
-            const e = expression[i]
-            if (e === '-' || e === '+' || e === '*') {
-                flag = true
-                for (const j of diffWaysToCompute(expression.substring(0, i))) {
-                    for (const k of diffWaysToCompute(expression.substring(i+1))) {
-                        if (e === '-') {
-                            res.push(j - k)
-                        } else if (e === '+') {
-                            res.push(j + k)
-                        } else {
-                            res.push(j * k)
+function diffWaysToCompute(expression: string): number[] {
+    const n = expression.length
+    const dp: number[][][] = Array(n+1).fill(0).map(() => Array(n+1).fill(0).map(() => ([0])))
+    for (let len=1; len <= n; len++) {
+        for (let i=0; i < n - len + 1; i++) {
+            const j = i + len - 1
+            const res = []
+            for (let k=i; k <= j; k++) {
+                const c = expression[k]
+                if (c === '-' || c === '+' || c === '*') {
+                    const left = dp[i][k-1]
+                    const right = dp[k+1][j]
+                    for (const l of left) {
+                        for (const r of right) {
+                            if (c === '-') {
+                                res.push(l - r)
+                            } else if (c === '+') {
+                                res.push(l + r)
+                            } else {
+                                res.push(l * r)
+                            }
                         }
                     }
                 }
             }
-        }
-        if (!flag) {
-            return dp[expression] = [Number(expression)]
-        }
-        return dp[expression] = res
+            if (!res.length) {
+                res.push(Number(expression.substring(i, j+1)))
+            }
+            dp[i][j] = res
+        }   
     }
+    return dp[0][n-1]
 };
