@@ -3,7 +3,7 @@
  * @return {number}
  */
 var maxEnvelopes = function(envelopes) {
-    envelopes.sort(([a, c], [b, d]) => a === b ? d - c : a - b)
+    envelopes.sort(([a, b], [c, d]) => a - c || d - b)
     const dp = []
     for (const e of envelopes) {
         const idx = binarySearch(dp, e)
