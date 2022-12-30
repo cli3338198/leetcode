@@ -1,6 +1,6 @@
 function maxCoins(nums: number[]): number {
     const n = nums.length
-    const dp = Array(n).fill(0).map(() => Array(n).fill(0))
+    const dp: number[][] = Array(n).fill(0).map(() => Array(n).fill(0))
     for (let len=1; len <= n; len++) {
         for (let i=0; i < n - len + 1; i++) {
             const j = i + len - 1
