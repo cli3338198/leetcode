@@ -4,18 +4,19 @@
  */
 var maxCoins = function(nums) {
     const n = nums.length
-    nums = [1, ...nums, 1]
-    const dp = Array(n+2).fill(0).map(() => Array(n+2).fill(0))
+    const dp = Array(n).fill(0).map(() => Array(n).fill(0))
     for (let len=1; len <= n; len++) {
-        for (let i=0; i <= n - len + 1; i++) {
+        for (let i=0; i < n - len + 1; i++) {
             const j = i + len - 1
             for (let k=i; k <= j; k++) {
+                const left = k - 1 >= 0 ? dp[i][k-1] : 0
+                const right = k + 1 < n ? dp[k+1][j] : 0
                 dp[i][j] = Math.max(
                     dp[i][j], 
-                    dp[i][k-1] + nums[i-1]*nums[k]*nums[j+1] + dp[k+1][j]
+                    left + (nums[i-1] || 1) * nums[k] * (nums[j+1] || 1) + right
                 )
             }
         }
     }
-    return dp[1][n]
+    return dp[0][n-1]
 };
