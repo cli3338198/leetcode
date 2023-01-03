@@ -1,35 +1,32 @@
-/**
- * @param {number[]} nums
- * @return {boolean}
- */
-var canPartition = function(nums) {
-    const sum = nums.reduce((acc, val) => acc + val, 0)
-    const halfSum = sum / 2
-    if (Math.floor(sum/2) !== halfSum) return false
-    nums.sort((a, b) => a - b)
-    const n = nums.length
-    const dp = []
-    for (let i=0; i <= n; i++) {
-        const row = []
-        for (let j=0; j <= halfSum; j++) {
-            if ((i === 0 && j === 0) || j === 0) {
-                row.push(true)
-            } else {
-                row.push(false)
-            }
-        }
-        dp.push(row)
-    }
-    for (let i=1; i <= n; i++) {
-        for (let j=1; j <= halfSum; j++) {
-            dp[i][j] = dp[i-1][j]
-            if (nums[i-1] <= j) {
-                dp[i][j] = dp[i][j] || dp[i-1][j-nums[i-1]]
-            }
-            if (j === halfSum && dp[i][j] === true) {
-                return true
-            }
-        }
-    }
-    return false
-};
+class Solution:
+    def canPartition(self, nums: List[int]) -> bool:
+        
+        n = len(nums)
+        total_sum = sum(nums)
+        half_sum = total_sum // 2
+        
+        if total_sum / 2 != half_sum:
+            return False
+        
+        nums.sort()
+        
+        dp = [[False] * (half_sum + 1) for _ in range(n + 1)]
+        
+        for i in range(n + 1):
+            for j in range(half_sum + 1):
+                if j == 0:
+                    dp[i][j] = True
+                    
+        for i in range(1, n + 1):
+            for j in range(1, half_sum + 1):
+                dp[i][j] = dp[i-1][j]
+                
+                if nums[i-1] <= j:
+                    dp[i][j] = dp[i][j] or dp[i-1][j-nums[i-1]]
+                    
+                if j == half_sum and dp[i][j] == True:
+                    return True
+        
+        return False
+        
+        
