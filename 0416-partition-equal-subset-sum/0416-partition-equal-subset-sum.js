@@ -4,32 +4,15 @@
  */
 var canPartition = function(nums) {
     const sum = nums.reduce((acc, val) => acc + val, 0)
-    const halfSum = sum / 2
-    if (Math.floor(sum/2) !== halfSum) return false
+    if (sum % 2 !== 0) return false
     nums.sort((a, b) => a - b)
-    const n = nums.length
-    const dp = []
-    for (let i=0; i <= n; i++) {
-        const row = []
-        for (let j=0; j <= halfSum; j++) {
-            if ((i === 0 && j === 0) || j === 0) {
-                row.push(true)
-            } else {
-                row.push(false)
-            }
-        }
-        dp.push(row)
-    }
-    for (let i=1; i <= n; i++) {
-        for (let j=1; j <= halfSum; j++) {
-            dp[i][j] = dp[i-1][j]
-            if (nums[i-1] <= j) {
-                dp[i][j] = dp[i][j] || dp[i-1][j-nums[i-1]]
-            }
-            if (j === halfSum && dp[i][j] === true) {
-                return true
-            }
+    const halfSum = sum / 2
+    const dp = Array(halfSum + 1).fill(false)
+    dp[0] = true
+    for (let i=0; i < nums.length; i++) {
+        for (let j=halfSum; j >= nums[i]; j--) {
+            if (dp[j - nums[i]] === true) dp[j] = true
         }
     }
-    return false
+    return dp[halfSum]
 };
