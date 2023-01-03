@@ -7,14 +7,12 @@ var canPartitionKSubsets = function(nums, k) {
     const n = nums.length
     const sum = nums.reduce((acc, val) => acc + val, 0)
     const kSum = sum / k
-    if (sum % k > 0) return false
+    if (sum % k !== 0) return false
     const dp = {}
-    return helper(Array(nums.length).fill(false), k, kSum)
+    return helper(Array(n).fill(false), k, kSum)
     
     function helper(used, k, curSum) {
-        if ([used, k, curSum] in dp) {
-            return dp[[used, k, curSum]]
-        }
+        if ([used, k, curSum] in dp) return dp[[used, k, curSum]]
         if (k === 0) {
             return used.every(u => u === true)
         }
