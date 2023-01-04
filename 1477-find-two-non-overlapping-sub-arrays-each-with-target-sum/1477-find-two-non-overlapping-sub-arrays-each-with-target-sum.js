@@ -50,3 +50,33 @@ minSumOfLengths = function(arr, target) {
     }
     return res === Infinity ? -1 : res
 }
+
+minSumOfLengths = function(arr, target) {
+    return helper(arr, target, 2)
+    
+    function helper(arr, target, k) {
+        const n = arr.length
+        const dp = Array(n+1).fill(0).map(() => Array(k+1).fill(Infinity))
+        const prefixSums = {}
+        prefixSums[0] = 0
+        for (let i=0; i <= n; i++) {
+            dp[i][0] = 0
+        }
+        let sum = 0
+        for (let i=1; i <= n; i++) {
+            let d = -1
+            sum += arr[i-1]
+            prefixSums[sum] = i
+            if (sum - target in prefixSums) {
+                d = prefixSums[sum - target]
+            }
+            for (let j=1; j <= k; j++) {
+                dp[i][j] = Math.min(dp[i][j], dp[i-1][j])
+                if (d !== -1) {
+                    dp[i][j] = Math.min(dp[i][j], dp[d][j-1] + i - d)
+                }
+            }
+        }
+        return dp[n][k] === Infinity ? -1 : dp[n][k]
+    }
+}
