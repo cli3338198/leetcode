@@ -38,21 +38,48 @@ function splitArray(nums: number[], k: number): number {
     // }
     // return dp[k-1][0]
     
-    const n = nums.length
-    const sums: number[] = Array(n+1).fill(0)
-    for (let i=0; i < n; i++) {
-        sums[i+1] = sums[i] + nums[i]
-    }
-    const dp: number[] = Array(n).fill(Infinity)
-    for (let i=0; i < n; i++) {
-        dp[i] = sums[n] - sums[i]
-    }
-    for (let s=1; s < k; s++) {
-        for (let i=0; i < n; i++) {
-            for (let j=i+1; j < n; j++) {
-                dp[i] = Math.min(dp[i], Math.max(dp[j], sums[j]-sums[i]))
-            }
+    // const n = nums.length
+    // const sums: number[] = Array(n+1).fill(0)
+    // for (let i=0; i < n; i++) {
+    //     sums[i+1] = sums[i] + nums[i]
+    // }
+    // const dp: number[] = Array(n).fill(Infinity)
+    // for (let i=0; i < n; i++) {
+    //     dp[i] = sums[n] - sums[i]
+    // }
+    // for (let s=1; s < k; s++) {
+    //     for (let i=0; i < n; i++) {
+    //         for (let j=i+1; j < n; j++) {
+    //             dp[i] = Math.min(dp[i], Math.max(dp[j], sums[j]-sums[i]))
+    //         }
+    //     }
+    // }
+    // return dp[0]
+    
+    let l = Math.max(...nums)
+    let r = nums.reduce((acc, val) => acc + val, 0)
+    let res = r
+    while (l <= r) {
+        const m = Math.floor((l+r)/2)
+        if (canSplit(m)) {
+            res = m
+            r = m - 1
+        } else {
+            l = m + 1
         }
     }
-    return dp[0]
+    return res
+    
+    function canSplit(largest: number): boolean {
+        let numArrays = 0
+        let curSum = 0
+        for (const n of nums) {
+            curSum += n
+            if (curSum > largest) {
+                curSum = n
+                numArrays++
+            }
+        }
+        return numArrays + 1 <= k
+    }
 };
