@@ -20,21 +20,39 @@ function splitArray(nums: number[], k: number): number {
 //         return dp[key] = res
 //     }
     
+    // const n = nums.length
+    // const sums: number[] = Array(n+1).fill(0)
+    // for (let i=0; i < n; i++) {
+    //     sums[i+1] = sums[i] + nums[i]
+    // }
+    // const dp: number[][] = Array(k).fill(0).map(() => Array(n).fill(Infinity))
+    // for (let i=0; i < n; i++) {
+    //     dp[0][i] = sums[n] - sums[i]
+    // }
+    // for (let s=1; s < k; s++) {
+    //     for (let i=0; i < n; i++) {
+    //         for (let j=i+1; j < n; j++) {
+    //             dp[s][i] = Math.min(dp[s][i], Math.max(dp[s-1][j], sums[j]-sums[i]))
+    //         }
+    //     }
+    // }
+    // return dp[k-1][0]
+    
     const n = nums.length
     const sums: number[] = Array(n+1).fill(0)
     for (let i=0; i < n; i++) {
         sums[i+1] = sums[i] + nums[i]
     }
-    const dp: number[][] = Array(k).fill(0).map(() => Array(n).fill(Infinity))
+    const dp: number[] = Array(n).fill(Infinity)
     for (let i=0; i < n; i++) {
-        dp[0][i] = sums[n] - sums[i]
+        dp[i] = sums[n] - sums[i]
     }
     for (let s=1; s < k; s++) {
         for (let i=0; i < n; i++) {
             for (let j=i+1; j < n; j++) {
-                dp[s][i] = Math.min(dp[s][i], Math.max(dp[s-1][j], sums[j]-sums[i]))
+                dp[i] = Math.min(dp[i], Math.max(dp[j], sums[j]-sums[i]))
             }
         }
     }
-    return dp[k-1][0]
+    return dp[0]
 };
