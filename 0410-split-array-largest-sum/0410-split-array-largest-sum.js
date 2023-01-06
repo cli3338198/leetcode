@@ -77,3 +77,34 @@ splitArray = function(nums, k) {
     }
     return dp[0]
 }
+
+splitArray = function(nums, k) {
+    // min is max of nums
+    let l = Math.max(...nums)
+    // max = sum of nums
+    let r = nums.reduce((acc, val) => acc + val, 0)
+    let res = r
+    while (l <= r) {
+        const m = Math.floor((l+r)/2)
+        if (canSplit(m)) {
+            res = m
+            r = m - 1
+        } else {
+            l = m + 1
+        }
+    }
+    return res
+    
+    function canSplit(largest) {
+        let subarrays = 0
+        let sum = 0
+        for (const n of nums) {
+            sum += n
+            if (sum > largest) {
+                sum = n
+                subarrays++
+            }
+        }
+        return subarrays + 1 <= k
+    }
+}
