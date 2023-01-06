@@ -52,3 +52,28 @@ splitArray = function(nums, k) {
     }
     return dp[k-1][0]
 }
+
+splitArray = function(nums, k) {
+    const n = nums.length
+    const sums = Array(n+1).fill(0)
+    for (let i=0; i < n; i++) {
+        sums[i+1] = sums[i] + nums[i]
+    }
+    const dp = Array(n)
+    for (let i=0; i < n; i++) {
+        dp[i] = sums[n] - sums[i]
+    }
+    for (let s=1; s < k; s++) {
+        for (let i=0; i < n-s; i++) {
+            for (let j=i+1; j <= n-s; j++) {
+                const maxSum = Math.max(dp[j], sums[j]-sums[i])
+                if (maxSum <= dp[i]) {
+                    dp[i] = maxSum
+                } else {
+                    break
+                }
+            }
+        }
+    }
+    return dp[0]
+}
