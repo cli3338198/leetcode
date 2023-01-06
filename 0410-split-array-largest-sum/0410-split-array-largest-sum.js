@@ -27,3 +27,28 @@ var splitArray = function(nums, k) {
         return dp[key] = res
     }
 };
+
+splitArray = function(nums, k) {
+    const n = nums.length
+    const sums = Array(n+1).fill(0)
+    for (let i=1; i <= n; i++) {
+        sums[i] = sums[i-1] + nums[i-1]
+    }
+    // #splits x arrayLength
+    const dp = Array(k).fill(0).map(() => Array(n).fill(Infinity))
+    for (let i=0; i < n; i++) {
+        // first row, no splits 
+        dp[0][i] = sums[n] - sums[i]
+    }
+    for (let s=1; s < k; s++) {
+        for (let i=0; i < n; i++) {
+            for (let j=i+1; j < n; j++) {
+                // not enough numbers, continue
+                if (n - j < s - 1) continue
+                // split for all j
+                dp[s][i] = Math.min(dp[s][i], Math.max(dp[s-1][j], sums[j]-sums[i]))
+            }
+        }
+    }
+    return dp[k-1][0]
+}
