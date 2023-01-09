@@ -41,3 +41,23 @@ findTargetSumWays = function(nums, target) {
     }
     return dp[n][s1]
 }
+
+findTargetSumWays = function(nums, target) {
+    const n = nums.length
+    const sum = nums.reduce((acc, val) => acc + val, 0)
+    if (Math.abs(target) > sum || (sum + target) % 2 !== 0) return 0
+    const s1 = Math.floor((target + sum) / 2)
+    let dp = Array(s1+1).fill(0)
+    dp[0] = 1
+    for (let i=1; i <= n; i++) {
+        const next = Array(s1+1).fill(0)
+        for (let j=0; j <= s1; j++) {
+            next[j] += dp[j]
+            if (nums[i-1] <= j) {
+                next[j] += dp[j-nums[i-1]]
+            }
+        }
+        dp = next
+    }
+    return dp[s1]
+}
