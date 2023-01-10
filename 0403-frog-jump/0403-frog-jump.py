@@ -1,5 +1,6 @@
 class Solution:
     def canCross(self, stones: List[int]) -> bool:
+        
         n = len(stones)
         
         dp = [[False] * n for _ in range(n)]
@@ -13,14 +14,14 @@ class Solution:
                     continue
                     
                 dp[i][jump] = True
-                
-                if jump - 1 >= 0:
-                    dp[i][jump - 1] = True
-                
-                if jump + 1 < n:
-                    dp[i][jump + 1] = True
                     
-                if i == n - 1:
+                if jump + 1 < n:
+                    dp[i][jump+1] = True
+                    
+                if jump - 1 >= 0:
+                    dp[i][jump-1] = True
+                    
+                if i == n-1:
                     return True
         
         return False
