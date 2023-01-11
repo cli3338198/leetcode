@@ -20,3 +20,20 @@ var eraseOverlapIntervals = function(intervals) {
     }
     return res
 };
+
+eraseOverlapIntervals = function(intervals) {
+    const n = intervals.length
+    intervals.sort(([a], [b]) => a - b)
+    let lastEnd = intervals[0][1]
+    const dp = Array(n).fill(0)
+    for (let i=1; i < n; i++) {
+        if (intervals[i][0] < lastEnd) {
+            lastEnd = Math.min(lastEnd, intervals[i][1])
+            dp[i] = 1 + dp[i-1]
+        } else {
+            lastEnd = intervals[i][1]
+            dp[i] = dp[i-1]
+        }
+    }
+    return dp[n-1]
+}
