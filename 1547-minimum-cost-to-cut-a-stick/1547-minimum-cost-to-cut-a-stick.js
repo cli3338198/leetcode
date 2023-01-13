@@ -24,3 +24,21 @@ var minCost = function(n, cuts) {
     }
     return dp[0][cuts.length-1]
 };
+
+minCost = function(n, cuts) {
+    const dp = {}
+    cuts = [0, ...cuts, n]
+    cuts.sort((a, b) => a - b)
+    return helper(0, cuts.length-1)
+    
+    function helper(i, j) {
+        const key = `${i} ${j}`
+        if (key in dp) return dp[key]
+        if (i + 1 === j) return 0
+        let res = Infinity
+        for (let k=i+1; k < j; k++) {
+            res = Math.min(res, cuts[j]-cuts[i] + helper(i, k) + helper(k, j))
+        }
+        return dp[key] = res
+    }
+}
