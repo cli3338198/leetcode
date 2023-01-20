@@ -62,3 +62,54 @@ maxAreaOfIsland = function(grid) {
         return res
     }
 }
+
+maxAreaOfIsland = function(grid) {
+    class UF {
+        constructor() {
+            this.root = {}
+            this.size = {}
+            this.max = 0
+        }
+        insert(a) {
+            if (!(a in this.root)) {
+                this.root[a] = a
+                this.size[a] = 1
+                this.max = Math.max(this.max, this.size[a])
+            }
+        }
+        find(a) {
+            this.insert(a)
+            if (this.root[a] !== a) {
+                this.root[a] = this.find(this.root[a])
+            }
+            return this.root[a]
+        }
+        union(a, b) {
+            const A = this.find(a)
+            const B = this.find(b)
+            if (A === B) return
+            this.root[B] = A
+            this.size[A] += this.size[B]
+            this.max = Math.max(this.max, this.size[A])
+        }
+    }
+    
+    const uf = new UF()
+    const rows = grid.length
+    const cols = grid[0].length
+    for (let r=0; r < rows; r++) {
+        for (let c=0; c < cols; c++) {
+            if (grid[r][c] === 1) {
+                uf.insert([r, c])
+                for (const [rr, cc] of [[0, 1], [1, 0], [0, -1], [-1, 0]]) {
+                    const rrr = rr + r
+                    const ccc = cc + c
+                    if (rrr in grid && ccc in grid[rrr] && grid[rrr][ccc] === 1) {
+                        uf.union([r, c], [rrr, ccc])
+                    }
+                }
+            }
+        }
+    }
+    return uf.max
+}
