@@ -18,3 +18,19 @@ var inorderTraversal = function(root) {
         ...inorderTraversal(root.right)
     ]
 };
+
+inorderTraversal = function(root) {
+    const stack = []
+    const res = []
+    while (stack.length || root) {
+        if (root) {
+            stack.push(root)
+            root = root.left
+        } else {
+            root = stack.pop()
+            res.push(root.val)
+            root = root.right
+        }
+    }
+    return res
+}
