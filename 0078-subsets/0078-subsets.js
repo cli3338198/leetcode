@@ -14,3 +14,15 @@ var subsets = function(nums) {
         }
     }
 };
+
+subsets = function(nums) {
+    const res = [[]]
+    for (const n of nums) {
+        const cur = []
+        for (const sub of res) {
+            cur.push([...sub, n])
+        }
+        res.push(...cur)
+    }
+    return res
+}
