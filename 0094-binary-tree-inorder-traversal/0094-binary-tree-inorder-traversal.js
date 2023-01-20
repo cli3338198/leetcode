@@ -34,3 +34,18 @@ inorderTraversal = function(root) {
     }
     return res
 }
+
+inorderTraversal = function(root) {
+    const stack = []
+    const res = []
+    while (stack.length || root) {
+        while (root) {
+            stack.push(root)
+            root = root.left
+        }
+        root = stack.pop()
+        res.push(root.val)
+        root = root.right
+    }
+    return res
+}
