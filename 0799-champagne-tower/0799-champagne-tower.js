@@ -16,3 +16,16 @@ var champagneTower = function(poured, query_row, query_glass) {
     }
     return Math.min(dp[query_row][query_glass], 1)
 };
+
+champagneTower = function(poured, query_row, query_glass) {
+    const dp = {}
+    return Math.min(1, dfs(query_row, query_glass))
+    
+    function dfs(r, c) {
+        const key = `${r} ${c}`
+        if (key in dp) return dp[key]
+        if (c < 0 || c > r) return 0
+        if (r === 0 && c === 0) return poured
+        return dp[key] = Math.max(dfs(r-1, c-1) - 1, 0)/2 + Math.max(dfs(r-1, c) - 1, 0)/2
+    }
+}
