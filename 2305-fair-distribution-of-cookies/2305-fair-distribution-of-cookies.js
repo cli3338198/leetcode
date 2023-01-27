@@ -14,7 +14,9 @@ var distributeCookies = function(cookies, k) {
         }
         for (let i=0; i < k; i++) {
             children[i] += cookies[idx]
-            helper(idx + 1, children)
+            if (children[i] < res) {
+                helper(idx + 1, children)
+            }
             children[i] -= cookies[idx]
         }
     }
