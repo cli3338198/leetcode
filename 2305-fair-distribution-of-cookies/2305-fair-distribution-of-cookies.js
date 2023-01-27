@@ -8,14 +8,14 @@ var distributeCookies = function(cookies, k) {
     helper(0, Array(k).fill(0))
     return res
     
-    function helper(idx, arr) {
+    function helper(idx, children) {
         if (idx === cookies.length) {
-            return res = Math.min(res, Math.max(...arr))
+            return res = Math.min(res, Math.max(...children))
         }
         for (let i=0; i < k; i++) {
-            arr[i] += cookies[idx]
-            helper(idx + 1, arr)
-            arr[i] -= cookies[idx]
+            children[i] += cookies[idx]
+            helper(idx + 1, children)
+            children[i] -= cookies[idx]
         }
     }
 };
