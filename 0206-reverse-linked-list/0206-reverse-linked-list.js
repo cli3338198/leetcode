@@ -19,3 +19,14 @@ var reverseList = function(head) {
     }
     return prev
 };
+
+reverseList = function(head) {
+    return helper(null, head)
+    
+    function helper(prev, head) {
+        if (!head) return prev
+        const next = head.next
+        head.next = prev
+        return helper(head, next)
+    }
+}
