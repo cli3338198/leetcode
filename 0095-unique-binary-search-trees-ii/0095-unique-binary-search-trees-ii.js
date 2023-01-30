@@ -14,14 +14,14 @@ var generateTrees = function(n) {
     const dp = {}
     return helper(1, n)
     
-    function helper(l, r) {
-        const key = `${l} ${r}`
+    function helper(lo, hi) {
+        const key = `${lo} ${hi}`
+        if (lo > hi) return [null]
         if (key in dp) return dp[key]
-        if (l > r) return [null]
         const res = []
-        for (let root=l; root <= r; root++) {
-            for (const left of helper(l, root-1)) {
-                for (const right of helper(root+1, r)) {
+        for (let root=lo; root <= hi; root++) {
+            for (const left of helper(lo, root-1)) {
+                for (const right of helper(root+1, hi)) {
                     const tree = new TreeNode(root)
                     tree.left = left
                     tree.right = right
