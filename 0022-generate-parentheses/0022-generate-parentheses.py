@@ -1,15 +1,19 @@
 class Solution:
-    def generateParenthesis(self, n: int) -> List[str]:     
-        dp = [[[] * (n + 1) for _ in range(n+1)] for _ in range(n+2)]
+    def generateParenthesis(self, n: int) -> List[str]:
         
-        dp[1][1].append('(')
+        q = deque()
+        q.append([0, 0, ''])
         
-        for open in range(1, len(dp)):
-            for close in range(1, len(dp[0])):
-                if open - 1 > close: continue
-                for k in dp[open-1][close]:
-                    dp[open][close].append(k + ')')
-                for k in dp[open][close-1]:
-                    dp[open][close].append(k + '(')
+        for i in range(2 * n):
+            l = len(q)
+            
+            for j in range(l):
+                left, right, cur = q.popleft()
+                
+                if left < n:
+                    q.append([left + 1, right, cur + "("])
+                
+                if right < left:
+                    q.append([left, right + 1, cur + ")"])
         
-        return dp[len(dp) - 1][len(dp[0]) - 1]
+        return map(lambda x: x[2], q)
