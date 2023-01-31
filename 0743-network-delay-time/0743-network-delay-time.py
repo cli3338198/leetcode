@@ -5,7 +5,6 @@ class Solution:
             graph[u] = graph.get(u, []) + [[v, t]]
             
         heap = [(0, k)]
-        heapq.heapify(heap)
         distances = {}
         
         while heap:
