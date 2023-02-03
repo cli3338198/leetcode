@@ -8,7 +8,7 @@
 var knightProbability = function(n, k, row, column) {
     const moves = [[-2, -1], [-2, 1], [-1, 2], [1, 2], [2, -1], [2, 1], [-1, -2], [1, -2]]
     const dp = {}
-    return helper(k, row, column) / (8**k)
+    return helper(k, row, column)
     
     function helper(k, row, col) {
         const key = `${k} ${row} ${col}`
@@ -19,7 +19,7 @@ var knightProbability = function(n, k, row, column) {
         for (const [r, c] of moves) {
             const rr = row + r
             const cc = col + c
-            res += helper(k-1, rr, cc)
+            res += 0.125 * helper(k-1, rr, cc)
         }
         return dp[key] = res
     }
