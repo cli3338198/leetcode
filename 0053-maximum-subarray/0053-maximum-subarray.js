@@ -11,3 +11,12 @@ var maxSubArray = function(nums) {
     }
     return max
 };
+
+maxSubArray = function(nums) {
+    const n = nums.length
+    const dp = nums.slice()
+    for (let i=1; i < n; i++) {
+        dp[i] = Math.max(dp[i] + dp[i-1], dp[i])
+    }
+    return Math.max(...dp)
+}
