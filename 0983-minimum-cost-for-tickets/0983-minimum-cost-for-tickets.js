@@ -19,3 +19,21 @@ var mincostTickets = function(days, costs) {
     }
     return dp[n]
 };
+
+mincostTickets = function(days, costs) {
+    const dp = {}
+    const n = days.length
+    return helper(0, 0)
+    
+    function helper(idx, daysCovered) {
+        const key = `${idx} ${daysCovered}`
+        if (idx >= n) return 0
+        if (key in dp) return dp[key]
+        if (daysCovered >= days[idx]) return helper(idx+1, daysCovered)
+        let res = Infinity
+        res = Math.min(res, costs[0] + helper(idx+1, days[idx]))
+        res = Math.min(res, costs[1] + helper(idx+1, days[idx]+6))
+        res = Math.min(res, costs[2] + helper(idx+1, days[idx]+29))
+        return dp[key] = res
+    }
+}
