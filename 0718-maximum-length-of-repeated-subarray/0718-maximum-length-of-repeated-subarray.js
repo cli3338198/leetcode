@@ -12,7 +12,7 @@ var findLength = function(nums1, nums2) {
         for (let j=1; j <= n; j++) {
             if (nums1[i-1] === nums2[j-1]) {
                 dp[i][j] = 1 + dp[i-1][j-1]
-            } 
+            }
             res = Math.max(res, dp[i][j])
         }
     }
