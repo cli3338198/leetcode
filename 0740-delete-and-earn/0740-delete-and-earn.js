@@ -15,3 +15,17 @@ var deleteAndEarn = function(nums) {
     }
     return dp[max]
 };
+
+deleteAndEarn = function(nums) {
+    const max = Math.max(...nums)
+    const freq = Array(max+1).fill(0)
+    for (const n of nums) {
+        freq[n]++
+    }
+    let earn1 = 0
+    let earn2 = 0
+    for (let i=1; i <= max; i++) {
+        [earn1, earn2] = [earn2, Math.max(earn2, earn1 + i * freq[i])]
+    }
+    return Math.max(earn1, earn2)
+}
