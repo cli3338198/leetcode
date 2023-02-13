@@ -17,3 +17,19 @@ var minPathCost = function(grid, moveCost) {
     }
     return Math.min(...dp[rows-1])
 };
+
+minPathCost = function(grid, moveCost) {
+    const rows = grid.length
+    const cols = grid[0].length
+    let dp = grid[0].slice()
+    for (let r=1; r < rows; r++) {
+        const newDp = Array(cols).fill(Infinity)
+        for (let c=0; c < cols; c++) {
+            for (let k=0; k < cols; k++) {
+                newDp[c] = Math.min(newDp[c], grid[r][c] + dp[k] + moveCost[grid[r-1][k]][c])
+            }
+        }
+        dp = newDp
+    }
+    return Math.min(...dp)
+}
