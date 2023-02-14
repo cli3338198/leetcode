@@ -1,35 +1,16 @@
-/**
- * @param {number[][]} grid
- * @param {number[][]} moveCost
- * @return {number}
- */
-var minPathCost = function(grid, moveCost) {
-    const rows = grid.length
-    const cols = grid[0].length
-    const dp = Array(rows).fill(0).map(() => Array(cols).fill(Infinity))
-    dp[0] = grid[0].slice()
-    for (let r=1; r < rows; r++) {
-        for (let c=0; c < cols; c++) {
-            for (let k=0; k < cols; k++) {
-                dp[r][c] = Math.min(dp[r][c], grid[r][c] + dp[r-1][k] + moveCost[grid[r-1][k]][c])
-            }
-        }
-    }
-    return Math.min(...dp[rows-1])
-};
-
-minPathCost = function(grid, moveCost) {
-    const rows = grid.length
-    const cols = grid[0].length
-    let dp = grid[0].slice()
-    for (let r=1; r < rows; r++) {
-        const newDp = Array(cols).fill(Infinity)
-        for (let c=0; c < cols; c++) {
-            for (let k=0; k < cols; k++) {
-                newDp[c] = Math.min(newDp[c], grid[r][c] + dp[k] + moveCost[grid[r-1][k]][c])
-            }
-        }
-        dp = newDp
-    }
-    return Math.min(...dp)
-}
+class Solution:
+    def minPathCost(self, grid: List[List[int]], moveCost: List[List[int]]) -> int:
+        
+        rows = len(grid)
+        cols = len(grid[0])
+        
+        dp = [[inf] * cols for _ in range(rows)]
+        dp[0] = grid[0]
+        
+        for r in range(1, rows):
+            for c in range(cols):
+                for k in range(cols):
+                    dp[r][c] = min(dp[r][c], grid[r][c] + dp[r-1][k] + moveCost[grid[r-1][k]][c])
+        
+        return min(*dp[-1])
+        
