@@ -15,3 +15,19 @@ var uniquePaths = function(m, n) {
         return dp[key] = helper(r+1, c) + helper(r, c+1)
     }
 };
+
+uniquePaths = function(m, n) {
+    const dp = Array(m).fill(0).map(() => Array(n).fill(0))
+    for (let r=m-1; r >= 0; r--) {
+        dp[r][n-1] = 1
+    }
+    for (let c=n-1; c >= 0; c--) {
+        dp[m-1][c] = 1
+    }
+    for (let r=m-2; r >= 0; r--) {
+        for (let c=n-2; c >= 0; c--) {
+            dp[r][c] += dp[r+1][c] + dp[r][c+1]
+        }
+    }
+    return dp[0][0]
+}
