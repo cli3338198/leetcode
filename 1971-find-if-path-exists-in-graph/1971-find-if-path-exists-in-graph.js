@@ -27,3 +27,26 @@ var validPath = function(n, edges, source, destination) {
         return false
     }
 };
+
+validPath = function(n, edges, source, destination) {
+    const graph = {}
+    for (let i=0; i < n; i++) {
+        graph[i] = []
+    }
+    for (const [u, v] of edges) {
+        graph[u].push(v)
+        graph[v].push(u)
+    }
+    const q = [source]
+    const set = new Set()
+    while (q.length) {
+        const cur = q.shift()
+        if (cur === destination) return true
+        if (set.has(cur)) continue
+        set.add(cur)
+        for (const next of graph[cur]) {
+            q.push(next)
+        }
+    }
+    return false
+}
