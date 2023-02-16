@@ -50,3 +50,42 @@ validPath = function(n, edges, source, destination) {
     }
     return false
 }
+
+validPath = function(n, edges, source, destination) {
+    class UF {
+        constructor(n) {
+            this.root = {}
+            this.size = {}
+            for (let i=0; i < n; i++) {
+                this.root[i] = i
+                this.size[i] = 1
+            }
+        }
+        find(a) {
+            if (this.root[a] !== a) {
+                this.root[a] = this.find(this.root[a])
+            }
+            return this.root[a]
+        }
+        union(a, b) {
+            const A = this.find(a)
+            const sizeA = this.size[A]
+            const B = this.find(b)
+            const sizeB = this.size[B]
+            if (A === B) return
+            if (sizeA > sizeB) {
+                this.root[B] = A
+                this.size[A] += this.size[B]
+            } else {
+                this.root[A] = B
+                this.size[B] += this.size[A]
+            }
+        }
+    }
+    
+    const uf = new UF(n)
+    for (const [u, v] of edges) {
+        uf.union(u, v)
+    }
+    return uf.find(source) === uf.find(destination)
+}
