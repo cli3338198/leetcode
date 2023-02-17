@@ -28,3 +28,22 @@ generateParenthesis = function(n) {
     }
     return q.map(x => x[0])
 }
+
+generateParenthesis = function(n) {
+    const dp = {}
+    return helper(n)
+    
+    function helper(n) {
+        if (n === 0) return [['']]
+        if (n in dp) return dp[n]
+        const res = []
+        for (let i=0; i < n; i++) {
+            for (const sub1 of helper(n-i-1)) {
+                for (const sub2 of helper(i)) {
+                    res.push(sub1 + "(" + sub2 + ")")
+                }
+            }
+        }
+        return dp[n] = res
+    }
+}
