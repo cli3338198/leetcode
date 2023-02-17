@@ -15,3 +15,16 @@ var generateParenthesis = function(n) {
         if (r < l) helper(l, r+1, cur + ")")
     }
 };
+
+generateParenthesis = function(n) {
+    const q = [["", 0, 0]]
+    for (let i=0; i < (2 * n); i++) {
+        const len = q.length
+        for (let j=0; j < len; j++) {
+            const [cur, l, r] = q.shift()
+            if (l < n) q.push([cur + "(", l+1, r])
+            if (r < l) q.push([cur + ")", l, r+1])
+        }
+    }
+    return q.map(x => x[0])
+}
