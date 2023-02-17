@@ -47,3 +47,18 @@ generateParenthesis = function(n) {
         return dp[n] = res
     }
 }
+
+generateParenthesis = function(n) {
+    const dp = Array(n+1).fill(0).map(() => ([]))
+    dp[0].push("")
+    for (let i=1; i <= n; i++) {
+        for (let j=0; j < i; j++) {
+            for (const sub1 of dp[i-j-1]) {
+                for (const sub2 of dp[j]) {
+                    dp[i].push(sub1 + "(" + sub2 + ")")
+                }
+            }
+        }
+    }
+    return dp[n]
+}
