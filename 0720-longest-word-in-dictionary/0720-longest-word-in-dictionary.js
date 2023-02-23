@@ -11,9 +11,7 @@ var longestWord = function(words) {
         for (const char of word) {
             cur += char
             if (!set.has(cur)) break
-            if (cur.length > res.length || res === '') {
-                res = cur
-            } else if (res.length === cur.length && cur < res) {
+            if (cur.length > res.length || res === '' || (res.length === cur.length && cur < res)) {
                 res = cur
             }
         }
