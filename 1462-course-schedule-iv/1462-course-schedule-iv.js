@@ -12,13 +12,13 @@ var checkIfPrerequisite = function(numCourses, prerequisites, queries) {
     for (const [u, v] of prerequisites) {
         graph[u].push(v)
     }
-    return queries.map(query => dfs(...query))
+    return queries.map(q => dfs(...q))
     
     function dfs(u, v, set=new Set()) {
         if (u === v) return true
         if (set.has(u)) return false
         set.add(u)
-        for (const next of graph[u] || []) {
+        for (const next of graph[u]) {
             if (dfs(next, v, set)) return true
         }
         return false
