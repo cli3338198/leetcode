@@ -56,3 +56,26 @@ checkIfPrerequisite = function(numCourses, prerequisites, queries) {
     }
     return queries.map(([u, v]) => map[v].has(Number(u)) || map[v].has(String(u)))
 }
+
+checkIfPrerequisite = function(numCourses, prerequisites, queries) {
+    const graph = {}
+    const map = {}
+    for (let i=0; i < numCourses; i++) {
+        graph[i] = []
+    }
+    for (const [u, v] of prerequisites) {
+        graph[u].push(v)
+    }
+    Object.keys(graph).forEach(u => dfs(u))
+    return queries.map(([u, v]) => map[u].has(Number(v)) || map[u].has(String(v)))
+    
+    function dfs(u) {
+        if (u in map) return
+        map[u] = new Set()
+        for (const v of graph[u]) {
+            map[u].add(v)
+            dfs(v)
+            map[v].forEach(map[u].add, map[u])
+        }
+    }
+}
