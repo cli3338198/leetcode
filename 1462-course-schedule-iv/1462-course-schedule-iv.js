@@ -5,15 +5,12 @@
  * @return {boolean[]}
  */
 var checkIfPrerequisite = function(numCourses, prerequisites, queries) {
-    const outDegree = {}
     const graph = {}
     for (let i=0; i < numCourses; i++) {
         graph[i] = []
-        outDegree[i] = 0
     }
     for (const [u, v] of prerequisites) {
         graph[u].push(v)
-        outDegree[u]++
     }
     return queries.map(query => dfs(...query))
     
