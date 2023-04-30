@@ -12,3 +12,7 @@ var runningSum = function(nums) {
         return acc
     }, [])
 };
+
+runningSum = function(nums) {
+    return nums.map((n, i, arr) => (arr[i] = n + (arr[i-1] ?? 0)))
+}
