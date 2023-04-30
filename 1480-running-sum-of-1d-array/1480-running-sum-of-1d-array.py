@@ -1,12 +1,7 @@
 class Solution:
     def runningSum(self, nums: List[int]) -> List[int]:
+                        
+        for i in range(1, len(nums)):
+            nums[i] += nums[i-1]
         
-        res = []
-        
-        for i, n in enumerate(nums):
-            if i == 0:
-                res += [n]
-            else:
-                res += [n + res[-1]]
-                
-        return res
+        return nums
