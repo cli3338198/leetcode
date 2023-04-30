@@ -13,3 +13,13 @@ var finalValueAfterOperations = function(operations) {
     })
     return res
 };
+
+finalValueAfterOperations = function(operations) {
+    const map = {
+        "++X": 1,
+        "X++": 1,
+        "--X": -1,
+        "X--": -1
+    }
+    return operations.reduce((acc, op) => acc + map[op], 0)
+}
