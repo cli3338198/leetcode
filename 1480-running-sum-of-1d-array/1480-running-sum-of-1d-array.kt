@@ -1,8 +1,10 @@
 class Solution {
     fun runningSum(nums: IntArray): IntArray {
-        val res = IntArray(nums.size) { nums[0] }
-        for (i in 1..(nums.size-1)) {
-            res[i] = nums[i] + res[i-1]
+        var res = IntArray(nums.size) { 0 }
+        var sum = 0
+        for (i in 0..(nums.size-1)) {
+            sum += nums[i]
+            res[i] = sum
         }
         return res
     }
