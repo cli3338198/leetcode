@@ -4,7 +4,7 @@ class Solution:
         res = 0
         
         for op in operations:
-            if "+" in op:
+            if op == '++X' or op == 'X++':
                 res += 1
             else:
                 res -= 1
