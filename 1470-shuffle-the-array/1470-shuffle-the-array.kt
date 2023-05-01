@@ -1,10 +1,9 @@
 class Solution {
     fun shuffle(nums: IntArray, n: Int): IntArray {
-        val res = IntArray(nums.size) { 0 }
-        var j = 0
+        val res = IntArray(nums.size)
         for (i in 0..(n-1)) {
-            res[j++] = nums[i]
-            res[j++] = nums[i+n]
+            res[i*2] = nums[i]
+            res[i*2 + 1] = nums[i+n]
         }
         return res
     }
