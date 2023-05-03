@@ -10,3 +10,7 @@ var restoreString = function(s, indices) {
     }
     return res.join("")
 };
+
+restoreString = function(s, indices) {
+    return indices.map((idx, i) => ([idx, s[i]])).sort(([a], [b]) => a - b).map(([,a]) => a).join("")
+}
