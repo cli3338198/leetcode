@@ -4,9 +4,5 @@
  * @return {number}
  */
 var numJewelsInStones = function(jewels, stones) {
-    let res = 0
-    for (const stone of stones) {
-        if (jewels.includes(stone)) res++
-    }
-    return res
+    return stones.split("").reduce((acc, stone) => acc + (jewels.includes(stone) ? 1 : 0), 0)
 };
