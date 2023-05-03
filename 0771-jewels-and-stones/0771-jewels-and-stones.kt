@@ -5,6 +5,7 @@ class Solution {
             for (jewel in jewels) {
                 if (stone == jewel) {
                     res += 1
+                    break
                 }
             }
         }
