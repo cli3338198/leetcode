@@ -9,3 +9,8 @@ var smallestEvenMultiple = function(n) {
         }
     }
 };
+
+smallestEvenMultiple = function(n) {
+    if ((n % 2)) n = 2*n
+    return n
+}
