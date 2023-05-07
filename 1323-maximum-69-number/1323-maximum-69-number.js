@@ -3,12 +3,17 @@
  * @return {number}
  */
 var maximum69Number  = function(num) {
-    num = String(num).split("")
-    for (let i=0; i < num.length; i++) {
-        if (num[i] === '6') {
-            num[i] = '9'
-            break
+    let flag = false
+    return +String(num).split("").map((n) => {
+        if (n === "6") {
+            if (!flag) {
+                flag = !flag
+                return "9"
+            } else {
+                return n
+            }
+        } else {
+            return n
         }
-    }
-    return Number(num.join(""))
+    }).join("")
 };
