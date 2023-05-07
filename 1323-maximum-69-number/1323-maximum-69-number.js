@@ -17,3 +17,15 @@ var maximum69Number  = function(num) {
         }
     }).join("")
 };
+
+maximum69Number = function(num) {
+    let max = num
+    num = String(num)
+    for (let i=0; i < num.length; i++) {
+        let cur = num.split("")
+        cur[i] = 9
+        cur = cur.join("")
+        max = Math.max(max, +cur)
+    }
+    return max
+}
