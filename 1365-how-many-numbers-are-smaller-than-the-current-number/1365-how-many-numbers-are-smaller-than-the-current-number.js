@@ -29,3 +29,14 @@ smallerNumbersThanCurrent = function(nums) {
     }
     return res
 }
+
+smallerNumbersThanCurrent = function(nums) {
+    const numbers = Array(101).fill(0)
+    for (const n of nums) {
+        numbers[n]++
+    }
+    for (let i=1; i < numbers.length; i++) {
+        numbers[i] += numbers[i-1]
+    }
+    return nums.map(n => n === 0 ? 0 : numbers[n-1])
+}
