@@ -17,3 +17,15 @@ var smallerNumbersThanCurrent = function(nums) {
         return cnt
     }
 };
+
+smallerNumbersThanCurrent = function(nums) {
+    const res = []
+    for (let i=0; i < nums.length; i++) {
+        let cnt = 0
+        for (let j=0; j < nums.length; j++) {
+            if (nums[j] < nums[i]) cnt++
+        }
+        res.push(cnt)
+    }
+    return res
+}
