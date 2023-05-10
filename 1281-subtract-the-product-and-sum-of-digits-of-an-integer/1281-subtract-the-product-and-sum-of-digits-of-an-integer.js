@@ -20,7 +20,17 @@ var subtractProductAndSum = function(n) {
             res += n % 10
             n = Math.floor(n / 10)
         }
-        console.log(res)
         return res
     }
 };
+
+subtractProductAndSum = function(n) {
+    let product = 1
+    let sum = 0
+    while (n) {
+        product *= n % 10 ?? 1
+        sum += n % 10
+        n = Math.floor(n / 10)
+    }
+    return product - sum
+}
