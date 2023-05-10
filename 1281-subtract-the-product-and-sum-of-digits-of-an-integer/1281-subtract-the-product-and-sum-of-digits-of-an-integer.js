@@ -34,3 +34,27 @@ subtractProductAndSum = function(n) {
     }
     return product - sum
 }
+
+subtractProductAndSum = function(n) {
+    return getDiff(getDigits(n).reduce(reducer, [1, 0]))
+    
+    function getDiff([a, b]) {
+        return a - b
+    }
+    
+    function getDigits(n) {
+        const res = []
+        while (n) {
+            res.push(n % 10)
+            n = Math.floor(n / 10)
+        }
+        return res
+    }
+    
+    function reducer(acc, val) {
+        let [product, sum] = acc
+        product *= val ?? 1
+        sum += val
+        return [product, sum]
+    }
+}
