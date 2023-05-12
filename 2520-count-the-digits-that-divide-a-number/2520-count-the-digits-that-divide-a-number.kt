@@ -4,7 +4,7 @@ class Solution {
         var n = num
         while (n !== 0) {
             res += if (num % (n % 10) === 0) 1 else 0
-            n = n / 10
+            n /= 10
         }
         return res
     }
