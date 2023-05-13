@@ -6,7 +6,7 @@ var largestAltitude = function(gain) {
     return gain.reduce(reducer, [0, 0])[1]
     
     function reducer(acc, val) {
-        let [ht, mx] = acc
+        const [ht, mx] = acc
         return [ht + val, Math.max(mx, ht + val)]
     }
 };
