@@ -4,11 +4,12 @@
  */
 var minOperations = function(nums) {
     let res = 0
-    for (let i=1; i < nums.length; i++) {
-        if (nums[i-1] < nums[i]) continue
-        const diff = Math.abs(nums[i]-nums[i-1]) + 1
-        nums[i] += diff
-        res += diff
+    for (let i=0; i < nums.length-1; i++) {
+        if (nums[i] < nums[i+1]) continue
+        while (nums[i] >= nums[i+1]) {
+            res++
+            nums[i+1]++
+        }
     }
     return res
 };
