@@ -17,3 +17,12 @@ var findGCD = function(nums) {
     }
     return res
 };
+
+findGCD = function(nums) {
+    nums.sort((a, b) => a - b)
+    return helper(nums.at(0), nums.at(-1))
+    
+    function helper(smallest, greatest) {
+        return greatest === 0 ? smallest : helper(greatest, smallest % greatest)
+    }
+}
