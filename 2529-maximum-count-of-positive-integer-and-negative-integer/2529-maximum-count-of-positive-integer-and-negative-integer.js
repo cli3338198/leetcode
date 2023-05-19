@@ -13,3 +13,16 @@ var maximumCount = function(nums) {
     }
     return Math.max(pos, neg)
 };
+
+maximumCount = function(nums) {
+    return Math.max(...nums.reduce(reducer, [0, 0]))
+    
+    function reducer(acc, val) {
+        if (val > 0) {
+            acc[0]++
+        } else if (val < 0) {
+            acc[1]++
+        }
+        return acc
+    }
+}
