@@ -33,3 +33,17 @@ mergeAlternately = function(w1, w2) {
     }
     return res
 }
+
+mergeAlternately = function(w1, w2) {
+    let res = ""
+    const max = Math.max(w1.length, w2.length)
+    for (let i=0; i < max; i++) {
+        if (i < w1.length) {
+            res += w1[i]
+        }
+        if (i < w2.length) {
+            res += w2[i]
+        }
+    }
+    return res
+}
