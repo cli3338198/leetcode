@@ -18,3 +18,18 @@ var mergeAlternately = function(word1, word2) {
     }
     return res
 };
+
+mergeAlternately = function(w1, w2) {
+    let res = '', i = 0, j = 0
+    while (i < w1.length && j < w2.length) {
+        res += w1[i++]
+        res += w2[j++]
+    }
+    if (i < w1.length) {
+        res += w1.substring(i)
+    }
+    if (j < w2.length) {
+        res += w2.substring(j)
+    }
+    return res
+}
