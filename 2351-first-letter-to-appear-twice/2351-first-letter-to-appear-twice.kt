@@ -1,6 +1,6 @@
 class Solution {
     fun repeatedCharacter(s: String): Char {
-        val set = mutableSetOf<Char>()
+        val set = HashSet<Char>()
         for (i in s.indices) {
             val c = s[i]
             if (set.contains(c)) {
