@@ -7,7 +7,7 @@ var hammingDistance = function(x, y) {
     let xor = x ^ y
     let res = 0
     while (xor) {
-        xor = xor & (xor - 1)
+        xor &= (xor - 1)
         res++
     }
     return res
