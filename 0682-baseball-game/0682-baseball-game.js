@@ -3,19 +3,21 @@
  * @return {number}
  */
 var calPoints = function(operations) {
-    const stack = []
+    const scores = []
     for (const op of operations) {
-        if (op === '+') {
-            const a = stack[stack.length-1] || 0
-            const b = stack[stack.length-2] || 0
-            stack.push(a + b)
-        } else if (op === 'C') {
-            stack.pop()
-        } else if (op === 'D') {
-            stack.push(stack[stack.length-1] * 2)
-        } else {
-            stack.push(Number(op))
+        switch (op) {
+            case "+":
+                scores.push(scores.at(-1) + scores.at(-2))
+                break
+            case "D":
+                scores.push(scores.at(-1) * 2)
+                break
+            case "C":
+                scores.splice(scores.length-1)
+                break
+            default:
+                scores.push(+op)
         }
     }
-    return stack.reduce((acc, val) => acc + val, 0)
+    return scores.reduce((acc, val) => acc + val, 0)
 };
