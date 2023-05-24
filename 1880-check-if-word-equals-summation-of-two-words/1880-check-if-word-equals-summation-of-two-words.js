@@ -18,3 +18,16 @@ var isSumEqual = function(firstWord, secondWord, targetWord) {
         return Number(res)
     }
 };
+
+isSumEqual = function(first, second, target) {
+    return helper(first) + helper(second) === helper(target)
+    
+    function helper(word) {
+        let res = 0
+        for (const c of word) {
+            res += c.charCodeAt(0) - 97
+            res *= 10
+        }
+        return res
+    }
+}
