@@ -14,3 +14,13 @@ var uniqueOccurrences = function(arr) {
     }
     return true
 };
+
+uniqueOccurrences = function(arr) {
+    const map = arr.reduce(reducer, {})
+    return new Set(Object.values(map)).size === Object.values(map).length
+    
+    function reducer(acc, val) {
+        acc[val] = acc[val] + 1 || 1
+        return acc
+    }
+}
