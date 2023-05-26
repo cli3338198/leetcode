@@ -84,3 +84,7 @@ minimumOperations = function(nums) {
     }
     return res
 }
+
+minimumOperations = function(nums) {
+    return Array.from(new Set(nums.filter(n => n > 0))).length
+}
