@@ -1,10 +1,9 @@
 class Solution {
     fun helper(n: Int): Boolean {
-        val original = n
         var num = n
         while (num !== 0) {
             val digit = num % 10
-            if (digit === 0 || original % digit !== 0) {
+            if (digit === 0 || n % digit !== 0) {
                 return false
             }
             num /= 10
