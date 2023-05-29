@@ -40,3 +40,17 @@ searchBST = function(root, val) {
     }
     return null
 }
+
+searchBST = function(cur, val) {
+    while (cur) {
+        if (cur.val === val) return cur
+        if (cur.val > val && cur.left) {
+            cur = cur.left
+        } else if (cur.val < val && cur.right) {
+            cur = cur.right
+        } else {
+            break
+        }
+    }
+    return null
+}
