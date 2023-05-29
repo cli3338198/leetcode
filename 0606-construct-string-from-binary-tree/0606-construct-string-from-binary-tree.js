@@ -30,3 +30,17 @@ var tree2str = function(root) {
         return str
     }
 };
+
+tree2str = function(root) {
+    if (!root) {
+        return ""
+    }
+    let str = "" + root.val
+    if (!root.left && !root.right) {
+        return str
+    }
+    if (!root.right) {
+        return str + "(" + tree2str(root.left) + ")"
+    }
+    return str + "(" + tree2str(root.left) + ")" + "(" + tree2str(root.right) + ")"
+}
