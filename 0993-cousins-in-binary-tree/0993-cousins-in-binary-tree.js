@@ -48,6 +48,7 @@ isCousins = function(root, x, y) {
             if (root.left) q.push([root.left, root])
             if (root.right) q.push([root.right, root])
         }
+        if (p1 || p2) break
     }
     return false
 }
