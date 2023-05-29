@@ -26,3 +26,20 @@ var getMinimumDifference = function(root) {
         dfs(root.right)
     }
 };
+
+getMinimumDifference = function(root) {
+    let res = 10 ** 5 + 1
+    let prev = null
+    dfs(root)
+    return res
+    
+    function dfs(root) {
+        if (!root) return
+        dfs(root.left)
+        if (prev !== null) {
+            res = Math.min(res, root.val - prev)
+        }
+        prev = root.val
+        dfs(root.right)
+    }
+}
