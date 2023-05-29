@@ -10,9 +10,9 @@ class Solution:
             return ""
         res = "" + str(root.val)
         if root.left:
-            res += "(" + self.tree2str(root.left) + ")"
+            res += f"({self.tree2str(root.left)})"
         if root.right:
             if not root.left:
                 res += "()"
-            res += "(" + self.tree2str(root.right) + ")"
+            res += f"({self.tree2str(root.right)})"
         return res
