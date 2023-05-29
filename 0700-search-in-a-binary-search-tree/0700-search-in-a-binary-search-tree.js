@@ -26,3 +26,17 @@ searchBST = function(root, val) {
         return searchBST(root.left, val)
     }
 }
+
+searchBST = function(root, val) {
+    const q = [root]
+    while (q.length) {
+        const n = q.shift()
+        if (n.val === val) return n
+        if (n.val < val && n.right) {
+            q.push(n.right)
+        } else if (n.val > val && n.left) {
+            q.push(n.left)
+        }
+    }
+    return null
+}
