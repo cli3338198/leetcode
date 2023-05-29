@@ -1,10 +1,7 @@
 class MyStack {
-    a: number[];
-    b: number[];
 
-    constructor() {
-        this.a = []
-        this.b = []
+    constructor(private a: number[] = [], private b: number[] = []) {
+
     }
 
     push(x: number): void {
