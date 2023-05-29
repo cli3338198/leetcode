@@ -33,3 +33,16 @@ sumOfLeftLeaves = function(root) {
         dfs(root.right)
     }
 }
+
+sumOfLeftLeaves = function(root) {
+    const q = [root]
+    let sum = 0
+    while (q.length) {
+        const n = q.shift()
+        if (!n) break
+        if (n.left && !n.left.left && !n.left.right) sum += n.left.val
+        if (n.left) q.push(n.left)
+        if (n.right) q.push(n.right)
+    }
+    return sum
+}
