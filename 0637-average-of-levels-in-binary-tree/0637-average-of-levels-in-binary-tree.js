@@ -12,17 +12,14 @@
  */
 var averageOfLevels = function(root) {
     const res = []
-    const q = [root]
-    while (q.length) {
-        const len = q.length
-        let sum = 0
-        for (let i=0; i < len; i++) {
-            const {val, left, right} = q.shift()
-            sum += val
-            if (left) q.push(left)
-            if (right) q.push(right)
-        }
-        res.push(sum / len)
+    dfs(root, 0)
+    return res.map(x => (x.reduce((acc, val) => acc + val, 0)) / x.length)
+    
+    function dfs(root, lvl) {
+        if (!root) return
+        if (!res[lvl]) res[lvl] = []
+        res[lvl].push(root.val)
+        dfs(root.left, lvl+1)
+        dfs(root.right, lvl+1)
     }
-    return res
 };
