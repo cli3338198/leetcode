@@ -16,3 +16,13 @@ var searchBST = function(root, val) {
     if (root.val === val) return root
     return searchBST(root.left, val) || searchBST(root.right, val)
 };
+
+searchBST = function(root, val) {
+    if (!root) return null
+    if (root.val === val) return root
+    if (root.val < val) {
+        return searchBST(root.right, val)
+    } else {
+        return searchBST(root.left, val)
+    }
+}
