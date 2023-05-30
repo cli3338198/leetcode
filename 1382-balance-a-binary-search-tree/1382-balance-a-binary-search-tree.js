@@ -39,3 +39,22 @@ var balanceBST = function(root) {
         return res
     }
 };
+
+balanceBST = function(root) {
+    const arr = dfs(root)
+    return balance(0, arr.length-1)
+    
+    function balance(lo, hi) {
+        if (lo > hi) return null
+        const mid = Math.floor((lo+hi)/2)
+        const root = new TreeNode(arr[mid])
+        root.left = balance(lo, mid-1)
+        root.right = balance(mid+1, hi)
+        return root
+    }
+    
+    function dfs(root) {
+        if (!root) return []
+        return [...dfs(root.left), root.val, ...dfs(root.right)]
+    }
+}
