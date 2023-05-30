@@ -12,3 +12,16 @@ var halvesAreAlike = function(s) {
         }
     }
 };
+
+halvesAreAlike = function(s) {
+    const vowels = new Set('aeiouAEIOU'.split(""))
+    let i = 0
+    let j = s.length-1
+    let c1 = 0
+    let c2 = 0
+    while (i < j) {
+        if (vowels.has(s[i++])) c1++
+        if (vowels.has(s[j--])) c2++
+    }
+    return c1 === c2
+}
