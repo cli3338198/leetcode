@@ -21,3 +21,14 @@ var sumEvenGrandparent = function(root) {
     }
     return sum
 };
+
+sumEvenGrandparent = function(root) {
+    return dfs(root, null, null)
+    
+    function dfs(root, parent, grandparent) {
+        if (!root) return 0
+        let sum = 0
+        if (grandparent && grandparent.val % 2 === 0) sum += root.val
+        return sum + dfs(root.left, root, parent) + dfs(root.right, root, parent)
+    }
+}
