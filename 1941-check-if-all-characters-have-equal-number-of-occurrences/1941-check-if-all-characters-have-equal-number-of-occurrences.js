@@ -17,3 +17,7 @@ var areOccurrencesEqual = function(s) {
     }
     return true
 };
+
+areOccurrencesEqual = function(s) {
+    return (new Set(Object.values(s.split("").reduce((acc, val) => ({...acc, [val]: acc[val] + 1 || 1}), {})))).size === 1
+}
