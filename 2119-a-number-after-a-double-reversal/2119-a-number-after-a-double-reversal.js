@@ -16,3 +16,9 @@ var isSameAfterReversals = function(num) {
         return res
     }
 };
+
+isSameAfterReversals = function(num) {
+    if (num === 0) return true
+    if (num % 10 === 0) return false
+    return true
+}
