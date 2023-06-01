@@ -5,4 +5,6 @@ class Solution:
         for i in range(0, len(nums)):
             if nums[i] == target:
                 res.append(i)
+            elif nums[i] > target:
+                break
         return res
