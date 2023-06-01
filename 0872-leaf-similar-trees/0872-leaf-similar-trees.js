@@ -29,3 +29,23 @@ var leafSimilar = function(root1, root2) {
         ]
     }
 };
+
+leafSimilar = function(root1, root2) {
+    const a = dfs(root1)
+    const b = dfs(root2)
+    if (a.length !== b.length) return false
+    for (let i=0; i < a.length; i++) {
+        if (a[i] !== b[i]) return false
+    }
+    return true
+    
+    function dfs(root, res=[]) {
+        if (root.left || root.right) {
+            if (root.left) dfs(root.left, res)
+            if (root.right) dfs(root.right, res)
+        } else {
+            res.push(root.val)
+        }
+        return res
+    }
+}
