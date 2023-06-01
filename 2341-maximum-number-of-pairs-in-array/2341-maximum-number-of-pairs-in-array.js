@@ -18,3 +18,19 @@ var numberOfPairs = function(nums) {
     }
     return res
 };
+
+numberOfPairs = function(nums) {
+    const arr = []
+    const res = [0, 0]
+    for (const n of nums) {
+        if (arr[n]) {
+            arr[n] = 0
+            res[0]++
+            res[1]--
+        } else {
+            arr[n] = 1
+            res[1]++
+        }
+    }
+    return res
+}
