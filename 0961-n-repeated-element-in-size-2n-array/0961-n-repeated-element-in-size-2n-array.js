@@ -11,3 +11,9 @@ var repeatedNTimes = function(nums) {
         if (map[k] === nums.length / 2) return k
     }
 };
+
+repeatedNTimes = function(nums) {
+    for (let i=0; i < nums.length; i++) {
+        if (nums.indexOf(nums[i]) !== i) return nums[i]
+    }
+}
