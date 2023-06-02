@@ -17,3 +17,11 @@ repeatedNTimes = function(nums) {
         if (nums.indexOf(nums[i]) !== i) return nums[i]
     }
 }
+
+repeatedNTimes = function(nums) {
+    const set = new Set()
+    for (const n of nums) {
+        if (set.has(n)) return n
+        set.add(n)
+    }
+}
