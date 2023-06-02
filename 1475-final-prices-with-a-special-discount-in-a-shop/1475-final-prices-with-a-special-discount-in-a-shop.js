@@ -14,3 +14,16 @@ var finalPrices = function(prices) {
     }
     return prices.map((p, i) => p - discounts[i])
 };
+
+finalPrices = function(prices) {
+    const stack = []
+    const res = []
+    for (let i=prices.length-1; i >= 0; i--) {
+        while (stack.length && stack[stack.length-1] > prices[i]) {
+            stack.pop()
+        }
+        res[i] = stack.length ? prices[i] - stack[stack.length-1] : prices[i]
+        stack.push(prices[i])
+    }
+    return res
+}
