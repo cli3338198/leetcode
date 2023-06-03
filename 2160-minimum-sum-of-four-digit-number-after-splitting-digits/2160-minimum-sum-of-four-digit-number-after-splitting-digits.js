@@ -3,6 +3,15 @@
  * @return {number}
  */
 var minimumSum = function(num) {
-    const [a, c, b, d] = String(num).split("").map(Number).sort((a, b) => a - b)
-    return Number("" + a + b) + Number("" + c + d)
+    const [a, b, c, d] = getDigits(num).sort((a, b) => a - b)
+    return Number("" + a + c) + Number("" + b + d)
+    
+    function getDigits(num) {
+        const res = []
+        while (num) {
+            res.push(num % 10)
+            num = Math.floor(num / 10)
+        }
+        return res
+    }
 };
