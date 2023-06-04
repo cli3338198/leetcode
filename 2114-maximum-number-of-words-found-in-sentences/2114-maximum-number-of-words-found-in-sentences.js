@@ -13,3 +13,7 @@ var mostWordsFound = function(sentences) {
     }
     return res
 };
+
+mostWordsFound = function(sentences) {
+    return Math.max(...sentences.map(sentence => sentence.split(" ").length))
+}
