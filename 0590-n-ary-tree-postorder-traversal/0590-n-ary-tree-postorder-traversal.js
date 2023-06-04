@@ -32,3 +32,15 @@ postorder = function(root, res = []) {
     res.push(root.val)
     return res
 }
+
+postorder = function(root) {
+    if (!root) return []
+    const res = []
+    for (const child of root.children) {
+        for (const v of postorder(child)) {
+            res.push(v)
+        }
+    }
+    res.push(root.val)
+    return res
+}
