@@ -85,3 +85,21 @@ postorder = function(root) {
     }
     return res
 }
+
+postorder = function(root) {
+    if (!root) return []
+    const res = []
+    const stack = [root]
+    while (stack.length) {
+        const pop = stack[stack.length-1]
+        if (pop.children.length) {
+            while (pop.children.length) {
+                stack.push(pop.children.pop())
+            }
+        } else {
+            res.push(pop.val)
+            stack.pop()
+        }
+    }
+    return res
+}
