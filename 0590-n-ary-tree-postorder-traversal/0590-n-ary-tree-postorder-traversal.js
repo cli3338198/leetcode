@@ -70,3 +70,18 @@ postorder = function(root) {
     }
     return res.reverse()
 }
+
+postorder = function(root) {
+    const res = []
+    const stack = [root]
+    while (stack.length) {
+        const root = stack.pop()
+        if (root) {
+            res.unshift(root.val)
+            for (const child of root.children) {
+                stack.push(child)
+            }
+        }
+    }
+    return res
+}
