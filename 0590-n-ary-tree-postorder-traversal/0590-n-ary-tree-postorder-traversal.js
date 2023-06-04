@@ -44,3 +44,17 @@ postorder = function(root) {
     res.push(root.val)
     return res
 }
+
+postorder = function(root) {
+    if (!root) return []
+    return [
+        ...spread(root.children.map(postorder)),
+        root.val
+    ]
+    
+    function spread(arr) {
+        const res = [].concat(...arr)
+        if (res.some(Array.isArray)) return spread(res)
+        return res
+    }
+}
