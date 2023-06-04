@@ -23,3 +23,12 @@ var postorder = function(root) {
         res.push(root.val)
     }
 };
+
+postorder = function(root, res = []) {
+    if (!root) return res
+    for (const child of root.children) {
+        postorder(child, res)
+    }
+    res.push(root.val)
+    return res
+}
