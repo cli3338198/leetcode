@@ -58,3 +58,15 @@ postorder = function(root) {
         return res
     }
 }
+
+postorder = function(root) {
+    const stack = [root]
+    const res = []
+    while (stack.length) {
+        const root = stack.pop()
+        if (!root) continue
+        res.push(root.val)
+        stack.push(...root.children)
+    }
+    return res.reverse()
+}
