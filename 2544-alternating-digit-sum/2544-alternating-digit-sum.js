@@ -33,3 +33,12 @@ alternateDigitSum = function(n) {
     }
     return res
 }
+
+alternateDigitSum = function(n) {
+    let res = 0, str = String(n), sign = 1
+    for (let i=0; i < str.length; i++) {
+        res += sign * str[i]
+        sign *= -1
+    }
+    return res
+}
