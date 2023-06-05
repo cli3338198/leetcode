@@ -43,3 +43,17 @@ preorder = function(root) {
     }
     return res
 }
+
+preorder = function(root) {
+    if (!root) return []
+    return [
+        root.val,
+        ...spread(root.children.map(preorder))
+    ]
+    
+    function spread(arr) {
+        const res = [].concat(...arr)
+        if (res.some(Array.isArray)) return spread(res)
+        return res
+    }
+}
