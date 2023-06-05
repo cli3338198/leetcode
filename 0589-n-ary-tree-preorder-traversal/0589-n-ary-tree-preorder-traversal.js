@@ -21,3 +21,10 @@ var preorder = function(root) {
     }
     return res
 };
+
+preorder = function(root, res=[]) {
+    if (!root) return res
+    res.push(root.val)
+    root.children.forEach(child => preorder(child, res))
+    return res
+}
