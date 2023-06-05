@@ -37,3 +37,12 @@ deleteGreatestValue = function(grid) {
     }
     return res
 }
+
+deleteGreatestValue = function(grid) {
+    grid.forEach(row => row.sort((a, b) => a > b ? -1 : 1))
+    let res = 0
+    for (let c=0; c < grid[0].length; c++) {
+        res += Math.max(...grid.map(r => r[c]))
+    }
+    return res
+}
