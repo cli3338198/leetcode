@@ -21,3 +21,19 @@ var deleteGreatestValue = function(grid) {
     }
     return res
 };
+
+deleteGreatestValue = function(grid) {
+    let res = 0, rows = grid.length, cols = grid[0].length
+    for (let c = 0; c < cols; c++) {
+        let gridMax = -Infinity
+        for (let r = 0; r < grid.length; r++) {
+            const row = grid[r]
+            const max = Math.max(...row)
+            const idx = row.indexOf(max)
+            gridMax = Math.max(gridMax, max)
+            grid[r] = row.slice(0, idx).concat(row.slice(idx+1))
+        }
+        res += gridMax
+    }
+    return res
+}
