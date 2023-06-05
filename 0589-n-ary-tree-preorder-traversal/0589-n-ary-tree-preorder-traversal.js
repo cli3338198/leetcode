@@ -28,3 +28,18 @@ preorder = function(root, res=[]) {
     root.children.forEach(child => preorder(child, res))
     return res
 }
+
+preorder = function(root) {
+    if (!root) return []
+    const stack = [root], res = []
+    while (stack.length) {
+        const root = stack.pop()
+        res.push(root.val)
+        if (root.children.length) {
+            while (root.children.length) {
+                stack.push(root.children.pop())
+            }
+        }
+    }
+    return res
+}
