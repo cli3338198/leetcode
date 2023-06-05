@@ -46,12 +46,23 @@ class FindElements {
         this.set = new Set()
         this.root = this.recover(root, 0)
     }
+    // recover(root, x) {
+    //     if (!root) return null
+    //     root.val = x
+    //     this.set.add(x)
+    //     root.left = this.recover(root.left, 2 * x + 1)
+    //     root.right = this.recover(root.right, 2 * x + 2)
+    //     return root
+    // }
     recover(root, x) {
-        if (!root) return null
-        root.val = x
-        this.set.add(x)
-        root.left = this.recover(root.left, 2 * x + 1)
-        root.right = this.recover(root.right, 2 * x + 2)
+        const q = [[root, x]]
+        while (q.length) {
+            const [root, x] = q.shift()
+            root.val = x
+            this.set.add(x)
+            if (root.left) q.push([root.left, 2 * x + 1])
+            if (root.right) q.push([root.right, 2 * x + 2])
+        }
         return root
     }
     find(target) {
