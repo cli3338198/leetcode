@@ -22,3 +22,14 @@ chunk = function(arr, size) {
     }
     return res
 }
+
+chunk = function(arr, size) {
+    return arr.reduce((acc, val) => {
+        if (!acc.length || acc[acc.length-1].length === size) {
+            acc.push([val])
+        } else {
+            acc[acc.length-1].push(val)
+        }
+        return acc
+    }, [])
+}
