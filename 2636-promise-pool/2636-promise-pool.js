@@ -17,3 +17,15 @@ var promisePool = async function(functions, n) {
  * promisePool([() => sleep(500), () => sleep(400)], 1)
  *   .then(console.log) // After 900ms
  */
+
+promisePool = async function(functions, n) {
+    const promises = Array(n).fill().map(getNext)
+    await Promise.all(promises)
+    
+    async function getNext() {
+        if (functions.length) {
+            await functions.shift()()
+            await getNext()
+        }
+    }
+}
