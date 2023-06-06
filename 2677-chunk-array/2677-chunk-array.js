@@ -14,3 +14,11 @@ var chunk = function(arr, size) {
     }
     return res
 };
+
+chunk = function(arr, size) {
+    const res = []
+    while (arr.length) {
+        res.push(arr.splice(0, size))
+    }
+    return res
+}
