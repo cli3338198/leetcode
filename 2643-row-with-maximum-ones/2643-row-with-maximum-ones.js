@@ -18,3 +18,15 @@ var rowAndMaximumOnes = function(mat) {
     }
     return [idx, cnt]
 };
+
+rowAndMaximumOnes = function(mat) {
+    return mat.reduce((acc, row, i) => {
+        const [idx, cnt] = acc
+        const sum = row.reduce((acc, val) => acc + val, 0)
+        if (idx === null || sum > cnt) {
+            return [i, sum]
+        } else {
+            return acc
+        }
+    }, [null, 0])
+}
