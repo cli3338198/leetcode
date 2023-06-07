@@ -21,3 +21,15 @@ var luckyNumbers  = function(matrix) {
     }
     return res
 };
+
+luckyNumbers = function(mat) {
+    const res = []
+    for (const r in mat) {
+        for (const c in mat[r]) {
+            if (mat[r][c] === Math.min(...mat[r]) && mat[r][c] === Math.max(...mat.map((a) => a[c]))) {
+                res.push(mat[r][c])
+            }
+        }
+    }
+    return res
+}
