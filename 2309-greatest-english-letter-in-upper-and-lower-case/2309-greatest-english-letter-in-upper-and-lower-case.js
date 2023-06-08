@@ -4,16 +4,16 @@
  */
 var greatestLetter = function(s) {
     const set = new Set()
-    let res = null
+    let res = ""
     for (const c of s) {
         set.add(c)
         const upper = c.toUpperCase()
         const lower = c.toLowerCase()
         if (set.has(upper) && set.has(lower)) {
-            if (res === null || res < upper) {
+            if (res === "" || res < upper) {
                 res = upper
             } 
         }
     }
-    return res !== null ? res : ""
+    return res
 };
