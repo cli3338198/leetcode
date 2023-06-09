@@ -35,7 +35,10 @@ divisorGame = function(n) {
     dp[2] = true
     for (let m = 3; m <= n; m++) {
         for (let x=1; x < m; x++) {
-            if (m % x === 0 && !dp[m - x]) dp[m] = true
+            if (m % x === 0 && !dp[m - x]) {
+                dp[m] = true
+                break
+            }
         }
     }
     return dp[n]
