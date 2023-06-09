@@ -12,3 +12,13 @@ var findMaxK = function(nums) {
     }
     return res === -Infinity ? -1 : res
 };
+
+findMaxK = function(nums) {
+    const set = new Set()
+    let res = -Infinity
+    for (const n of nums) {
+        if (set.has(-n)) res = Math.max(res, Math.abs(n))
+        set.add(n)
+    }
+    return res === -Infinity ? -1 : res
+}
