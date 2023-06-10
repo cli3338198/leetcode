@@ -44,3 +44,24 @@ countCharacters = function(words, chars) {
     }
     return res
 }
+
+countCharacters = function(words, chars) {
+    const cnt = Array(26).fill(0)
+    for (const c of chars) {
+        cnt[cToI(c)]++
+    }
+    return words.reduce((acc, word) => {
+        const copy = [...cnt]
+        for (const c of word) {
+            if (copy[cToI(c)] === 0) {
+                return acc
+            } 
+            copy[cToI(c)]--
+        }
+        return acc + word.length
+    }, 0)
+    
+    function cToI(c) {
+        return c.charCodeAt(0)-97
+    }
+}
