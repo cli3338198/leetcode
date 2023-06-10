@@ -23,3 +23,24 @@ var countCharacters = function(words, chars) {
     }
     return res
 };
+
+countCharacters = function(words, chars) {
+    const cnt = Array(26).fill(0)
+    for (const c of chars) {
+        cnt[c.charCodeAt(0)-97]++
+    }
+    let res = 0
+    for (const word of words) {
+        const copy = [...cnt]
+        let flag = true
+        for (const c of word) {
+            if (copy[c.charCodeAt(0)-97] === 0) {
+                flag = false
+                break
+            }
+            copy[c.charCodeAt(0)-97]--
+        }
+        if (flag) res += word.length
+    }
+    return res
+}
