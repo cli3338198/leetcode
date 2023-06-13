@@ -40,3 +40,24 @@ numTilePossibilities = function(tiles) {
         return count[0]
     }
 }
+
+numTilePossibilities = function(tiles) {
+    const map = {}
+    for (const tile of tiles) {
+        map[tile] = map[tile] + 1 || 1
+    }
+    let res = 0
+    helper()
+    return res
+    
+    function helper() {
+        for (const [tile, count] of Object.entries(map)) {
+            if (count > 0) {
+                map[tile]--
+                res++
+                helper()
+                map[tile]++
+            }
+        }
+    }
+}
