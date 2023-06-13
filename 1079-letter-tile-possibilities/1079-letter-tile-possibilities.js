@@ -20,3 +20,23 @@ var numTilePossibilities = function(tiles) {
         }
     }
 };
+
+numTilePossibilities = function(tiles) {
+    const map = new Map()
+    for (const tile of tiles) {
+        map.set(tile, map.get(tile)  + 1 || 1)
+    }
+    return helper([0])
+    
+    function helper(count) {
+        for (const [tile, cnt] of map) {
+            if (cnt > 0) {
+                map.set(tile, map.get(tile) - 1)
+                count[0]++
+                helper(count)
+                map.set(tile, map.get(tile) + 1)
+            }
+        }
+        return count[0]
+    }
+}
