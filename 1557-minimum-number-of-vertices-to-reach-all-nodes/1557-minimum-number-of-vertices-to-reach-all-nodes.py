@@ -27,6 +27,14 @@ class UF:
 
 class Solution:
     def findSmallestSetOfVertices(self, n: int, edges: List[List[int]]) -> List[int]:
+        res = set([i for i in range(0, n)])
+        for _, v in edges:
+            try:
+                res.remove(v)
+            except:
+                pass
+        return list(res)
+        
         uf = UF()
         for u, v in edges:
             uf.union(u, v)
