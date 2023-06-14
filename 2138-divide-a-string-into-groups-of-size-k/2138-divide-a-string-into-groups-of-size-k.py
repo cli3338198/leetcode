@@ -8,8 +8,7 @@ class Solution:
                 res.append(cur)
                 cur = c
         if cur:
-            for i in range(0, k-len(cur)):
-                cur += fill
+            cur += fill * (k - len(cur))
             res.append(cur)
         return res
         
