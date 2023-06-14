@@ -18,3 +18,20 @@ var divideString = function(s, k, fill) {
     }
     return res
 };
+
+divideString = function(s, k, fill) {
+    const res = []
+    let cur = ""
+    for (const c of s) {
+        if (cur.length < k) {
+            cur += c
+        } else {
+            res.push(cur)
+            cur = c
+        }
+    }
+    if (cur.length) {
+        res.push(cur + fill.repeat(k - cur.length))
+    }
+    return res
+}
