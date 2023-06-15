@@ -13,3 +13,17 @@ var isCircularSentence = function(sentence) {
         }
     }
 };
+
+isCircularSentence = function(sentence) {
+    sentence = sentence.split(" ")
+    if (sentence.length === 1) {
+        return sentence[0].at(-1) === sentence[0].at(0)
+    } else {
+        for (let i=0; i < sentence.length; i++) {
+            const cur = sentence[i]
+            const next = sentence[i+1] || sentence[0]
+            if (cur.at(-1) !== next.at(0)) return false
+        }
+        return true
+    }
+}
