@@ -20,3 +20,14 @@ var checkAlmostEquivalent = function(word1, word2) {
     }
     return true
 };
+
+checkAlmostEquivalent = function(word1, word2) {
+    const chars = Array(26).fill(0)
+    for (const c of word1) {
+        chars[c.charCodeAt(0)-97]++
+    }
+    for (const c of word2) {
+        chars[c.charCodeAt(0)-97]--
+    }
+    return chars.every(char => Math.abs(char) <= 3)
+}
