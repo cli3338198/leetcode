@@ -5,15 +5,14 @@
  */
 var distributeCandies = function(candies, num_people) {
     const res = Array(num_people).fill(0)
-    let count = 1
-    let idx = 0
-    while (candies > 0) {
-        res[idx] += count
-        idx++
-        candies -= count
-        count++
-        if (idx === num_people) idx = 0
-        if (count > candies) count = candies
+    let i = 0, cnt = 1
+    while (candies) {
+        res[i] += cnt
+        i++
+        candies -= cnt
+        cnt++
+        if (i === num_people) i = 0
+        if (cnt > candies) cnt = candies
     }
     return res
 };
