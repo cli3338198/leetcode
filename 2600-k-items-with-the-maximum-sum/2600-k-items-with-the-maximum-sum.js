@@ -25,3 +25,7 @@ var kItemsWithMaximumSum = function(numOnes, numZeros, numNegOnes, k) {
 var kItemsWithMaximumSum = function(numOnes, numZeros, numNegOnes, k) {
     return [...Array(numOnes).fill(1), ...Array(numZeros).fill(0), ...Array(numNegOnes).fill(-1)].reduce((acc, val, i) => acc + (i < k ? val : 0), 0)
 }
+
+kItemsWithMaximumSum = function(numOnes, numZeros, numNegOnes, k) {
+    return Math.min(k, numOnes) - Math.max(0, k - numZeros - numOnes)
+}
