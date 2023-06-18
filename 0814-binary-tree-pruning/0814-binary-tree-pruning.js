@@ -26,3 +26,14 @@ var pruneTree = function(root) {
         }
     }
 };
+
+pruneTree = function(root) {
+    if (!root) return root
+    root.left = pruneTree(root.left)
+    root.right = pruneTree(root.right)
+    if (!root.left && !root.right) {
+        return root.val === 1 ? root : null
+    } else {
+        return root
+    }
+}
