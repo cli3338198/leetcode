@@ -20,3 +20,14 @@ var removeLeafNodes = function(root, target) {
     root.right = right
     return root
 };
+
+removeLeafNodes = function(root, target) {
+    if (!root) return root
+    root.left = removeLeafNodes(root.left, target)
+    root.right = removeLeafNodes(root.right, target)
+    if (!root.left && !root.right && root.val === target) {
+        return null
+    } else {
+        return root
+    }
+}
