@@ -31,3 +31,17 @@ goodNodes = function(root) {
         return (root.val >= max ? 1 : 0) + dfs(root.left, max) + dfs(root.right, max)
     }
 }
+
+goodNodes = function(root) {
+    let res = 0
+    dfs(root, root.val)
+    return res
+    
+    function dfs(root, max) {
+        if (!root) return
+        max = Math.max(max, root.val)
+        if (root.val >= max) res++
+        dfs(root.left, max)
+        dfs(root.right, max)
+    }
+}
