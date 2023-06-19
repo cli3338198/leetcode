@@ -44,3 +44,19 @@ var restoreMatrix = function(rowSum, colSum) {
         return [min, idx]
     }
 };
+
+restoreMatrix = function(rowSum, colSum) {
+    const rows = rowSum.length
+    const cols = colSum.length
+    const mat = Array(rows).fill(0).map(() => Array(cols).fill(0))
+    let r = 0
+    let c = 0
+    while (r < rows && c < cols) {
+        mat[r][c] = Math.min(rowSum[r], colSum[c])
+        rowSum[r] -= mat[r][c]
+        colSum[c] -= mat[r][c]
+        if (rowSum[r] === 0) r++
+        if (colSum[c] === 0) c++
+    }
+    return mat
+}
