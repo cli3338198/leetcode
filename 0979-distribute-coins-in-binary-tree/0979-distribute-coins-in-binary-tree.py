@@ -1,25 +1,21 @@
-/**
- * Definition for a binary tree node.
- * function TreeNode(val, left, right) {
- *     this.val = (val===undefined ? 0 : val)
- *     this.left = (left===undefined ? null : left)
- *     this.right = (right===undefined ? null : right)
- * }
- */
-/**
- * @param {TreeNode} root
- * @return {number}
- */
-var distributeCoins = function(root) {
-    let res = 0
-    dfs(root)
-    return res
-    
-    function dfs(root) {
-        if (!root) return 0
-        const left = dfs(root.left)
-        const right = dfs(root.right)
-        res += Math.abs(left) + Math.abs(right)
-        return root.val + left + right - 1
-    }
-};
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def distributeCoins(self, root: Optional[TreeNode]) -> int:
+        res = 0
+        
+        def dfs(root: Optional[TreeNode]) -> int:
+            nonlocal res
+            if not root:
+                return 0
+            left = dfs(root.left)
+            right = dfs(root.right)
+            res += abs(left) + abs(right)
+            return root.val + left + right - 1
+        
+        dfs(root)
+        return res
