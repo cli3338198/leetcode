@@ -32,3 +32,23 @@ var findFarmland = function(land) {
         return coords
     }
 };
+
+findFarmland = function(land) {
+    const rows = land.length
+    const cols = land[0].length
+    const res = []
+    for (let r=0; r < rows; r++) {
+        for (let c=0; c < cols; c++) {
+            if (land[r][c] === 1) {
+                let rr = r, cc = c
+                for (rr = r; rr < rows && land[rr][c] === 1; rr++) {
+                    for (cc = c; cc < cols && land[rr][cc] === 1; cc++) {
+                        land[rr][cc] = 0
+                    }
+                }
+                res.push([r, c, rr-1, cc-1])
+            }
+        }
+    }
+    return res
+}
