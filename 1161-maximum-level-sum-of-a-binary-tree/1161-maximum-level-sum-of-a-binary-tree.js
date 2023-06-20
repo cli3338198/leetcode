@@ -32,3 +32,24 @@ var maxLevelSum = function(root) {
     }
     return res
 };
+
+maxLevelSum = function(root) {
+    const map = {}
+    dfs(root, 1)
+    let max = null
+    let res = null
+    for (const lvl in map) {
+        if (res === null || map[lvl] > max) {
+            max = map[lvl]
+            res = lvl
+        }
+    }
+    return res
+    
+    function dfs(root, lvl) {
+        if (!root) return
+        map[lvl] = map[lvl] + root.val || root.val
+        dfs(root.left, lvl+1)
+        dfs(root.right, lvl+1)
+    }
+}
