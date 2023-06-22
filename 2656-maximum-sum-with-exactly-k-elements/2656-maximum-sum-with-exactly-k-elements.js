@@ -68,3 +68,12 @@ var maximizeSum = function(nums, k) {
     }
     return res
 };
+
+maximizeSum = function(nums, k) {
+    const max = Math.max(...nums)
+    let res = 0
+    for (let i=1; i <= k; i++) {
+        res += max + i - 1
+    }
+    return res
+}
