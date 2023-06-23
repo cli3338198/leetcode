@@ -13,3 +13,20 @@ var maximumUnits = function(boxTypes, truckSize) {
     }
     return res
 };
+
+maximumUnits = function(boxTypes, truckSize) {
+    const boxes = Array(1001).fill(0)
+    for (let i=0; i < boxTypes.length; i++) {
+        const [numberBoxes, numberUnitsPerBox] = boxTypes[i]
+        boxes[numberUnitsPerBox] += numberBoxes
+    }
+    let res = 0
+    for (let i=1000; i >= 1 && truckSize > 0; i--) {
+        if (boxes[i] > 0) {
+            const noBoxes = Math.min(boxes[i], truckSize)
+            res += noBoxes * i
+            truckSize -= noBoxes
+        }
+    }
+    return res
+}
