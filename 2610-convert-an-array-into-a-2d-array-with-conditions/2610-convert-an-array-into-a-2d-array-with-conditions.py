@@ -1,22 +1,14 @@
-/**
- * @param {number[]} nums
- * @return {number[][]}
- */
-var findMatrix = function(nums) {
-    const map = {}
-    for (const n of nums) {
-        map[n] = map[n] + 1 || 1
-    }
-    const res = []
-    while (Object.values(map).some(n => n > 0)) {
-        const subarr = []
-        for (const n in map) {
-            if (map[n] > 0) {
-                map[n]--
-                subarr.push(n)
-            }
-        }
-        res.push(subarr)
-    }
-    return res
-};
+class Solution:
+    def findMatrix(self, nums: List[int]) -> List[List[int]]:
+        res = []
+        freq = {}
+        for n in nums:
+            freq[n] = freq.get(n, 0) + 1
+        for i in range(0, max(freq.values())):
+            subres = []
+            for k in freq:
+                if freq[k] > 0:
+                    freq[k] -= 1
+                    subres.append(k)
+            res.append(subres)
+        return res
