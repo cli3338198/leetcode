@@ -24,3 +24,7 @@ repeatedSubstringPattern = function(s) {
     const ss = (s + s).substring(1, s.length * 2 - 1)
     return ss.indexOf(s) !== -1    
 }
+
+repeatedSubstringPattern = function(s) {
+    return (s + s).substring(1, s.length * 2 - 1).includes(s)
+}
