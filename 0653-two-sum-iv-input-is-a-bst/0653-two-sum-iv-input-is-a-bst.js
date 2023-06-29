@@ -22,3 +22,23 @@ var findTarget = function(root, k) {
         return dfs(root.left) || dfs(root.right)
     }
 };
+
+findTarget = function(root, k) {
+    const inOrdered = inOrder(root)
+    let l = 0, r = inOrdered.length-1
+    while (l < r) {
+        if (inOrdered[l] + inOrdered[r] === k) {
+            return true
+        } else if (inOrdered[l] + inOrdered[r] > k) {
+            r--
+        } else {
+            l++
+        }
+    }
+    return false
+    
+    function inOrder(root) {
+        if (!root) return []
+        return [...inOrder(root.left), root.val, ...inOrder(root.right)]
+    }
+}
