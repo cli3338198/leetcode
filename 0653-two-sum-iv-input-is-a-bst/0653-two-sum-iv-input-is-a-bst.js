@@ -11,9 +11,14 @@
  * @param {number} k
  * @return {boolean}
  */
-var findTarget = function(root, k, set = new Set()) {
-    if (!root) return false
-    if (set.has(k-root.val)) return true
-    set.add(root.val)
-    return findTarget(root.left, k, set) || findTarget(root.right, k, set)
+var findTarget = function(root, k) {
+    const set = new Set()
+    return dfs(root)
+    
+    function dfs(root) {
+        if (!root) return false
+        if (set.has(k - root.val)) return true
+        set.add(root.val)
+        return dfs(root.left) || dfs(root.right)
+    }
 };
