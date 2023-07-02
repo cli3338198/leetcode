@@ -3,19 +3,11 @@
  * @return {number}
  */
 var triangleNumber = function(nums) {
-    const n = nums.length
-    nums.sort((a, b) => a - b)
     let res = 0
-    for (let k=2; k < n; k++) {
-        let i = 0
-        let j = k-1
-        while (i < j) {
-            const sum = nums[i] + nums[j]
-            if (sum > nums[k]) {
-                res += j - i
-                j--
-            } else {
-                i++
+    for (let i=0; i < nums.length; i++) {
+        for (let j=i+1; j< nums.length; j++) {
+            for (let k=j+1; k < nums.length; k++) {
+                if (nums[i] + nums[j] > nums[k] && nums[i] + nums[k] > nums[j] && nums[j] + nums[k] > nums[i]) res++
             }
         }
     }
