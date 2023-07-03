@@ -19,22 +19,13 @@ var twoEggDrop = function(n) {
     }
 };
 
-// twoEggDrop = function(n) {
-//     return helper(n, 2)
-    
-//     function helper(n, eggs) {
-//         const dp = Array(n+1).fill(0).map(() => Array(eggs+1).fill(Infinity))
-//         for (const lvl in dp) {
-//             dp[lvl][0] = lvl
-//             dp[lvl][1] = lvl
-//         }
-//         dp[0].fill(0)
-//         dp[1].fill(1)
-//         for (let lvl=2; lvl <= n; lvl++) {
-//             for (let curEggs=1; curEggs <= eggs; curEggs++) {
-//                 dp[lvl][curEggs] = 1 + Math.max(dp[lvl-1][curEggs-1], dp[n-lvl][eggs])
-//             }
-//         }
-//         return Math.min(...dp[n])
-//     }
-// }
+twoEggDrop = function(n) {
+    const dp = Array(n+1).fill(Infinity)
+    dp[0] = 0
+    for (let lvl=1; lvl <= n; lvl++) {
+        for (let curLvl=1; curLvl <= lvl; curLvl++) {
+            dp[lvl] = Math.min(dp[lvl], 1 + Math.max(curLvl-1, dp[lvl-curLvl]))
+        }
+    }
+    return dp[n]
+}
