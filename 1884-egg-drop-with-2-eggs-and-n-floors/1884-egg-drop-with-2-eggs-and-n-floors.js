@@ -29,3 +29,13 @@ twoEggDrop = function(n) {
     }
     return dp[n]
 }
+
+twoEggDrop = function(n) {
+    const dp = Array(n+1).fill(0).map(() => Array(3).fill(0))
+    for (let i=1; i <= n; i++) {
+        for (let j=1; j <= 2; j++) {
+            dp[i][j] = 1 + dp[i-1][j-1] + dp[i-1][j] 
+        }
+        if (dp[i][2] >= n) return i
+    }
+}
