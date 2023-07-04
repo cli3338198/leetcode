@@ -29,3 +29,15 @@ smallerNumbersThanCurrent = function(nums) {
         return cnt
     }
 }
+
+smallerNumbersThanCurrent = function(nums) {
+    const res = []
+    for (const n of nums) {
+        let cnt = 0
+        for (const k of nums) {
+            if (k < n) cnt++
+        }
+        res.push(cnt)
+    }
+    return res
+}
