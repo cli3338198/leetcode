@@ -10,3 +10,20 @@ var getCommon = function(nums1, nums2) {
     }
     return -1
 };
+
+getCommon = function(nums1, nums2) {
+    for (const n of nums1) {
+        let l = 0, r = nums2.length-1
+        while (l <= r) {
+            const m = Math.floor((l+r)/2)
+            if (nums2[m] === n) {
+                return n
+            } else if (nums2[m] < n) {
+                l = m + 1
+            } else {
+                r = m - 1
+            }
+        }
+    }
+    return -1
+}
