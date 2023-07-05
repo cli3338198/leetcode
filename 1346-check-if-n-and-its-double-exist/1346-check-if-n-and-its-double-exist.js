@@ -9,3 +9,22 @@ var checkIfExist = function(arr) {
     }
     return false
 };
+
+checkIfExist = function(arr) {
+    arr.sort((a, b) => a - b)
+    for (let i=0; i < arr.length; i++) {
+        let l = 0
+        let r = arr.length-1
+        while (l <= r) {
+            const m = Math.floor((l+r)/2)
+            if (arr[m] === arr[i] * 2 && i !== m) {
+                return true
+            } else if (arr[m] > arr[i] * 2) {
+                r = m - 1
+            } else {
+                l = m + 1
+            }
+        }
+    }
+    return false
+}
