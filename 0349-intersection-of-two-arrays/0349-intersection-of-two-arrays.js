@@ -22,3 +22,12 @@ var intersection = function(nums1, nums2) {
     }
     return res
 };
+
+intersection = function(nums1, nums2) {
+    nums2 = new Set(nums2)
+    const set = new Set()
+    for (const n of nums1) {
+        if (nums2.has(n)) set.add(n)
+    }
+    return Array.from(set)
+}
