@@ -28,3 +28,12 @@ checkIfExist = function(arr) {
     }
     return false
 }
+
+checkIfExist = function(arr) {
+    const set = new Set()
+    for (const n of arr) {
+        if (set.has(n * 2) || set.has(n / 2)) return true
+        set.add(n)
+    }
+    return false
+}
