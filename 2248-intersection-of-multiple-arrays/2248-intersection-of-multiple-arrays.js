@@ -13,7 +13,6 @@ var intersection = function(nums) {
 
 intersection = function(nums) {
     nums.forEach(arr => arr.sort((a, b) => a - b))
-    console.log(nums)
     const arr = Array(1001).fill(0)
     for (const row of nums) {
         for (let i=0; i < row.length; i++) {
@@ -21,6 +20,21 @@ intersection = function(nums) {
             arr[row[i]]++
         }
     }
-    console.log(arr)
     return arr.map((cnt, i) => ([cnt, i])).filter(([cnt, i]) => cnt === nums.length).map(([, i]) => i)
+}
+
+intersection = function(nums) {
+    const arr = Array(1001).fill(0)
+    for (const row of nums) {
+        for (const n of row) {
+            arr[n]++
+        }
+    }
+    const res = []
+    for (let i=0; i < arr.length; i++) {
+        if (arr[i] === nums.length) {
+            res.push(i)
+        }
+    }
+    return res
 }
