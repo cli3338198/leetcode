@@ -36,3 +36,33 @@ var largest1BorderedSquare = function(grid) {
         return grid.map(clone)
     }
 };
+
+largest1BorderedSquare = function(grid) {
+    const rows = grid.length
+    const cols = grid[0].length
+    const dp = Array(rows).fill(0).map((_,r) => Array(cols).fill(0).map((_,c) => Array(2).fill(0).map(() => grid[r][c])))
+    for (let r=0; r < rows; r++) {
+        for (let c=0; c < cols; c++) {
+            if (grid[r][c] > 0) {
+                if (r > 0 && dp[r-1][c][0] > 0) dp[r][c][0] += dp[r-1][c][0]
+                if (c > 0 && dp[r][c-1][1] > 0) dp[r][c][1] += dp[r][c-1][1]
+            }
+        }
+    }
+    let max = 0
+    for (let r=rows-1; r >= 0; r--) {
+        for (let c=cols-1; c >= 0; c--) {
+            if (grid[r][c] > 0) {
+                let min = Math.min(dp[r][c][0], dp[r][c][1])
+                while (min > max) {
+                    if (dp[r][c-min+1][0] >= min && dp[r-min+1][c][1] >= min) {
+                        max = min
+                        break
+                    }
+                    min--
+                }
+            }
+        }
+    }
+    return max * max
+}
