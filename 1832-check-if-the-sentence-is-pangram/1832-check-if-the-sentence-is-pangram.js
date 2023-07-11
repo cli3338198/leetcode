@@ -9,3 +9,11 @@ var checkIfPangram = function(sentence) {
     }
     return arr.every(c => c === true)
 };
+
+checkIfPangram = function(sentence) {
+    const set = new Set()
+    for (const c of sentence) {
+        set.add(c)
+    }
+    return set.size === 26
+}
