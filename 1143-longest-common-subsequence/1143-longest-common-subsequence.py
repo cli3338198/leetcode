@@ -1,5 +1,17 @@
 class Solution:
     def longestCommonSubsequence(self, text1: str, text2: str) -> int:
+        @lru_cache(None)
+        def lcs(i: int, j: int) -> int:
+            nonlocal text1
+            nonlocal text2
+            if i == len(text1) or j == len(text2):
+                return 0
+            if text1[i] == text2[j]:
+                return 1 + lcs(i+1, j+1)
+            return max(lcs(i+1, j), lcs(i, j+1))
+        
+        return lcs(0, 0)
+        
         m, n = len(text1), len(text2)
         dp = [[0 for _ in range(0, n+1)] for _ in range(0, m+1)]
         for i in range(1, m+1):
