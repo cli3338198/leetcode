@@ -34,3 +34,21 @@ longestCommonSubsequence = function(t1, t2) {
     }
     return dp[m][n]
 }
+
+longestCommonSubsequence = function(t1, t2) {
+    const m = t1.length
+    const n = t2.length
+    let prev = Array(n+1).fill(0)
+    for (let i=1; i <= m; i++) {
+        let cur = Array(n+1).fill(0)
+        for (let j=1; j <= n; j++) {
+            if (t1[i-1] === t2[j-1]) {
+                cur[j] = 1 + prev[j-1]
+            } else {
+                cur[j] = Math.max(cur[j-1], prev[j])
+            }
+        }
+        prev = cur
+    }
+    return prev[n]
+}
