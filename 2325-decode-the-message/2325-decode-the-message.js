@@ -5,10 +5,9 @@
  */
 var decodeMessage = function(key, message) {
     const set = new Set()
-    key = key.replace(/\s/g, "")
     let newKey = ""
     for (const c of key) {
-        if (!set.has(c)) {
+        if (!set.has(c) && c !== " ") {
             set.add(c)
             newKey += c
         }
