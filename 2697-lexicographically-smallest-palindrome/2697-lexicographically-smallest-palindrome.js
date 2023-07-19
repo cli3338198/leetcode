@@ -19,3 +19,15 @@ var makeSmallestPalindrome = function(s) {
     }
     return s.join("")
 };
+
+makeSmallestPalindrome = function(s) {
+    s = s.split("")
+    for (let i=0; i < Math.floor(s.length / 2); i++) {
+        if (s[i] < s[s.length-1-i]) {
+            s[s.length-1-i] = s[i]
+        } else {
+            s[i] = s[s.length-1-i]
+        }
+    }
+    return s.join("")
+}
