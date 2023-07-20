@@ -18,3 +18,7 @@ var interpret = function(command) {
     }
     return res
 };
+
+interpret = function(command) {
+    return command.replaceAll("()", "o").replaceAll("(al)", "al")
+}
