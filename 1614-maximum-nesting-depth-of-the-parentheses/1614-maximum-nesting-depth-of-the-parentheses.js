@@ -16,3 +16,16 @@ var maxDepth = function(s) {
     }
     return max
 };
+
+maxDepth = function(s) {
+    let max = 0
+    let cur = 0
+    for (const c of s) {
+        if (c === "(") {
+            cur++
+        } else if (c === ")") {
+            max = Math.max(max, cur--)
+        }
+    }
+    return max
+}
