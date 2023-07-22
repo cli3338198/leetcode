@@ -18,3 +18,19 @@ var minAddToMakeValid = function(s) {
     }
     return open + close
 };
+
+minAddToMakeValid = function(s) {
+    const stack = []
+    for (const paren of s) {
+        if (paren === "(") {
+            stack.push(paren)
+        } else {
+            if (stack.at(-1) === "(") {
+                stack.pop()
+            } else {
+                stack.push(paren)
+            }
+        }
+    }
+    return stack.length
+}
