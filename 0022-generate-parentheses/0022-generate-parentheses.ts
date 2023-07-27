@@ -1,17 +1,14 @@
 function generateParenthesis(n: number): string[] {
     const res: string[] = []
-    helper(0, 0, '')
+    helper(0, 0, "")
     return res
     
-    function helper(l, r, cur) {
-        if (l === r && l === n) {
-            return res.push(cur)
+    function helper(open, close, cur): void {
+        if (open === close && close === n) {
+            res.push(cur)
+            return
         }
-        if (l < n) {
-            helper(l+1, r, cur + "(")
-        }
-        if (r < l) {
-            helper(l, r+1, cur + ")")
-        }
+        if (open < n) helper(open + 1, close, cur + "(")
+        if (open > close) helper(open, close + 1, cur + ")")
     }
 };
