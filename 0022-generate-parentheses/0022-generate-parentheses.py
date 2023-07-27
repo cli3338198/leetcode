@@ -1,5 +1,14 @@
 class Solution:
     def generateParenthesis(self, n: int) -> List[str]:
+        dp = [[] for _ in range(0, n+1)]
+        dp[0].append("")
+        for i in range(1, n+1):
+            for j in range(0, i):
+                for sub1 in dp[i-j-1]:
+                    for sub2 in dp[j]:
+                        dp[i].append(sub1 + "(" + sub2 + ")")
+        return dp[n]
+        
         q = deque([[0, 0, ""]])
         for _ in range(0, 2 * n):
             length = len(q)
