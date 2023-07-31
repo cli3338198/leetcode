@@ -25,3 +25,27 @@ var pairSum = function(head) {
     }
     return max
 };
+
+pairSum = function(head) {
+    let slow = head
+    let fast = head
+    while (fast && fast.next) {
+        slow = slow.next
+        fast = fast.next.next
+    }
+    let prev = null
+    while (slow) {
+        next = slow.next
+        slow.next = prev
+        prev = slow
+        slow = next
+    }
+    let max = 0
+    slow = head
+    while (slow && prev) {
+        max = Math.max(max, slow.val + prev.val)
+        slow = slow.next
+        prev = prev.next
+    }
+    return max
+}
