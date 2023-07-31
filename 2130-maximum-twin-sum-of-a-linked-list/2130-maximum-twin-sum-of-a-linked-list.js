@@ -49,3 +49,20 @@ pairSum = function(head) {
     }
     return max
 }
+
+pairSum = function(head) {
+    let slow = head
+    let fast = head
+    for (slow, fast; fast && fast.next; slow = slow.next, fast = fast.next.next) {}
+    let prev = null
+    let next = null
+    for (prev, slow, next; slow; prev = slow, slow = next) {
+        next = slow.next
+        slow.next = prev
+    }
+    let max = 0
+    for (slow = head, prev; slow && prev; slow = slow.next, prev = prev.next) {
+        max = Math.max(max, slow.val + prev.val)
+    }
+    return max
+}
