@@ -5,9 +5,7 @@ class Solution:
         """
         def swap(i: int, j: int) -> None:
             nonlocal nums
-            temp = nums[i]
-            nums[i] = nums[j]
-            nums[j] = temp
+            nums[i], nums[j] = nums[j], nums[i]
         
         last_non_zero_idx = 0
         for i, n in enumerate(nums):
