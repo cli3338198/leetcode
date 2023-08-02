@@ -6,7 +6,10 @@ function isAnagram(s: string, t: string): boolean {
     for (const c of t) {
         arr[c.charCodeAt(0)-97]--
     }
-    return arr.every(x => x === 0)
+    for (const cnt of arr) {
+        if (cnt !== 0) return false
+    }
+    return true
     
     return toString(splitSort(s)) === toString(splitSort(t))
 };
