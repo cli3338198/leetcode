@@ -28,3 +28,21 @@ var minDiffInBST = function(root) {
         dfs(root.right)
     }
 };
+
+minDiffInBST = function(root) {
+    const stack = []
+    let min = Infinity
+    let prev = new TreeNode(Infinity)
+    while (stack.length || root) {
+        if (root) {
+            stack.push(root)
+            root = root.left
+        } else {
+            const node = stack.pop()
+            min = Math.min(min, Math.abs(prev.val-node.val))
+            prev = node
+            root = node.right
+        }        
+    }
+    return min
+}
