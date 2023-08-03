@@ -50,3 +50,44 @@ minScore = function(n, roads) {
     }
     return res
 }
+
+minScore = function(n, roads) {
+    class UF {
+        constructor() {
+            this.root = {}
+        }
+        insert(a) {
+            if (!(a in this.root)) {
+                this.root[a] = a
+            }
+        }
+        find(a) {
+            this.insert(a)
+            if (this.root[a] !== a) {
+                this.root[a] = this.find(this.root[a])
+            }
+            return this.root[a]
+        }
+        union(a, b) {
+            const A = this.find(a)
+            const B = this.find(b)
+            if (A === B) return
+            this.root[B] = A
+        }
+    }
+    
+    const uf = new UF()
+    let res = Infinity
+    for (const [u, v] of roads) {
+        uf.union(u, v)
+    }
+    const root = uf.find(1)
+    for (const [u, v, d] of roads) {
+        const U = uf.find(u)
+        const V = uf.find(v)
+        if (U === root || V === root) {
+            res = Math.min(res, d)
+        }
+    }
+    return res
+}
