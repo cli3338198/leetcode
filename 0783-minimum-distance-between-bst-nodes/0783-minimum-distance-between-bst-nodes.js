@@ -38,10 +38,10 @@ minDiffInBST = function(root) {
             stack.push(root)
             root = root.left
         } else {
-            const node = stack.pop()
-            min = Math.min(min, Math.abs(prev.val-node.val))
-            prev = node
-            root = node.right
+            root = stack.pop()
+            min = Math.min(min, Math.abs(prev.val-root.val))
+            prev = root
+            root = root.right
         }        
     }
     return min
