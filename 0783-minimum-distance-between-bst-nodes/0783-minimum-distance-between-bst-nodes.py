@@ -21,5 +21,19 @@ class Solution:
         self.dfs(root.right)
     
     def minDiffInBST(self, root: Optional[TreeNode]) -> int:
+        stack, prev, mn = [], float("inf"), float("inf")
+        while stack or root:
+            if root:
+                stack.append(root)
+                root = root.left
+            else:
+                root = stack.pop()
+                mn = min(mn, abs(prev-root.val))
+                prev = root.val
+                root = root.right
+        return mn        
+        
+        #
+        
         self.dfs(root)
         return self.min
