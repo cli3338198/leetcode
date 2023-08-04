@@ -14,3 +14,7 @@ var vowelStrings = function(words, left, right) {
     }
     return res
 };
+
+vowelStrings = function(words, left, right) {
+    return words.reduce((acc, word, idx) => idx >= left && idx <= right ? acc + ('aeiou'.includes(word.at(0)) && 'aeiou'.includes(word.at(-1)) ? 1 : 0) : acc, 0)
+}
