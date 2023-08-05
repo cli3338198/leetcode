@@ -63,3 +63,32 @@ smallestEquivalentString = function(s1, s2, baseStr) {
         return min
     }
 }
+
+smallestEquivalentString = function(s1, s2, baseStr) {
+    const graph = {}
+    for (let i=0; i < s1.length; i++) {
+        graph[s1[i]] = graph[s1[i]] || []
+        graph[s2[i]] = graph[s2[i]] || []
+        graph[s1[i]].push(s2[i])
+        graph[s2[i]].push(s1[i])
+    }
+    return baseStr.split("").reduce((acc, char) => acc + dfs(char), "")
+    
+    function dfs(char) {
+        const stack = [char]
+        let min = char
+        const set = new Set()
+        set.add(char)
+        while (stack.length) {
+            const [lesser] = [min, stack.at(-1)].sort()
+            min = lesser
+            for (const next of graph[stack.pop()] || []) {
+                if (!set.has(next)) {
+                    set.add(next)
+                    stack.push(next)
+                }
+            }
+        }
+        return min
+    }
+}
