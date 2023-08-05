@@ -40,3 +40,26 @@ var smallestEquivalentString = function(s1, s2, baseStr) {
     }
     return baseStr.split("").map(char => uf.find(char)).join("")
 };
+
+smallestEquivalentString = function(s1, s2, baseStr) {
+    const graph = {}
+    for (let i=0; i < s1.length; i++) {
+        graph[s1[i]] = graph[s1[i]] || []
+        graph[s2[i]] = graph[s2[i]] || []
+        graph[s1[i]].push(s2[i])
+        graph[s2[i]].push(s1[i])
+    }
+    return baseStr.split("").reduce((acc, char) => acc + dfs(char, new Set()), "")
+    
+    function dfs(char, set) {
+        let min = char
+        if (!set.has(char)) {
+            set.add(char)
+            for (const next of graph[char] || []) {
+                const [lesser] = [dfs(next, set), min].sort()
+                min = lesser
+            }
+        }
+        return min
+    }
+}
