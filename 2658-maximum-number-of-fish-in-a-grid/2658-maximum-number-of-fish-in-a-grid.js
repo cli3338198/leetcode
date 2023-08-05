@@ -69,3 +69,26 @@ var findMaxFish = function(grid) {
     }
     return uf.getMax()
 };
+
+findMaxFish = function(grid) {
+    let res = 0
+    const set = new Set()
+    for (let r=0; r < grid.length; r++) {
+        for (let c=0; c < grid[r].length; c++) {
+            if (grid[r][c] === 0 || set.has(`${r} ${c}`)) continue
+            res = Math.max(res, dfs(r, c))
+        }
+    }
+    return res
+    
+    function dfs(r, c) {
+        if (set.has(`${r} ${c}`) || !(r in grid) || !(c in grid[r]) || grid[r][c] === 0) return 0
+        set.add(`${r} ${c}`)
+        let res = grid[r][c]
+        res += dfs(r+1, c)
+        res += dfs(r-1, c)
+        res += dfs(r, c+1)
+        res += dfs(r, c-1)
+        return res
+    }
+}
