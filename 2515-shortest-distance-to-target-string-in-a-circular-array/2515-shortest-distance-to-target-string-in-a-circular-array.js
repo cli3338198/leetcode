@@ -19,3 +19,15 @@ var closetTarget = function(words, target, startIndex) {
         return 1 + dfs(graph[i], graph)
     }
 };
+
+closetTarget = function(words, target, startIndex) {
+    let res = Infinity
+    for (let i=0; i < words.length; i++) {
+        if (words[i] === target) {
+            const forward = Math.abs(startIndex - i)
+            const backward = words.length - forward
+            res = Math.min(res, forward, backward)
+        }
+    }
+    return res === Infinity ? -1 : res
+}
