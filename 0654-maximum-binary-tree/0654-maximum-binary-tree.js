@@ -29,3 +29,19 @@ var constructMaximumBinaryTree = function(nums) {
         return root
     }
 };
+
+constructMaximumBinaryTree = function(nums) {
+    if (nums.length === 0) return null
+    let max = nums[0]
+    let idx = 0
+    for (let i=0; i < nums.length; i++) {
+        if (nums[i] > max) {
+            max = nums[i]
+            idx = i
+        }
+    }
+    const root = new TreeNode(max)
+    root.left = constructMaximumBinaryTree(nums.slice(0, idx))
+    root.right = constructMaximumBinaryTree(nums.slice(idx+1))
+    return root
+}
