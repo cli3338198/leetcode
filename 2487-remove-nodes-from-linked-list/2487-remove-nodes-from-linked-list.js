@@ -24,3 +24,12 @@ var removeNodes = function(head) {
     }
     return dummy.next
 };
+
+removeNodes = function(head) {
+    if (!head || !head.next) return head
+    head.next = removeNodes(head.next)
+    if (head.val < head.next.val) {
+        return head.next
+    }
+    return head
+}
