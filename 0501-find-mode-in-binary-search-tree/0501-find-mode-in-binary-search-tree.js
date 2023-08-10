@@ -54,3 +54,26 @@ findMode = function(root) {
     }
     return cnt[max]
 }
+
+findMode = function(root) {
+    let res = []
+    let curCnt = 0
+    let maxCnt = 0
+    let curVal = null
+    dfs(root)
+    return res
+    
+    function dfs(root) {
+        if (!root) return
+        dfs(root.left)
+        curCnt = (curVal === root.val ? curCnt : 0) + 1
+        curVal = root.val
+        if (curCnt > maxCnt) {
+            maxCnt = curCnt
+            res = [root.val]
+        } else if (curCnt === maxCnt) {
+            res.push(root.val)
+        }
+        dfs(root.right)
+    }
+}
