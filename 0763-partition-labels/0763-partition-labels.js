@@ -19,3 +19,21 @@ var partitionLabels = function(s) {
     }
     return res
 };
+
+partitionLabels = function(s) {
+    const map = {}
+    for (let i=0; i < s.length; i++) {
+        map[s[i]] = i
+    }
+    let start = 0
+    let end = 0
+    const res = []
+    for (let i=0; i < s.length; i++) {
+        end = Math.max(end, map[s[i]])
+        if (i === end) {
+            res.push(end - start + 1)
+            start = i + 1
+        }
+    }
+    return res
+}
