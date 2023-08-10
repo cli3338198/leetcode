@@ -33,3 +33,24 @@ var findMode = function(root) {
         dfs(root.right)
     }
 };
+
+findMode = function(root) {
+    const map = {}
+    const cnt = {}
+    let max = 0
+    const q = [root]
+    while (q.length) {
+        const len = q.length
+        for (let i=0; i < len; i++) {
+            const {val, left, right} = q.shift()
+            map[val] = map[val] || 0
+            map[val]++
+            cnt[map[val]] = cnt[map[val]] || []
+            cnt[map[val]].push(val)
+            max = Math.max(max, map[val])
+            if (left) q.push(left)
+            if (right) q.push(right)
+        }
+    }
+    return cnt[max]
+}
