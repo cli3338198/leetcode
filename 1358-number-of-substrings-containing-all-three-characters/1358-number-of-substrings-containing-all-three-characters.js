@@ -16,3 +16,13 @@ var numberOfSubstrings = function(s) {
     }
     return res
 };
+
+numberOfSubstrings = function(s) {
+    const arr = [-1, -1, -1]
+    let res = 0
+    for (let i=0; i < s.length; i++) {
+        arr[s[i].charCodeAt(0)-97] = i
+        res += 1 + Math.min(...arr)
+    }
+    return res
+}
