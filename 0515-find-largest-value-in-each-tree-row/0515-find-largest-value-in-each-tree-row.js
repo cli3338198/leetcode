@@ -26,3 +26,21 @@ var largestValues = function(root) {
         dfs(root.right, row+1)
     }
 };
+
+largestValues = function(root) {
+    if (!root) return []
+    const q = [root]
+    const res = []
+    while (q.length) {
+        const len = q.length
+        let max = -Infinity
+        for (let i=0; i < len; i++) {
+            const {val, left, right} = q.shift()
+            max = Math.max(max, val)
+            if (left) q.push(left)
+            if (right) q.push(right)
+        }
+        res.push(max)
+    }
+    return res
+}
