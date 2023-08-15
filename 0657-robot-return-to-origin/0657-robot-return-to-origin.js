@@ -10,3 +10,15 @@ var judgeCircle = function(moves) {
     }
     return map["R"] === map["L"] && map["U"] === map["D"]
 };
+
+judgeCircle = function(moves) {
+    let ud = 0
+    let lr = 0
+    for (const move of moves) {
+        if (move === "L") lr--
+        if (move === "R") lr++
+        if (move === "D") ud++
+        if (move === "U") ud--
+    }
+    return ud === 0 && lr === 0
+}
