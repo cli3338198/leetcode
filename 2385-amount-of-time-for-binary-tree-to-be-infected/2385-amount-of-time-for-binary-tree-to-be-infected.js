@@ -100,3 +100,29 @@ amountOfTime = function(root, start) {
         }
     }
 }
+
+amountOfTime = function(root, start) {
+    let res = 0
+    dfs(root)
+    return res
+    
+    function dfs(root) {
+        if (!root) return [false, 0]
+        const [leftFound, leftDepth] = dfs(root.left)
+        const [rightFound, rightDepth] = dfs(root.right)
+        if (root.val === start) {
+            res = Math.max(leftDepth, rightDepth)
+            return [true, 0]
+        }
+        if (leftFound) {
+            res = Math.max(res, 1 + leftDepth + rightDepth)
+            return [true, 1 + leftDepth]
+        } else if (rightFound) {
+            res = Math.max(res, 1 + leftDepth + rightDepth)
+            return [true, 1 + rightDepth]
+        } else {
+            return [false, 1 + Math.max(leftDepth, rightDepth)]
+        }
+
+    }
+}
