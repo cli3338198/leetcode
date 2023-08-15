@@ -10,6 +10,32 @@ class Solution:
         self.start = 0
     
     def amountOfTime(self, root: Optional[TreeNode], start: int) -> int:
+        res = 0
+        
+        def dfs(root: Optional[TreeNode]) -> Tuple[bool, int]:
+            nonlocal start
+            nonlocal res
+            if not root:
+                return False, 0
+            l_found, l_ht = dfs(root.left)
+            r_found, r_ht = dfs(root.right)
+            if root.val == start:
+                res = max(l_ht, r_ht)
+                return True, 0
+            if l_found:
+                res = max(res, 1 + l_ht + r_ht)
+                return True, 1 + l_ht
+            elif r_found:
+                res = max(res, 1 + l_ht + r_ht)
+                return True, 1 + r_ht
+            else:
+                return False, 1 + max(l_ht, r_ht)
+        
+        dfs(root)
+        return res
+    
+        #
+        
         self.start = start
         self.dfs(root)
         return self.res
