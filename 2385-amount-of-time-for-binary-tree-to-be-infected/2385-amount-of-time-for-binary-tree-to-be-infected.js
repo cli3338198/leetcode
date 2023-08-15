@@ -79,3 +79,24 @@ amountOfTime = function(root, start) {
         makeGraph(root, root.right)
     }
 }
+
+amountOfTime = function(root, start) {
+    let res = 0
+    dfs(root)
+    return res
+    
+    function dfs(root) {
+        if (!root) return 0
+        const left = dfs(root.left)
+        const right = dfs(root.right)
+        if (root.val === start) {
+            res = Math.max(left, right)
+            return -1
+        } else if (left >= 0 && right >= 0) {
+            return 1 + Math.max(left, right)
+        } else {
+            res = Math.max(res, Math.abs(left - right))
+            return Math.min(left, right) - 1
+        }
+    }
+}
