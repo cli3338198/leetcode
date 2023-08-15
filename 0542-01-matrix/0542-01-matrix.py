@@ -1,5 +1,20 @@
 class Solution:
     def updateMatrix(self, mat: List[List[int]]) -> List[List[int]]:
+        m, n = len(mat), len(mat[0])
+        for r in range(0, m):
+            for c in range(0, n):
+                if mat[r][c] != 0:
+                    left = mat[r][c-1] if c > 0 else float("inf")
+                    up = mat[r-1][c] if r > 0 else float("inf")
+                    mat[r][c] = 1 + min(left, up)
+        for r in range(m-1, -1, -1):
+            for c in range(n-1, -1, -1):
+                if mat[r][c] != 0:
+                    right = mat[r][c+1] if c < n-1 else float("inf")
+                    down = mat[r+1][c] if r < m-1 else float("inf")
+                    mat[r][c] = min(mat[r][c], 1 + min(right, down))
+        return mat
+        
         rows, cols, q = len(mat), len(mat[0]), deque()
         dp = [[float("inf") for _ in range(0, cols)] for _ in range(0, rows)]
         for r in range(0, rows):
