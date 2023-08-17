@@ -58,3 +58,24 @@ var sortString = function(s) {
         }
     }
 };
+
+sortString = function(s) {
+    const arr = Array(26).fill(0)
+    let res = ""
+    for (const c of s) {
+        arr[c.charCodeAt(0)-97]++
+    }
+    while (s.length !== res.length) {
+        for (let i=0; i < 26; i++) {
+            if (arr[i]-- > 0) {
+                res += String.fromCharCode(i+97)
+            }
+        }
+        for (let i=25; i >= 0; i--) {
+            if (arr[i]-- > 0) {
+                res += String.fromCharCode(i+97)
+            }
+        }
+    }
+    return res
+}
