@@ -18,3 +18,16 @@ var partitionString = function(s) {
     }
     return res
 };
+
+partitionString = function(s) {
+    const set = new Set()
+    let res = 0
+    for (const c of s) {
+        if (set.has(c)) {
+            set.clear()
+            res++
+        }
+        set.add(c)
+    }
+    return res + 1
+}
