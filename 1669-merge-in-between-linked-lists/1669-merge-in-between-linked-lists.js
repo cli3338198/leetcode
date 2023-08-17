@@ -38,3 +38,23 @@ var mergeInBetween = function(list1, a, b, list2) {
     lo.next = next
     return list1
 };
+
+mergeInBetween = function(l1, a, b, l2) {
+    let cur = l1
+    let i = 0
+    let start = null
+    let end = null
+    while (i <= b) {
+        if (i === a-1) start = cur
+        cur = cur.next
+        i++
+    }
+    end = cur
+    start.next = l2
+    cur = start.next
+    while (cur.next) {
+        cur = cur.next
+    }
+    cur.next = end
+    return l1
+}
