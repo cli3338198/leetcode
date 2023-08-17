@@ -20,3 +20,12 @@ var minSteps = function(s, t) {
     }
     return res
 };
+
+minSteps = function(s, t) {
+    const arr = Array(26).fill(0)
+    for (let i=0; i < s.length; i++) {
+        arr[s[i].charCodeAt(0)-97]++
+        arr[t[i].charCodeAt(0)-97]--
+    }
+    return arr.reduce((acc, val) => acc + (val > 0 ? val : 0), 0)
+}
