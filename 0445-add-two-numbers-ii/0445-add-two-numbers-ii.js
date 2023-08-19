@@ -47,3 +47,27 @@ var addTwoNumbers = function(l1, l2) {
         return reversed(next, head)
     }
 };
+
+addTwoNumbers = function(l1, l2) {
+    const stack1 = toStack(l1)
+    const stack2 = toStack(l2)
+    let carry = 0
+    let d = null
+    while (stack1.length || stack2.length || carry) {
+        const v1 = stack1.pop()?.val || 0
+        const v2 = stack2.pop()?.val || 0
+        const sum = v1 + v2 + carry
+        d = new ListNode(sum % 10, d)
+        carry = Math.floor(sum / 10)
+    }
+    return d
+    
+    function toStack(head) {
+        const stack = []
+        while (head) {
+            stack.push(head)
+            head = head.next
+        }
+        return stack
+    }
+}
