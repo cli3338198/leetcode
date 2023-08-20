@@ -12,9 +12,10 @@
 var insertGreatestCommonDivisors = function(head) {
     for (let cur=head; cur.next; cur=cur.next.next) {
         let greatestCommon = 1
-        for (let i=2; i <= Math.max(cur.val, cur.next.val); i++) {
+        for (let i=Math.max(cur.val, cur.next.val); i >= 1; i--) {
             if (cur.val % i === 0 && cur.next.val % i === 0) {
                 greatestCommon = i
+                break
             }
         }
         cur.next = new ListNode(greatestCommon, cur.next)
