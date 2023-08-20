@@ -22,3 +22,15 @@ var insertGreatestCommonDivisors = function(head) {
     }
     return head
 };
+
+insertGreatestCommonDivisors = function(head) {
+    for (let cur=head; cur.next; cur=cur.next.next) {
+        cur.next = new ListNode(greatestCommon(cur.val, cur.next.val), cur.next)
+    }
+    return head
+    
+    function greatestCommon(a, b) {
+        if (b === 0) return a
+        return greatestCommon(b, a % b)
+    }
+}
