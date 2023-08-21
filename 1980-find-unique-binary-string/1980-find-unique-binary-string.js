@@ -16,3 +16,7 @@ var findDifferentBinaryString = function(nums) {
         return res        
     }
 };
+
+findDifferentBinaryString = function(nums) {
+    return nums.map((n, i) => n[i] === "1" ? "0" : "1").join("")
+}
