@@ -7,15 +7,11 @@
 var oddCells = function(m, n, indices) {
     const grid = Array(m).fill(0).map(() => Array(n).fill(0))
     for (const [r, c] of indices) {
-        for (let row=0; row < m; row++) {
-            if (row === r) grid[row] = grid[row].map(x => x + 1)
+        for (let col=0; col < n; col++) {
+            grid[r][col]++
         }
         for (let row=0; row < m; row++) {
-            for (let col=0; col < n; col++) {
-                if (col === c) {
-                    grid[row][col]++
-                }
-            }
+            grid[row][c]++
         }
     }
     let res = 0
