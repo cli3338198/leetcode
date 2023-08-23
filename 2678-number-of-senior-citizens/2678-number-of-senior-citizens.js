@@ -9,3 +9,7 @@ var countSeniors = function(details) {
     }
     return res
 };
+
+countSeniors = function(details) {
+    return details.filter(deet => +(deet.at(-4) + deet.at(-3)) > 60).length
+}
