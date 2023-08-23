@@ -6,4 +6,5 @@ class Solution:
                 grid[row][c] += 1
             for col in range(0, n):
                 grid[r][col] += 1
+        return sum([1 if cell % 2 != 0 else 0 for row in grid for cell in row])
         return sum([1 for row in grid for cell in row if cell % 2 != 0])
