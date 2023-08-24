@@ -21,3 +21,19 @@ var findThePrefixCommonArray = function(A, B) {
     }
     return res.slice(1)
 };
+
+findThePrefixCommonArray = function(A, B) {
+    const n = A.length
+    const counts = Array(n+1).fill(0)
+    const res = []
+    let curCommon = 0
+    for (let i=0; i < n; i++) {
+        const n1 = A[i], n2 = B[i]
+        counts[n1]++
+        counts[n2]++
+        if (counts[n1] > 1) curCommon++
+        if (n1 !== n2 && counts[n2] > 1) curCommon++
+        res.push(curCommon)
+    }
+    return res
+}
