@@ -37,3 +37,16 @@ findThePrefixCommonArray = function(A, B) {
     }
     return res
 }
+
+findThePrefixCommonArray = function(A, B) {
+    const seen = new Set(), res = []
+    let curCommon = 0
+    for (let i=0; i < A.length; i++) {
+        if (seen.has(A[i])) curCommon++
+        seen.add(A[i])
+        if (seen.has(B[i])) curCommon++
+        seen.add(B[i])
+        res.push(curCommon)
+    }
+    return res
+}
