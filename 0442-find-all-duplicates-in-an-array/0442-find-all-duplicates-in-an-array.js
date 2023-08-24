@@ -20,3 +20,12 @@ findDuplicates = function(nums) {
     }
     return res
 }
+
+findDuplicates = function(nums) {
+    const res = []
+    for (const n of nums) {
+        if (nums[Math.abs(n)-1] < 0) res.push(Math.abs(n))
+        nums[Math.abs(n)-1] *= -1
+    }
+    return res
+}
