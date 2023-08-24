@@ -8,7 +8,7 @@ function replaceWords(dictionary: string[], sentence: string): string {
             this.word = ""
             this.end = false
         }
-        insert(word: string) {
+        insert(word: string): void {
             let cur: Trie = this as Trie
             for (const c of word) {
                 if (!(c in cur.children)) {
@@ -19,7 +19,7 @@ function replaceWords(dictionary: string[], sentence: string): string {
             }
             cur.end = true
         }
-        find(word: string) {
+        find(word: string): string {
             let cur: Trie = this as Trie
             for (const c of word) {
                 if (cur.end === true) return cur.word
