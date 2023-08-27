@@ -26,3 +26,17 @@ checkSubarraySum = function(nums, k) {
     }
     return false
 }
+
+checkSubarraySum = function(nums, k) {
+    const map = {"0": 0}
+    let cursum = 0
+    for (let i=0; i < nums.length; i++) {
+        cursum += nums[i]
+        if (!((cursum % k) in map)) {
+            map[cursum % k] = i + 1
+        } else if (map[cursum % k] < i) {
+            return true
+        }
+    }
+    return false
+}
