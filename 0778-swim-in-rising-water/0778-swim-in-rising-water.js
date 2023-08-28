@@ -76,5 +76,4 @@ var swimInWater = function(grid) {
             }
         }
     }
-    return min
 };
