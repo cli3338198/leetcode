@@ -6,6 +6,8 @@ class Solution:
             total_wt += wt
             
         def can_ship(cur_wt: int) -> bool:
+            nonlocal days
+            nonlocal weights
             day, wt = 1, 0
             for w in weights:
                 wt += w
