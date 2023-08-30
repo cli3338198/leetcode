@@ -22,3 +22,21 @@ var maxProfitAssignment = function(difficulty, profit, worker) {
     }
     return totalProfit
 };
+
+maxProfitAssignment = function(difficulty, profit, worker) {
+    const zipped = [], n = difficulty.length
+    for (let i=0; i < n; i++) {
+        zipped.push([difficulty[i], profit[i]])
+    }
+    zipped.sort((a, b) => a[0] - b[0] || a[1] - b[1])
+    worker.sort((a, b) => a - b)
+    let totalProfit = 0, i = 0, bestProfit = 0
+    for (const maxAbility of worker) {
+        while (i < n && maxAbility >= zipped[i][0]) {
+            bestProfit = Math.max(bestProfit, zipped[i][1])
+            i++
+        }
+        totalProfit += bestProfit
+    }
+    return totalProfit
+}
