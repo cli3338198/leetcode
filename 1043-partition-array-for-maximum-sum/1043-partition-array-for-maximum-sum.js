@@ -16,3 +16,16 @@ var maxSumAfterPartitioning = function(arr, k) {
     }
     return dp[n]
 };
+
+maxSumAfterPartitioning = function(arr, k) {
+    const n = arr.length
+    const dp = Array(n+1).fill(0)
+    for (let i=1; i <= n; i++) {
+        let curmax = 0
+        for (let j=1; j <= Math.min(k, i); j++) {
+            curmax = Math.max(curmax, arr[i-j])
+            dp[i] = Math.max(dp[i], dp[i-j] + curmax * j)
+        }
+    }
+    return dp[n]
+}
