@@ -12,3 +12,21 @@ var permute = function(nums) {
     }
     return res
 };
+
+permute = function(nums) {
+    const q = [[[], Array(nums.length).fill(false)]]
+    for (let i=1; i <= nums.length; i++) {
+        const len = q.length
+        for (let j=0; j < len; j++) {
+            const [curList, used] = q.shift()
+            for (let k=0; k < nums.length; k++) {
+                if (!used[k]) {
+                    used[k] = true
+                    q.push([[...curList, nums[k]], used.slice()])
+                    used[k] = false
+                }
+            }
+        }
+    }
+    return q.map(x => x[0])
+}
