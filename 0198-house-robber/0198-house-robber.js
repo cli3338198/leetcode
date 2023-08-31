@@ -12,3 +12,11 @@ var rob = function(nums) {
     }
     return dp[n-1]
 };
+
+rob = function(nums) {
+    let twoHousesBack = nums[0], oneHouseBack = Math.max(nums[0], nums[1] || 0)
+    for (let i=2; i < nums.length; i++) {
+        [twoHousesBack, oneHouseBack] = [oneHouseBack, Math.max(oneHouseBack, twoHousesBack + nums[i])]
+    }
+    return Math.max(twoHousesBack, oneHouseBack)
+}
