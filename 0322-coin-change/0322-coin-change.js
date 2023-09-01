@@ -9,7 +9,7 @@ var coinChange = function(coins, amount) {
     for (let amt=1; amt <= amount; amt++) {
         for (const coin of coins) {
             if (coin <= amt) {
-                dp[amt] = Math.min(dp[amt], 1 + (amt-coin < 0 ? Infinity : dp[amt-coin]))
+                dp[amt] = Math.min(dp[amt], 1 + dp[amt-coin])
             }
         }
     }
