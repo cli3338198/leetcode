@@ -1,12 +1,35 @@
-class Solution:
-    def coinChange(self, coins: List[int], amount: int) -> int:
-        dp = [inf] * (amount + 1)
-        dp[0] = 0
-        
-        for i in range(1, amount+1):
-            for coin in coins:
-                if coin <= i:
-                    dp[i] = min(dp[i], 1 + dp[i-coin])
-        
-        
-        return dp[amount] if dp[amount] != inf else -1
+/**
+ * @param {number[]} coins
+ * @param {number} amount
+ * @return {number}
+ */
+var coinChange = function(coins, amount) {
+    const dp = Array(amount+1).fill(Infinity)
+    dp[0] = 0
+    for (let amt=1; amt <= amount; amt++) {
+        for (const coin of coins) {
+            if (coin <= amt) {
+                dp[amt] = Math.min(dp[amt], 1 + dp[amt-coin])
+            }
+        }
+    }
+    return dp[amount] === Infinity ? -1 : dp[amount]
+};
+
+coinChange = function(coins, amount) {
+    const dp = {}
+    const res = helper(amount)
+    return res === Infinity ? -1 : res
+    
+    function helper(amount) {
+        if (amount in dp) return dp[amount]
+        if (amount === 0) return 0
+        let res = Infinity
+        for (const coin of coins) {
+            if (coin <= amount) {
+                res = Math.min(res, 1 + helper(amount-coin))
+            }
+        }
+        return dp[amount] = res
+    }
+}
