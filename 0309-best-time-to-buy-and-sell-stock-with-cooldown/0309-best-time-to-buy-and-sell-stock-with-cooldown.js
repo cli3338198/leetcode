@@ -3,13 +3,16 @@
  * @return {number}
  */
 var maxProfit = function(prices) {
-    const n = prices.length
-    const buy = Array(n).fill(0)
-    const sell = Array(n).fill(0)
-    buy[0] = -prices[0]
-    for (let i=1; i < n; i++) {
-        buy[i] = Math.max(buy[i-1], (sell[i-2] || 0) - prices[i])
-        sell[i] = Math.max(sell[i-1], buy[i-1] + prices[i])
+    let buying = -Infinity
+    let selling = 0
+    let resting = 0
+    for (const price of prices) {
+        const nextBuying = Math.max(buying, resting - price)
+        const nextSelling = buying + price
+        const nextResting = Math.max(resting, selling)
+        buying = nextBuying
+        selling = nextSelling
+        resting = nextResting
     }
-    return sell[n-1]
+    return Math.max(selling, resting)
 };
