@@ -4,7 +4,6 @@
  */
 var wiggleMaxLength = function(nums) {
     const n = nums.length
-    if (n < 2) return n
     const dp = Array(n).fill(0).map(() => ([1, 1]))
     for (let i=1; i < n; i++) {
         for (let j=0; j < i; j++) {
