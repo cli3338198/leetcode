@@ -36,3 +36,25 @@ canPartition = function(nums) {
     }
     return false
 }
+
+canPartition = function(nums) {
+    const sum = nums.reduce((acc, val) => acc + val, 0)
+    if (sum % 2 !== 0) return false
+    const halfSum = sum / 2
+    nums.sort((a, b) => a - b)
+    const dp = {}
+    return helper(0, halfSum)
+    
+    function helper(i, sum) {
+        const key = `${i} ${sum}`
+        if (key in dp) return dp[key]
+        if (i === nums.length) return sum === 0
+        let res = false
+        for (let j=i; j < nums.length; j++) {
+            if (nums[j] <= sum && helper(j+1, sum-nums[j]) === true) {
+                return true
+            }
+        }
+        return dp[key] = res
+    }
+}
