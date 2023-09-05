@@ -18,3 +18,15 @@ var findLongestChain = function(pairs) {
     }    
     return max
 };
+
+findLongestChain = function(pairs) {
+    pairs.sort((a, b) => a[1] - b[1])
+    let b = -Infinity, res = 0
+    for (const [c, d] of pairs) {
+        if (b < c) {
+            b = d
+            res++
+        }
+    }
+    return res
+}
