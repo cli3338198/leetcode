@@ -23,34 +23,3 @@ var knightDialer = function(n) {
         return dp[key] = res % mod
     }
 };
-
-knightDialer = function(n) {
-    const mod = Math.pow(10, 9) + 7
-    const moves = [[4, 6], [6, 8], [7, 9], [4, 8], [0, 3, 9], [], [0, 1, 7], [2, 6], [1, 3], [2, 4]]
-    let dp = Array(10).fill(1)
-    for (let numMoves = 1; numMoves < n; numMoves++) {
-        const nextDp = Array(10).fill(0)
-        for (let i=0; i < 10; i++) {
-            for (const next of moves[i]) {
-                nextDp[i] += dp[next] % mod
-            }
-        }
-        dp = nextDp
-    }
-    return dp.reduce((acc, val) => acc + val, 0) % mod
-}
-
-knightDialer = function(n) {
-    const mod = Math.pow(10, 9) + 7
-    const moves = [[4, 6], [6, 8], [7, 9], [4, 8], [0, 3, 9], [], [0, 1, 7], [2, 6], [1, 3], [2, 4]]
-    const dp = Array(n+1).fill(0).map(() => Array(10).fill(0))
-    dp[1].fill(1)
-    for (let i=2; i <= n; i++) {
-        for (let j=0; j < 10; j++) {
-            for (const next of moves[j]) {
-                dp[i][j] += dp[i-1][next] % mod
-            }
-        }
-    }
-    return dp[n].reduce((acc, val) => acc + val, 0) % mod
-}
