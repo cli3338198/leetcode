@@ -11,10 +11,10 @@ var canReach = function(s, minJump, maxJump) {
     let jumpPoints = 0
     for (let i=1; i < n; i++) {
         if (i > maxJump) {
-            jumpPoints -= dp[i-maxJump-1]
+            jumpPoints -= dp[i-maxJump-1] ? 1 : 0
         }
         if (i >= minJump) {
-            jumpPoints += dp[i-minJump]
+            jumpPoints += dp[i-minJump] ? 1 : 0
         }
         if (jumpPoints > 0 && s[i] === '0') {
             dp[i] = true
