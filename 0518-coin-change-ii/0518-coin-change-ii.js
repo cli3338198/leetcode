@@ -31,3 +31,17 @@ change = function(amount, coins) {
     }
     return dp[amount]
 }
+
+change = function(amount, coins) {
+    const dp = {}
+    return helper(0, amount)
+    
+    function helper(idx, amount) {
+        const key = `${idx} ${amount}`
+        if (key in dp) return dp[key]
+        if (amount === 0) return 1
+        if (idx >= coins.length) return 0
+        if (coins[idx] > amount) return helper(idx+1, amount)
+        return dp[key] = helper(idx, amount-coins[idx]) + helper(idx+1, amount)
+    }
+}
