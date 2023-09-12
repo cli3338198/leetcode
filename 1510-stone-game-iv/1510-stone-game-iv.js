@@ -3,14 +3,26 @@
  * @return {boolean}
  */
 var winnerSquareGame = function(n) {
-    const dp = Array(n+1).fill(false)
+    const squares = []
     for (let i=1; i <= n; i++) {
-        for (let j=1; j * j <= i; j++) {
-            if (dp[i-j*j] === false) {
-                dp[i] = true
-                break
+        for (let j=1; j <= i; j++) {
+            if (j * j === i) {
+                squares.push(i)
             }
         }
     }
-    return dp[n]
+    const dp = {}
+    return helper(n)
+    
+    function helper(n) {
+        if (n === 0) return false
+        if (n === 1) return true
+        if (n in dp) return dp[n]
+        for (let i=squares.length-1; i >= 0; i--) {
+            if (squares[i] <= n && !helper(n-squares[i])) {
+                return dp[n] = true
+            }
+        }
+        return dp[n] = false
+    }
 };
