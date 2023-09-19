@@ -20,3 +20,19 @@ var combinationSum = function(candidates, target) {
         }
     }
 };
+
+combinationSum = function(candidates, target) {
+    candidates.sort((a, b) => a - b)
+    const dp = Array(target+1).fill(0).map(() => ([]))
+    dp[0].push([])
+    for (const c of candidates) {
+        for (let t=1; t <= target; t++) {
+            if (c <= t) {
+                for (const sub of dp[t-c]) {
+                    dp[t].push([...sub, c])
+                }
+            }
+        }
+    }
+    return dp[target]
+}
