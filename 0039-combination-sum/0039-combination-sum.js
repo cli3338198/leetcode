@@ -36,3 +36,31 @@ combinationSum = function(candidates, target) {
     }
     return dp[target]
 }
+
+combinationSum = function(candidates, target) {
+    candidates.sort((a, b) => a - b)
+    const dp = {}
+    dp[0] = [[]]
+    for (const c of candidates) {
+        for (let t=1; t <= target; t++) {
+            if (c <= t) {
+                if (!(t in dp)) dp[t] = []
+                for (const sub of dp[t-c] || []) {
+                    dp[t].push([...sub, c])
+                }
+            }
+        }
+    }
+    // ┌─────────┬─────────────┬──────────┬───────┐
+    // │ (index) │      0      │    1     │   2   │
+    // ├─────────┼─────────────┼──────────┼───────┤
+    // │    0    │     []      │          │       │
+    // │    2    │    [ 2 ]    │          │       │
+    // │    3    │    [ 3 ]    │          │       │
+    // │    4    │  [ 2, 2 ]   │          │       │
+    // │    5    │  [ 2, 3 ]   │          │       │
+    // │    6    │ [ 2, 2, 2 ] │ [ 3, 3 ] │ [ 6 ] │
+    // │    7    │ [ 2, 2, 3 ] │  [ 7 ]   │       │
+    // └─────────┴─────────────┴──────────┴───────┘
+    return target in dp ? dp[target] : []
+}
