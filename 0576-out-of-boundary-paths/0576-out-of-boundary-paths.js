@@ -6,15 +6,21 @@
  * @param {number} startColumn
  * @return {number}
  */
-var findPaths = function(m, n, maxMove, startRow, startColumn, dp={}) {
-    const key = `${maxMove} ${startRow} ${startColumn}`
-    if (key in dp) return dp[key]
-    if (startRow < 0 || startRow >= m || startColumn < 0 || startColumn >= n) return 1
-    if (maxMove <= 0) return 0
-    return dp[key] = (
-        findPaths(m, n, maxMove-1, startRow+1, startColumn, dp) + 
-        findPaths(m, n, maxMove-1, startRow-1, startColumn, dp) + 
-        findPaths(m, n, maxMove-1, startRow, startColumn+1, dp) + 
-        findPaths(m, n, maxMove-1, startRow, startColumn-1, dp)
-    ) % ((10**9) + 7)
+var findPaths = function(m, n, maxMove, startRow, startColumn) {
+    const mod = Math.pow(10, 9) + 7
+    const dp = {}
+    return dfs(startRow, startColumn, 0)
+    
+    function dfs(r, c, moves) {
+        const key = `${r} ${c} ${moves}`
+        if (key in dp) return dp[key]
+        if (moves > maxMove) return 0
+        if (r < 0 || r >= m || c < 0 || c >= n) return 1
+        let res = 0
+        for (const [rr, cc] of [[1, 0], [0, 1], [-1, 0], [0, -1]]) {
+            const rrr = rr + r, ccc = cc + c
+            res += dfs(rrr, ccc, moves+1)
+        }
+        return dp[key] = res % mod
+    }
 };
