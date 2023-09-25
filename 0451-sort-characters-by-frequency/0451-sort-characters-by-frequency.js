@@ -60,7 +60,6 @@ var frequencySort = function(s) {
     for (const c in map) {
         heap.push({c, count: map[c]})
     }
-    console.log(heap.h)
     let res = ""
     while (heap.h.length) {
         const {c, count} = heap.pop()
@@ -68,3 +67,15 @@ var frequencySort = function(s) {
     }
     return res
 };
+
+frequencySort = function(s) {
+    const map = {}
+    for (const c of s) {
+        map[c] = map[c] + 1 || 1
+    }
+    const buckets = Array(s.length+1).fill(0).map(() => ([]))
+    for (const c in map) {
+        buckets[map[c]].push(c)
+    }
+    return buckets.reduceRight((acc, bucket, index) => acc + (bucket.length ? (bucket.sort().reduce((acc, char) => acc + (char.repeat(index)), "")) : ""), "")
+}
