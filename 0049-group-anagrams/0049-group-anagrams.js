@@ -12,9 +12,5 @@ var groupAnagrams = function(strs) {
             map[ana] = [str]
         }
     }
-    const res = []
-    for (const ana in map) {
-        res.push(map[ana])
-    }
-    return res
+    return Object.values(map)
 };
