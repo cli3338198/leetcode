@@ -12,6 +12,22 @@ class Solution:
             return self.dfs(root.left, min, root.val) and self.dfs(root.right, root.val, max)
         else:
             return False
+        
+    def bfs(self, root: Optional[TreeNode]) -> bool:
+        q = deque([[-inf, root, inf]])
+        while q:
+            mn, root, mx = q.popleft()
+            if root.val <= mn or root.val >= mx:
+                return False
+            if root.left:
+                q.append([mn, root.left, root.val])
+            if root.right:
+                q.append([root.val, root.right, mx])
+        return True
     
     def isValidBST(self, root: Optional[TreeNode]) -> bool:
+        return self.bfs(root)
+        
+        #
+        
         return self.dfs(root)
