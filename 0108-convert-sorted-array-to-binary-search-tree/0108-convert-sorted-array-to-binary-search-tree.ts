@@ -13,7 +13,27 @@
  */
 
 function sortedArrayToBST(nums: number[]): TreeNode | null {
-    if (!nums.length) return null
     const m = Math.floor(nums.length/2)
-    return new TreeNode(nums[m], sortedArrayToBST(nums.slice(0, m)), sortedArrayToBST(nums.slice(m+1)))
+    const root = new TreeNode(nums[m])
+    const q: [TreeNode, number[], number[]][] = [[root, nums.slice(0, m), nums.slice(m+1)]]
+    while (q.length) {
+        const [cur, left, right] = q.shift()
+        if (left.length) {
+            const m = Math.floor(left.length/2)
+            cur.left = new TreeNode(left[m])
+            q.push([cur.left, left.slice(0, m), left.slice(m+1)])
+        }
+        if (right.length) {
+            const m = Math.floor(right.length/2)
+            cur.right = new TreeNode(right[m])
+            q.push([cur.right, right.slice(0, m), right.slice(m+1)])
+        }
+    }
+    return root
+    
+    //
+    
+    if (!nums.length) return null
+    const n = Math.floor(nums.length/2)
+    return new TreeNode(nums[n], sortedArrayToBST(nums.slice(0, n)), sortedArrayToBST(nums.slice(n+1)))
 };
