@@ -27,6 +27,17 @@ class Trie:
         
 class Solution:
     def longestCommonPrefix(self, strs: List[str]) -> str:
+        strs.sort()
+        a, b, res = strs[0], strs[-1], ""
+        i = j = 0
+        while i < len(a) and j < len(b) and a[i] == b[j]:
+            res += a[i]
+            i += 1
+            j += 1
+        return res
+        
+        #
+        
         trie = Trie()
         for word in strs:
             trie.insert(word)
