@@ -1,11 +1,8 @@
 class Solution:
     def longestValidParentheses(self, s: str) -> int:
-        stack = [-1]
-        
-        res = 0
-        
-        for i, p in enumerate(s):
-            if p == '(':
+        stack, res = [-1], 0
+        for i, c in enumerate(s):
+            if c == "(":
                 stack.append(i)
             else:
                 stack.pop()
@@ -13,5 +10,5 @@ class Solution:
                     stack.append(i)
                 else:
                     res = max(res, i - stack[-1])
-        
         return res
+            
