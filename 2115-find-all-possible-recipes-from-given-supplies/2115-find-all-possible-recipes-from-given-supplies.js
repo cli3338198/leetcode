@@ -26,3 +26,30 @@ var findAllRecipes = function(recipes, ingredients, supplies) {
     }
     return recipes.filter(recipe => indegree[recipe] === 0)
 };
+
+findAllRecipes = function(recipes, ingredients, supplies) {
+    const graph = {}, set = new Set(), res = []
+    supplies = new Set(supplies)
+    for (let i=0; i < recipes.length; i++) {
+        graph[recipes[i]] = ingredients[i]
+    }
+    for (const recipe of recipes) {
+        if (dfs(recipe)) {
+            res.push(recipe)
+        }
+    }
+    return res
+    
+    function dfs(ing) {
+        if (supplies.has(ing)) return true
+        if (!(ing in graph) || set.has(ing)) return false
+        set.add(ing)
+        for (const nextIng of graph[ing] || []) {
+            if (!dfs(nextIng)) {
+                return false
+            }
+        }
+        set.delete(ing)
+        return true
+    }
+}
