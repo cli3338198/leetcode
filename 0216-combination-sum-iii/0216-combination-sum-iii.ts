@@ -1,4 +1,23 @@
 function combinationSum3(k: number, n: number): number[][] {
+    let curDp = Array(n+1).fill(0).map(() => Array(k+1).fill(0).map(() => []))
+    curDp[0][0].push([])
+    for (let curNum=1; curNum < 10; curNum++) {
+        const nextDp = clone(curDp)
+        for (let curTarget=1; curTarget <= n; curTarget++) {
+            for (let i=1; i <= k; i++) {
+                if (curNum <= curTarget) {
+                    for (const sub of curDp[curTarget-curNum][i-1]) {
+                        nextDp[curTarget][i].push([...sub, curNum])
+                    }
+                }
+            }
+        }
+        curDp = nextDp
+    }
+    return curDp[n][k]
+    
+    //
+    
     const dp = Array(10).fill(0).map(() => Array(n+1).fill(0).map(() => Array(k+1).fill(0).map(() => [])))
     for (let i=0; i < 10; i++) {
         dp[i][0][0].push([])
