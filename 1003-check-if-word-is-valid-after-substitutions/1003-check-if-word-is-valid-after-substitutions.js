@@ -21,3 +21,9 @@ isValid = function(s) {
     }
     return !s.length
 }
+
+isValid = function(s) {
+    if (!s.length) return true
+    if (!s.includes('abc')) return false
+    return isValid(s.replace('abc', ''))
+}
