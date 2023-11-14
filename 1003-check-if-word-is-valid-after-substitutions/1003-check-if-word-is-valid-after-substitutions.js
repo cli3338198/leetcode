@@ -14,3 +14,10 @@ var isValid = function(s) {
     }
     return !stack.length
 };
+
+isValid = function(s) {
+    while (s.includes('abc')) {
+        s = s.replaceAll('abc', '')
+    }
+    return !s.length
+}
