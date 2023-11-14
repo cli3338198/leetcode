@@ -5,6 +5,21 @@
 #         self.next = next
 class Solution:
     def doubleIt(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        def rec(head: Optional[ListNode]) -> Optional[ListNode]:
+            val = head.val * 2
+            if head.next:
+                val += rec(head.next)
+            head.val = val % 10
+            return val // 10
+        
+        remainder = rec(head)
+        if remainder:
+            return ListNode(remainder, head)
+        else:
+            return head
+    
+        #
+        
         def reverse(prev: Optional[ListNode], cur: Optional[ListNode]) -> Optional[ListNode]:
             if not cur:
                 return prev
