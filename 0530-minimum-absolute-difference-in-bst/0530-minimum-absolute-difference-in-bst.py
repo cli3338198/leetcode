@@ -19,5 +19,17 @@ class Solution:
         self.dfs(root.right)
         return self.min
     
+    def inorder(self, root: Optional[TreeNode]) -> List[int]:
+        if not root:
+            return []
+        return [*self.inorder(root.left), root.val, *self.inorder(root.right)]
+    
     def getMinimumDifference(self, root: Optional[TreeNode]) -> int:
+        res, arr = inf, self.inorder(root)
+        for i in range(0, len(arr)-1):
+            res = min(res, arr[i+1]-arr[i])
+        return res
+        
+        #
+        
         return self.dfs(root)
