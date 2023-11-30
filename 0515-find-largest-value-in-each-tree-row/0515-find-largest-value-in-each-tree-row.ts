@@ -14,7 +14,20 @@
 
 function largestValues(root: TreeNode | null): number[] {
     if (!root) return []
+    return dfs(root, 0, [])
+    
+    //
+
     return bfs(root)
+    
+    function dfs(root: TreeNode | null, lvl: number, res: number[]): number[] {
+        if (!root) return res
+        if (!(lvl in res)) res[lvl] = -Infinity
+        res[lvl] = Math.max(res[lvl], root.val)
+        dfs(root.left, lvl+1, res)
+        dfs(root.right, lvl+1, res)
+        return res
+    }
     
     function bfs(root: TreeNode | null): number[] {
         const q: TreeNode[] = [root], res: number[] = []
