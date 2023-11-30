@@ -10,6 +10,19 @@ class Solution:
             return []
         q, res = deque([root]), []
         while q:
+            q2 = []
+            res.append(q[-1].val)
+            for node in q:
+                if node.left:
+                    q2.append(node.left)
+                if node.right:
+                    q2.append(node.right)
+            q = q2
+        return res
+        
+        #
+        
+        while q:
             l, last = len(q), None
             for i in range(0, l):
                 cur = q.popleft()
