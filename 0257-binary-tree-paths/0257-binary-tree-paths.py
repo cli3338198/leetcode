@@ -11,11 +11,7 @@ class Solution:
                 return []
             if not root.left and not root.right:
                 return [str(root.val)]
-            left, right = dfs(root.left), dfs(root.right)
-            cur_list = []
-            for sub in left + right:
-                cur_list.append(f'{root.val}->{sub}')
-            return cur_list
+            return [f'{root.val}->{sub}' for sub in dfs(root.left) + dfs(root.right)]
                 
         return dfs(root)
             
