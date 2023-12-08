@@ -13,6 +13,24 @@
  */
 
 function isValidBST(root: TreeNode | null): boolean {
+    if (!root) return true
+    const stack: TreeNode[] = []
+    let parent: TreeNode | null = null
+    while (stack.length || root) {
+        if (root) {
+            stack.push(root)
+            root = root.left
+        } else {
+            root = stack.pop()
+            if (parent && root.val <= parent.val) return false
+            parent = root
+            root = root.right
+        }
+    }
+    return true
+    
+    //
+    
     return dfs(root, -Infinity, Infinity)
     
     function dfs(root: TreeNode | null, lo: number, hi: number): boolean {
