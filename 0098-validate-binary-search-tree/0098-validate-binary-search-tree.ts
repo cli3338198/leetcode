@@ -15,15 +15,15 @@
 function isValidBST(root: TreeNode | null): boolean {
     if (!root) return true
     const stack: TreeNode[] = []
-    let parent: TreeNode | null = null
+    let lastInorder: TreeNode | null = null
     while (stack.length || root) {
         if (root) {
             stack.push(root)
             root = root.left
         } else {
             root = stack.pop()
-            if (parent && root.val <= parent.val) return false
-            parent = root
+            if (lastInorder && root.val <= lastInorder.val) return false
+            lastInorder = root
             root = root.right
         }
     }
