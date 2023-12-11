@@ -6,8 +6,9 @@
 #         self.right = right
 class Solution:
     def sumOfLeftLeaves(self, root: Optional[TreeNode]) -> int:
-        if not root: 
+        if not root:
             return 0
-        sum = 0
-        sum += root.left.val if root.left and not root.left.left and not root.left.right else 0
-        return sum + self.sumOfLeftLeaves(root.left) + self.sumOfLeftLeaves(root.right)
+        res = 0
+        res += root.left.val if root.left and not root.left.left and not root.left.right else 0
+        return res + self.sumOfLeftLeaves(root.left) + self.sumOfLeftLeaves(root.right)
+            
