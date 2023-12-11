@@ -13,17 +13,14 @@
  */
 
 function isSymmetric(root: TreeNode | null): boolean {
-    const stack: [TreeNode, TreeNode][] = [[root.left, root.right]]
+    if (!root) return true
+    const stack: [TreeNode | null, TreeNode | null][] = [[root, root]]
     while (stack.length) {
         const [left, right] = stack.pop()
-        if (!left && !right) {
-            continue
-        } else if (!left || !right || left.val !== right.val) {
-            return false
-        } else {
-            stack.push([left.left, right.right])
-            stack.push([left.right, right.left])
-        }
+        if (!left && !right) continue
+        if (!left || !right || left.val !== right.val) return false
+        stack.push([left.left, right.right])
+        stack.push([left.right, right.left])
     }
     return true
 };
