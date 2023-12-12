@@ -8,8 +8,12 @@ function letterCasePermutation(s: string): string[] {
             res.push(substring)
             return
         }
-        backtrack(i+1, substring + s[i].toLowerCase())
-        if (s[i].toLowerCase() !== s[i].toUpperCase()) backtrack(i+1, substring + s[i].toUpperCase())
+        if (s[i].match(/[a-zA-Z]/)) {
+            backtrack(i+1, substring + s[i].toLowerCase())
+            backtrack(i+1, substring + s[i].toUpperCase())
+        } else {
+            backtrack(i+1, substring + s[i])
+        }
     }
     
     //
