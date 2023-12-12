@@ -1,4 +1,19 @@
 function letterCasePermutation(s: string): string[] {
+    const res: string[] = []
+    backtrack(0, "")
+    return res
+    
+    function backtrack(i: number, substring: string): void {
+        if (i >= s.length) {
+            res.push(substring)
+            return
+        }
+        backtrack(i+1, substring + s[i].toLowerCase())
+        if (s[i].toLowerCase() !== s[i].toUpperCase()) backtrack(i+1, substring + s[i].toUpperCase())
+    }
+    
+    //
+    
     const dp: string[][] = Array(s.length+1).fill(0).map(() => [])
     dp[0].push("")
     for (let i=1; i <= s.length; i++) {
