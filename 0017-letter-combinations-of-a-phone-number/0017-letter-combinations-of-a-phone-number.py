@@ -1,29 +1,12 @@
 class Solution:
     def letterCombinations(self, digits: str) -> List[str]:
-        mp, res = {"2": "abc", "3": "def", "4": "ghi", "5": "jkl", "6": "mno", "7": "pqrs", "8": "tuv", "9": "wxyz"}, deque([])
-        
-        if len(digits) == 0:
-            return res
-        res.append("")
-        for i in range(0, len(digits)):
-            length = len(res)
-            for j in range(0, length):
-                cur = res.popleft()
-                for k in mp[str(digits[i])]:
-                    res.append(cur + k)
-        return list(res)
-        
-        # 
-        
-        def backtrack(idx: int, cur: str) -> None:
-            nonlocal res, mp, digits
-            if idx >= len(digits):
-                res.append(cur)
-                return
-            for c in mp[str(digits[idx])]:
-                backtrack(idx+1, cur+c)
-        
-        if len(digits) == 0:
-            return res
-        backtrack(0, "")
-        return res
+        if not digits:
+            return []
+        mp = {"2": "abc", "3": "def", "4": "ghi", "5": "jkl", "6": "mno", "7": "pqrs", "8": "tuv", "9": "wxyz"}
+        dp = [[] for _ in range(0, len(digits)+1)]
+        dp[0].append("")
+        for i in range(1, len(digits)+1):
+            for sub in dp[i-1]:
+                for char in mp[digits[i-1]]:
+                    dp[i].append(sub + char)
+        return dp[-1]
