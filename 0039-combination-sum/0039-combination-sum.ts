@@ -5,7 +5,8 @@ function combinationSum(candidates: number[], target: number): number[][] {
     
     function backtrack(i: number, target: number, curList: number[]) {
         if (target === 0) {
-            return res.push(curList)
+            res.push(curList)
+            return
         }
         for (let j=i; j < candidates.length; j++) {
             if (candidates[j] <= target) {
