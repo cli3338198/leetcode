@@ -48,7 +48,70 @@ class Heap<T> {
     buildCompare = (compare: (a: T, b: T) => boolean) => (p: number, c: number) => compare(this.h[p], this.h[c])
 }
 
+class Heap2<T> {
+    public heap: T[]
+    private compare: (parent: number, child: number) => boolean
+    constructor(compare: (a: T, b: T) => boolean) {
+        this.heap = []
+        this.compare = this.buildCompare(compare)
+    }
+    push(a: T) {
+        this.heap.push(a)
+        this.bubbleUp(this.heap.length-1)
+    }
+    bubbleUp(child: number) {
+        let parent = Math.ceil(child / 2) - 1
+        while (parent in this.heap && this.compare(parent, child)) {
+            this.swap(parent, child)
+            child = parent
+            parent = Math.ceil(child / 2) - 1
+        }
+    }
+    pop() {
+        if (this.heap.length > 1) {
+            const top = this.heap[0]
+            this.heap[0] = this.heap.pop()
+            this.heapify(0)
+            return top
+        } else {
+            return this.heap.pop()
+        }
+    }
+    heapify(parent: number) {
+        let leftChild = 2 * parent + 1
+        let rightChild = 2 * parent + 2
+        while ((leftChild in this.heap && this.compare(parent, leftChild)) || (rightChild in this.heap && this.compare(parent, rightChild))) {
+            let temp = parent
+            if (leftChild in this.heap && this.compare(temp, leftChild)) temp = leftChild
+            if (rightChild in this.heap && this.compare(temp, rightChild)) temp = rightChild
+            if (temp !== parent) {
+                this.swap(parent, temp)
+                parent = temp
+                leftChild = 2 * parent + 1
+                rightChild = 2 * parent + 2
+            }
+        }
+    }
+    swap(parent: number, child: number) {
+        [this.heap[parent], this.heap[child]] = [this.heap[child], this.heap[parent]]
+    }
+    buildCompare = (compare: (a: T, b: T) => boolean) => (parent: number, child: number) => compare(this.heap[parent], this.heap[child]) 
+}
+
 function lastStoneWeight(stones: number[]): number {
+    const maxHeap2 = new Heap2<number>((a: number, b: number) => a < b)
+    stones.forEach(stone => maxHeap2.push(stone))
+    while (maxHeap2.heap.length > 1) {
+        const stone1 = maxHeap2.pop()
+        const stone2 = maxHeap2.pop()
+        if (stone1 !== stone2) {
+            maxHeap2.push(Math.abs(stone1 - stone2))
+        }
+    }
+    return maxHeap2.heap.length ? maxHeap2.heap[0] : 0
+    
+    //
+    
     const maxHeap = new Heap<number>((a: number, b: number) => a < b)
     stones.forEach(stone => maxHeap.push(stone))
     while (maxHeap.h.length > 1) {
