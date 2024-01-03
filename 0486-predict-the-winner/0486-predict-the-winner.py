@@ -1,5 +1,17 @@
 class Solution:
     def predictTheWinner(self, nums: List[int]) -> bool:
+        n = len(nums)
+        dp = [[0] * n for _ in range(0, n)]
+        for i in range(0, n):
+            dp[i][i] = nums[i]
+        for length in range(2, n+1):
+            for i in range(0, n-length+1):
+                j = i+length-1
+                dp[i][j] = max(nums[i]-dp[i+1][j], nums[j]-dp[i][j-1])
+        return dp[0][n-1] >= 0
+        
+        #
+        
         @lru_cache(None)
         def rec(i: int, j: int) -> int:
             if i > j:
