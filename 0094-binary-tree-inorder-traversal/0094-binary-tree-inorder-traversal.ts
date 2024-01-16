@@ -13,6 +13,21 @@
  */
 
 function inorderTraversal(root: TreeNode | null): number[] {
+    const stack: TreeNode[] = [], res: number[] = []
+    while (root || stack.length) {
+        if (root) {
+            stack.push(root)
+            root = root.left
+        } else {
+            root = stack.pop()
+            res.push(root.val)
+            root = root.right
+        }
+    }
+    return res
+    
+    //
+    
     if (!root) return []
     return [...inorderTraversal(root.left), root.val, ...inorderTraversal(root.right)]
 };
