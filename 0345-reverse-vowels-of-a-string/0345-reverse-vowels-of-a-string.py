@@ -1,5 +1,13 @@
 class Solution:
     def reverseVowels(self, s: str) -> str:
+        stack = []
+        for c in s:
+            if c in 'aeiouAEIOU':
+                stack.append(c)
+        return "".join([stack.pop() if c in 'aeiouAEIOU' else c for c in s])
+        
+        #
+        
         s = [c for c in s]
         l, r = 0, len(s)-1
         while l < r:
