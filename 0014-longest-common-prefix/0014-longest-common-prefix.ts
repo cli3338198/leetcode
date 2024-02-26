@@ -35,10 +35,22 @@ class Trie {
 }
 
 function longestCommonPrefix(strs: string[]): string {
+    strs.sort()
+    let i = 0
+    while (i < strs[0].length && i < strs[strs.length-1].length) {
+        if (strs[0][i] === strs[strs.length-1][i]) {
+            i++
+        } else {
+            break
+        }
+    }
+    return strs[0].substring(0, i)
+    
+    //
+    
     const trie = new Trie()
     for (const str of strs) {
         trie.insert(str)
     }
-    console.log(trie.children)
     return trie.findCommonPrefix(strs.length)
 };
