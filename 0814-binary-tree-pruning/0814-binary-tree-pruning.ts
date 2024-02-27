@@ -13,14 +13,9 @@
  */
 
 function pruneTree(root: TreeNode | null): TreeNode | null {
-    if (root.left) {
-        root.left = pruneTree(root.left)
-    } 
-    if (root.right) {
-        root.right = pruneTree(root.right)
-    }
-    if (!root.left && !root.right && root.val !== 1) {
-        return null
-    }
+    if (!root) return root
+    root.left = pruneTree(root.left)
+    root.right = pruneTree(root.right)
+    if (!root.left && !root.right && root.val !== 1) return null
     return root
 };
