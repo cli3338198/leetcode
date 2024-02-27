@@ -1,0 +1,19 @@
+* {
+  margin: 0;
+  padding: 0;
+  /* background-color: red; */
+  position: relative;
+}
+
+.target {
+  top: 0;
+  left: 0;
+}
+
+.dot {
+  width: 2px; /* Set the width of the dot */
+  height: 2px; /* Set the height of the dot */
+  background-color: black; /* Set the color of the dot */
+  border-radius: 50%; /* Make it round */
+  position: absolute; /* Position absolutely */
+}
