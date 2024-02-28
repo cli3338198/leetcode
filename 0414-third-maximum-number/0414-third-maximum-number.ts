@@ -3,14 +3,17 @@ function thirdMax(nums: number[]): number {
     let second = -Infinity
     let third = -Infinity
     for (const n of nums) {
+        if (n === first || n === second || n === third) {
+            continue
+        }
         if (n > first) {
             third = second
             second = first
             first = n
-        } else if (n > second && n !== first) {
+        } else if (n > second) {
             third = second
             second = n
-        } else if (n > third && n !== second && n !== first) {
+        } else if (n > third) {
             third = n
         }
     }   
