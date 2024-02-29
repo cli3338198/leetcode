@@ -45,6 +45,18 @@ class Heap:
 
 class Solution:
     def kClosest(self, points: List[List[int]], k: int) -> List[List[int]]:
+        h, k_closest = [], []
+        heapq.heapify(h)
+        for point in points:
+            d = dist([0, 0], point)
+            heapq.heappush(h, (d, point))
+        for _ in range(0, k):
+            _, point = heapq.heappop(h)
+            k_closest.append(point)
+        return k_closest
+        
+        #
+        
         def euclid(point):
             x1, y1 = point
             return sqrt(pow(x1, 2) + pow(y1, 2))
