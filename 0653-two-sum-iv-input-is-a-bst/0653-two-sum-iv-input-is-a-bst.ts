@@ -23,17 +23,24 @@ function findTarget(root: TreeNode | null, k: number): boolean {
     return false
      
     function binSearch(left: number, right: number, target: number) {
-        while (left <= right) {
-            const mid = Math.floor((left + right) / 2)
-            if (nums[mid] === target) {
-                return true
-            } else if (nums[mid] > target) {
-                right = mid - 1
-            } else {
-                left = mid + 1
-            }
-        }
+        if (left > right) return false
+        const mid = Math.floor((left + right) / 2)
+        if (nums[mid] === target) return true
+        if (nums[mid] > target) return binSearch(left, right - 1, target)
+        if (nums[mid] < target) return binSearch(left + 1, right, target)
         return false
+        
+        // while (left <= right) {
+        //     const mid = Math.floor((left + right) / 2)
+        //     if (nums[mid] === target) {
+        //         return true
+        //     } else if (nums[mid] > target) {
+        //         right = mid - 1
+        //     } else {
+        //         left = mid + 1
+        //     }
+        // }
+        // return false
     }
     
     function rec(root: TreeNode | null) {
