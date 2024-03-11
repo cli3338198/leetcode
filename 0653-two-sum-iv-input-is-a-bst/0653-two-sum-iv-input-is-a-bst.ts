@@ -13,6 +13,38 @@
  */
 
 function findTarget(root: TreeNode | null, k: number): boolean {
+    const nums: number[] = []
+    rec(root)
+    for (let i=0; i < nums.length; i++) {
+        if (binSearch(i + 1, nums.length - 1, k - nums[i])) {
+            return true
+        }
+    }
+    return false
+     
+    function binSearch(left: number, right: number, target: number) {
+        while (left <= right) {
+            const mid = Math.floor((left + right) / 2)
+            if (nums[mid] === target) {
+                return true
+            } else if (nums[mid] > target) {
+                right = mid - 1
+            } else {
+                left = mid + 1
+            }
+        }
+        return false
+    }
+    
+    function rec(root: TreeNode | null) {
+        if (!root) return
+        rec(root.left)
+        nums.push(root.val)
+        rec(root.right)
+    }
+    
+    //
+    
     const seen = new Set<number>()
     return dfs(root)
     
