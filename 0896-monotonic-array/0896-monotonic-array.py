@@ -1,5 +1,20 @@
 class Solution:
     def isMonotonic(self, nums: List[int]) -> bool:
+        if len(nums) <= 1:
+            return True
+        inc = dec = True
+        for i in range(1, len(nums)):
+            if nums[i] > nums[i - 1]:
+                inc = False
+            elif nums[i] < nums[i - 1]:
+                dec = False
+            if not inc and not dec:
+                return False
+        return True
+                
+        
+        #
+        
         increasing = all(nums[i] <= nums[i + 1] for i in range(0, len(nums) - 1))
         decreasing = all(nums[i] >= nums[i + 1] for i in range(0, len(nums) - 1))
         return increasing or decreasing
