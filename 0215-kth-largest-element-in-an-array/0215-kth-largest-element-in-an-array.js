@@ -55,6 +55,22 @@ class Heap {
  * @return {number}
  */
 var findKthLargest = function(nums, k) {
+    if (!nums.length) return
+    const pivot = nums[0]
+    const left = nums.filter(n => n > pivot)
+    const mid = nums.filter(n => n === pivot)
+    const right = nums.filter(n => n < pivot)
+    let l = left.length, m = mid.length
+    if (k <= l) {
+        return findKthLargest(left, k)
+    } else if (k > l + m) {
+        return findKthLargest(right, k - l - m)
+    } else {
+        return mid[0]
+    }
+    
+    //
+    
     const h = new Heap((a, b) => a < b)
     for (const n of nums) {
         h.push(n)
