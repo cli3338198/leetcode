@@ -14,6 +14,23 @@
 
 function rangeSumBST(root: TreeNode | null, low: number, high: number): number {
     if (!root) return 0
+    const stack: TreeNode[] = []
+    let sum1 = 0
+    while (stack.length || root) {
+        if (root) {
+            stack.push(root)
+            root = root.left
+        } else {
+            root = stack.pop()
+            if (root.val >= low && root.val <= high) sum1 += root.val
+            root = root.right
+        }
+    }
+    return sum1
+    
+    //
+    
+    if (!root) return 0
     let sum = 0
     if (root.val >= low && root.val <= high) sum += root.val
     sum += rangeSumBST(root.left, low, high)
