@@ -1,4 +1,4 @@
-function insert(intervals: number[][], newInterval: number[]): number[][] {
+function insert(intervals: number[][], newInterval: number[]): number[][] { 
     intervals.push(newInterval)
     intervals.sort((a, b) => a[0] - b[0] || b[1] - a[1])
     const res = [intervals[0]]
