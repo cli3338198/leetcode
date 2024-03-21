@@ -8,7 +8,4 @@ class Solution:
                     break
                 cur_len += brick
                 cuts[cur_len] = cuts.get(cur_len, 0) + 1
-        max_cuts = 0
-        for cut in cuts.values():
-            max_cuts = max(max_cuts, cut)
-        return len(wall) - max_cuts
+        return len(wall) - max(cuts.values()) if cuts else len(wall)
