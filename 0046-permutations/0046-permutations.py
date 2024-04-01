@@ -1,5 +1,22 @@
-class Solution:
+class Solution:    
     def permute(self, nums: List[int]) -> List[List[int]]:
+        res = []
+        
+        def backtrack(cur: List[int]) -> None:
+            if len(cur) == len(nums):
+                res.append([*cur])
+                return
+            for n in nums:
+                if n not in cur:
+                    cur.append(n)
+                    backtrack(cur)
+                    cur.pop()
+            
+        backtrack([])
+        return res
+        
+        #
+        
         dp = [[[nums[0]]]]
         for i in range(1, len(nums)):
             next = []
